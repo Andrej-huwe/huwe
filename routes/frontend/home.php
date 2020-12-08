@@ -4,7 +4,9 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\User\AccountController;
 use App\Http\Controllers\Frontend\User\DashboardController;
+use App\Http\Controllers\Frontend\User\LevelController;
 use App\Http\Controllers\Frontend\User\ProfileController;
+use App\Http\Controllers\Frontend\User\QuizController;
 
 /*
  * Frontend Controllers
@@ -22,12 +24,21 @@ Route::post('contact/send', [ContactController::class, 'send'])->name('contact.s
 Route::group(['middleware' => ['auth', 'password_expires']], function () {
     Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         // User Dashboard Specific
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboardd');
+        Route::get('home', [DashboardController::class, 'index'])->name('dashboard');
+
+        //User Level Specific
+        Route::get('level', [LevelController::class, 'index'])->name('level');
+
+        //User Quiz Specific
+        Route::get('quiz', [QuizController::class, 'index'])->name('quiz');
 
         // User Account Specific
         Route::get('account', [AccountController::class, 'index'])->name('account');
 
         // User Profile Specific
         Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+        // User Quiz
+        Route::get('home', [DashboardController::class, 'index'])->name('dashboard');
     });
 });

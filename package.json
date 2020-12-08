@@ -21,7 +21,7 @@
         "axios": "^0.19",
         "babel-core": "^7.0.0-bridge.0",
         "babel-jest": "^24.8.0",
-        "bootstrap": "^4.3.1",
+        "bootstrap": "^4.5.3",
         "cross-env": "^7.0",
         "cross-var": "^1.1.0",
         "jest": "^24.8.0",
@@ -35,7 +35,7 @@
         "sass": "^1.21.0",
         "sass-loader": "^8.0.0",
         "sweetalert2": "^9.3.5",
-        "vue": "^2.6.10",
+        "vue": "^2.6.11",
         "vue-jest": "^3.0.4",
         "vue-template-compiler": "^2.6.10"
     },
@@ -64,12 +64,14 @@
         "node": ">=6.0.0"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.19.0",
         "datatables.net": "^1.10.21",
         "datatables.net-bs4": "^1.10.21",
         "eonasdan-bootstrap-datetimepicker-bootstrap4beta": "^4.17.47-a",
         "eonasdan-custom-bootstrap-datetimepicker-with-bootstrap-4": "^1.0.0",
         "jstree": "^3.3.10",
         "select2": "^4.0.13",
-        "tinymce": "^5.4.0"
+        "tinymce": "^5.4.0",
+        "vue-radial-progress": "^0.3.2"
     }
 }
