@@ -18,7 +18,7 @@
                    class="b-avatar avatar badge-secondary rounded-circle"
                    style="width: 6rem; height: 6rem;">
                   <span class="b-avatar-img">
-                    <img src="https://huwe_final.test/images/apple-1.png?d2d5ddb0a77b7f26fb483b76d21795e5"
+                    <img src="https://huwe.test/images/apple-1.png?d2d5ddb0a77b7f26fb483b76d21795e5"
                          alt="avatar">
                   </span><!----></a>
               </div>
@@ -47,7 +47,7 @@
                     class="b-avatar avatar badge-secondary rounded-circle"
                     style="width: 6rem; height: 6rem;">
                   <span class="b-avatar-img">
-                    <img src="https://huwe_final.test/images/apple-1.png?d2d5ddb0a77b7f26fb483b76d21795e5"
+                    <img src="https://huwe.test/images/apple-1.png?d2d5ddb0a77b7f26fb483b76d21795e5"
                          :class="levelTwoFull ? 'blocked' : ''"
                          alt="avatar">
                   </span><!----></a>
@@ -73,7 +73,7 @@
                    >
                   <span class="b-avatar-img">
                     <img
-                        src="https://huwe_final.test/images/apple-1.png?d2d5ddb0a77b7f26fb483b76d21795e5"
+                        src="https://huwe.test/images/apple-1.png?d2d5ddb0a77b7f26fb483b76d21795e5"
                         :class="levelThreeFull ? 'blocked' : ''"
                         alt="avatar">
                   </span>

@@ -103,6 +103,13 @@
 export default  {
   data() {
     return {
+      imageOne: require('../../../img/awards/award_0.png'),
+      imagea: require('../../../img/awards/award_1.png'),
+      imageOse: require('../../../img/awards/award_2.png'),
+      imageOve: require('../../../img/awards/award_3.png'),
+      imageOee: require('../../../img/awards/award_4.png'),
+      imageOte: require('../../../img/awards/award_5.png'),
+
       //Awards Data
       awardOneNew: false,
       awardTwoNew: false,
@@ -113,12 +120,12 @@ export default  {
       awardFiveFull: false,
       awardSixFull: false,
       //Awards Image
-      awardOneImg:"https://huwe_final.test/images/award_0.png?581d15dd551124da1b8d05b888c181c0",
-      awardTwoImg:"https://huwe_final.test/images/award_1.png?37df38faf333d98395b2a43bd569887f",
-      awardThreeImg:"https://huwe_final.test/images/award_2.png?2a6ad27ebabc7f8b15adfdc5c629c3f8",
-      awardFourImg:"https://huwe_final.test/images/award_3.png?b4bc068fe1041679ff38042604b836f1",
-      awardFiveImg:"https://huwe_final.test/images/award_4.png?7fbf4070787a2a7d0794b63fb5c6f816",
-      awardSixImg:"https://huwe_final.test/images/award_5.png?10dfb8da588c143052540b453c7ec947",
+      awardOneImg:"https://huwe.test/images/award_0.png?581d15dd551124da1b8d05b888c181c0",
+      awardTwoImg:"https://huwe.test/images/award_1.png?37df38faf333d98395b2a43bd569887f",
+      awardThreeImg:"https://huwe.test/images/award_2.png?2a6ad27ebabc7f8b15adfdc5c629c3f8",
+      awardFourImg:"https://huwe.test/images/award_3.png?b4bc068fe1041679ff38042604b836f1",
+      awardFiveImg:"https://huwe.test/images/award_4.png?7fbf4070787a2a7d0794b63fb5c6f816",
+      awardSixImg:"https://huwe.test/images/award_5.png?10dfb8da588c143052540b453c7ec947",
       //Awards Name
       awardOneName: "Úroveň 1",
       awardTwoName:"Úroveň 2",
