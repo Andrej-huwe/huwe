@@ -20,49 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/LevelController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/QuizController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/awardC_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/award_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/award_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/award_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/award_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/award_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/award_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/award_6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/quiz-background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/quiz_correct.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/awards/award_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/awards/award_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/awards/award_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/awards/award_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/awards/award_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/awards/award_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/quiz-background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/img/quiz_correct.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/components/Awards.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/components/Level.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/components/chooseCards.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/appQuiz.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/user/level.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/user/quiz.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/frontend.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/frontend.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/backend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vendor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/user/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/user/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/frontend/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/frontend/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,11 +242,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Frontend/User" />
       <recent name="$PROJECT_DIR$/resources/js/frontend/components" />
       <recent name="$PROJECT_DIR$/resources/views/frontend/user" />
       <recent name="$PROJECT_DIR$/resources/views/frontend/layouts" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
@@ -318,6 +278,7 @@
       <workItem from="1607063564407" duration="10078000" />
       <workItem from="1607156896485" duration="9599000" />
       <workItem from="1607270932379" duration="4155000" />
+      <workItem from="1607594668973" duration="3141000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
