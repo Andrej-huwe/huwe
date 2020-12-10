@@ -4,7 +4,7 @@
             <i class="fas fa-code"></i> Example Vue Component
         </div>
         <div class="card-body">
-            I'm an example Vue component!
+           Funguje git?
         </div>
     </div>
 </template>
