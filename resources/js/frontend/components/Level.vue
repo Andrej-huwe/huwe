@@ -121,8 +121,6 @@ export default  {
       //Level Data
       levelThreeFull: false,
       levelTwoFull: false,
-      //Correct Words
-      correctWords: 9
     }
   },
   methods: {

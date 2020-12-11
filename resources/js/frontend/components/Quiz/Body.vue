@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       imageBg: require('../../../../img/quiz-background.png'),
-      angryImg: require('../../../../img/character-animation-angry.png'),
+      angryImg: require('../../../../img/character-animation.png'),
       questions: [],
       index: 0,
       numCorrect: 0,
@@ -208,7 +208,7 @@ body {
 h1 {
   font-family: 'Poppins', sans-serif;
 }.character {
-   background-image: url("http://huwe.test/images/character-animation.png?89c7b6042500dcb8c4a67cb272eccb87");
+   background-image: url("https://huwe.test/images/character-animation.png?89c7b6042500dcb8c4a67cb272eccb87");
    position: absolute;
    z-index: 100;
    width: 93%;
