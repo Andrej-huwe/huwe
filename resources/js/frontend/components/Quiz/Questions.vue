@@ -2,6 +2,7 @@
   <div class="question-box-container">
     <b-jumbotron class="text-center">
       <h1 class="question"
+          :style="sizeOfQuestion"
           v-if="hideElements">
         {{ currentQuestion.question }}
       </h1>
@@ -46,14 +47,14 @@ import _ from 'lodash'
 export default {
   data() {
     return {
-
       shuffledAnswers: [],
       correctIndex: null,
       answered: false,
       showElements: false,
       upNumber: false,
       downNumber: false,
-      hideElements: true
+      hideElements: true,
+      questionSize: "font-size: 1.5rem;"
     }
   },
   props: {
@@ -64,13 +65,20 @@ export default {
     numCorrect: Number,
     numTotal: Number,
     onClose: Function,
-    onOpen: Function
+    onOpen: Function,
+    checkRespoData: Boolean
   },
   computed: {
     answers() {
       let answers = [...this.currentQuestion.incorrect_answers]
       answers.push(this.currentQuestion.correct_answer)
       return answers
+    },
+    sizeOfQuestion(){
+      if(this.checkRespoData === false) {
+        console.log("question test")
+        return this.questionSize
+      }
     }
   },
   watch: {
@@ -218,5 +226,22 @@ export default {
 }
 .finish-text {
   margin: 10% 0;
+}
+@media only screen and (max-width: 900px){
+  .list-group-item {
+    width: 100%;
+  }
+  .jumbotron {
+    padding: 20px;
+  }
+  .question {
+    min-height: 80px
+  }
+  .list-group {
+    min-height: 0;
+  }
+  .finish-text {
+    font-size: 1.5rem;
+  }
 }
 </style>

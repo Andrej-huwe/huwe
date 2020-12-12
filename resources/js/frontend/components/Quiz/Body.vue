@@ -1,50 +1,71 @@
 <template>
-  <div id="app">
-    <b-row>
-      <b-col col sm="6" col md="4">
-        <b-img v-bind:src="imageBg" fluid-grow></b-img>
-        <div class="character" :style="inlineStyle"></div>
-        <div id="tooltip-button-show-event" class="character-message">.</div>
-        <b-tooltip class="character-tooltip" placement="bottom" ref="tooltip" target="tooltip-button-show-event" :title=changeText>
-        </b-tooltip>
-      </b-col>
-      <b-col col sm="6" col md="8">
-        <header-vue
-            :numTotal="numTotal"
-        ></header-vue>
-        <b-container  class="bv-example-row">
-          <b-row><b-col>
-            <quiz-questions
-                v-if="questions.length"
-                :currentQuestion="questions[index]"
-                :next="next"
-                :increment="increment"
-                :index="index"
-                :numCorrect="numCorrect"
-                :numTotal="numTotal"
-                :angry="angry"
-                :idle="idle"
-                :onClose="onClose"
-                :onOpen="onOpen"
-            ></quiz-questions>
-          </b-col>
-          </b-row>
-        </b-container>
-      </b-col>
-    </b-row>
-  </div>
+  <b-row>
+    <b-col col class="character-area" :style="inlineStyleArea">
+      <b-img v-bind:src="imageBg" fluid-grow></b-img>
+      <div class="character" :style="inlineStyle"></div>
+      <div id="tooltip-button-show-event" class="character-message">.</div>
+      <b-tooltip class="character-tooltip" placement="bottom" ref="tooltip" target="tooltip-button-show-event" :title=changeText>
+      </b-tooltip>
+    </b-col>
+    <b-col col sm="12" col md="7" class="quiz-area">
+      <header-vue
+          :numTotal="numTotal"
+      ></header-vue>
+      <b-container  class="bv-example-row">
+        <b-row><b-col>
+          <quiz-questions
+              v-if="questions.length"
+              :currentQuestion="questions[index]"
+              :next="next"
+              :increment="increment"
+              :index="index"
+              :numCorrect="numCorrect"
+              :numTotal="numTotal"
+              :angry="angry"
+              :idle="idle"
+              :onClose="onClose"
+              :onOpen="onOpen"
+              :checkRespoData="checkRespoData"
+          ></quiz-questions>
+        </b-col>
+        </b-row>
+      </b-container>
+    </b-col>
+    <transition name="fade">
+      <div v-if="showModal && showModalRespo()" >
+        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
+          <div class="modal-dialog">
+            <span tabindex="0"></span>
+            <div tabindex="-1" class="modal-content">
+              <div class="modal-body">
+                <div class="d-block text-center">
+                  <h2>Je potrebné si telefón otočiť na šírku</h2>
+                  <b-img thumbnail fluid
+                         src="https://huwe.test/images/rotate.png?0e93e06d9430d5eae994bdbbfaae7aa8 "></b-img>
+                </div>
+              </div><!----></div><span tabindex="0"></span>
+          </div>
+        </div>
+        <div class="modal-backdrop"></div>
+      </div>
+    </transition>
+  </b-row>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       imageBg: require('../../../../img/quiz-background.png'),
-      angryImg: require('../../../../img/character-animation.png'),
+
+      //Quiz
       questions: [],
       index: 0,
       numCorrect: 0,
       numTotal: 0,
+
+      //Animation
       stopAnimationDelay: 200,
       angryAnimationDelay: 1440,
       waitAnimationDelay: 5000,
@@ -60,11 +81,18 @@ export default {
       animationPressed: true,
       checkAnimation: true,
       time: false,
+
+      //Text
       textCorrect: 'Výborne!!!',
       textInCorrect: 'Ajajajaj...',
       textMotivation: 'Makaj viacej!',
       textWrong: null,
       textGood: null,
+
+      //Modal
+      showModal: true,
+      showRespoModal: false,
+      checkRespoData: false,
 
 
       number: null,
@@ -72,6 +100,11 @@ export default {
     }
   },
   computed: {
+    inlineStyleArea(){
+      if(this.checkRespoData === true){
+
+      }
+    },
     inlineStyle() {
       if (this.numAnimation === 2 && this.checkAnimation === true && this.time === true) {
         this.updateAnimation(this.angry, this.idle)
@@ -103,6 +136,26 @@ export default {
   methods: {
     date_function() {
       var currentDate = new Date()
+    },
+    changeRespo(){
+      setInterval(() => this.checkRespo(), 1000)
+    },
+    showModalRespo(){
+      this.changeRespo()
+      if(this.checkRespoData === true){
+        this.showRespoModal = true
+        return this.showRespoModal
+      } else {
+        this.showRespoModal = false
+        return  this.showRespoModal
+      }
+    },
+    checkRespo(){
+      if(window.innerWidth < window.innerHeight){
+        this.checkRespoData = true
+      } else {
+        this.checkRespoData = false
+      }
     },
     randomNumber() {
       this.number = Math.floor(Math.random() * 9) + 1;
@@ -250,6 +303,40 @@ h1 {
   }
   to {
     background-position: -11782px 742px;
+  }
+}
+.character-area {
+  flex: 0 0 495px;
+  max-width: 495px;
+  margin: auto;
+}
+.quiz-area {
+  margin: auto;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.modal-dialog {
+  max-width: 96% !important;
+  margin: 0% !important;
+  height: 100%;
+}
+.modal-content {
+  height: 100%;
+}
+.modal-body {
+  margin-top: 50%;
+}
+.img-thumbnail {
+  padding: 6.25rem;
+  border: none;
+}
+@media only screen and (max-width: 900px){
+  .character-area {
+    display: none;
   }
 }
 </style>
