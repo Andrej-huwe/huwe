@@ -229,19 +229,26 @@ export default {
 }
 @media only screen and (max-width: 900px){
   .list-group-item {
-    width: 100%;
+    width: 25%;
   }
   .jumbotron {
-    padding: 20px;
+    padding: 0px;
   }
   .question {
-    min-height: 80px
+    min-height: 50%;
   }
   .list-group {
     min-height: 0;
+    margin-bottom: 0;
   }
   .finish-text {
     font-size: 1.5rem;
+  }
+  .next {
+    margin-top: 3%;
+  }
+  .finish-text {
+    margin: 5% 0;
   }
 }
 </style>

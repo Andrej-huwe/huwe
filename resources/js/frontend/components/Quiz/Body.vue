@@ -7,10 +7,10 @@
       <b-tooltip class="character-tooltip" placement="bottom" ref="tooltip" target="tooltip-button-show-event" :title=changeText>
       </b-tooltip>
     </b-col>
-    <b-col col sm="12" col md="7" class="quiz-area">
-      <header-vue
+    <b-col col sm="12" lg="7" class="quiz-area">
+      <quiz-header
           :numTotal="numTotal"
-      ></header-vue>
+      ></quiz-header>
       <b-container  class="bv-example-row">
         <b-row><b-col>
           <quiz-questions
@@ -31,8 +31,26 @@
         </b-row>
       </b-container>
     </b-col>
+
     <transition name="fade">
-      <div v-if="showModal && showModalRespo()" >
+      <div v-if="showModal && showModalPete()" class="modalForPete">
+        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
+          <div class="modal-dialog">
+            <span tabindex="0"></span>
+            <div tabindex="-1" class="modal-content">
+              <div class="modal-body">
+                <div class="d-block text-center">
+                  <h2>Test</h2>
+
+                </div>
+              </div><!----></div><span tabindex="0"></span>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <transition name="fade">
+      <div v-if="showModal && showModalRespo()"  class="modalForRespo">
         <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
           <div class="modal-dialog">
             <span tabindex="0"></span>
@@ -40,8 +58,7 @@
               <div class="modal-body">
                 <div class="d-block text-center">
                   <h2>Je potrebné si telefón otočiť na šírku</h2>
-                  <b-img thumbnail fluid
-                         src="https://huwe.test/images/rotate.png?0e93e06d9430d5eae994bdbbfaae7aa8 "></b-img>
+
                 </div>
               </div><!----></div><span tabindex="0"></span>
           </div>
@@ -49,6 +66,7 @@
         <div class="modal-backdrop"></div>
       </div>
     </transition>
+
   </b-row>
 </template>
 
@@ -89,10 +107,13 @@ export default {
       textWrong: null,
       textGood: null,
 
-      //Modal
+      //Modal Respo
       showModal: true,
       showRespoModal: false,
       checkRespoData: false,
+
+      //Modal Pete
+      showPeteModal: false,
 
 
       number: null,
@@ -136,6 +157,18 @@ export default {
   methods: {
     date_function() {
       var currentDate = new Date()
+    },
+    showModalPete(){
+      if(window.innerWidth < 900 && this.numAnimation === 2){
+        this.showPeteModal = true
+        return this.showPeteModal
+      } else {
+        this.showPeteModal = false
+        return this.showPeteModal
+      }
+    },
+    checkPete(){
+
     },
     changeRespo(){
       setInterval(() => this.checkRespo(), 1000)
@@ -249,7 +282,7 @@ export default {
 
 }
 </script>
-<style>
+<style >
 body {
   background-color: white;
   height: 100%;
@@ -319,20 +352,25 @@ h1 {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-.modal-dialog {
+.modalForRespo .modal-dialog {
   max-width: 96% !important;
   margin: 0% !important;
   height: 100%;
 }
-.modal-content {
+.modalForRespo .modal-content {
   height: 100%;
 }
-.modal-body {
+.modalForRespo .modal-body {
   margin-top: 50%;
 }
-.img-thumbnail {
-  padding: 6.25rem;
-  border: none;
+.modalForPete .modal-content {
+  margin-top: 8%;
+  height: 100%;
+}
+.modalForPete .modal-dialog {
+  max-width: 96%;
+  margin: 0%;
+  height: 100%;
 }
 @media only screen and (max-width: 900px){
   .character-area {
