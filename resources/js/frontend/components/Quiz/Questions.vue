@@ -251,4 +251,10 @@ export default {
     margin: 5% 0;
   }
 }
+@media only screen and (max-width: 675px){
+  .list-group-item {
+    width: 100%;
+    margin: 0;
+  }
+}
 </style>

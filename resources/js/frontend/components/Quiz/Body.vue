@@ -33,15 +33,24 @@
     </b-col>
 
     <transition name="fade">
-      <div v-if="showModal && showModalPete()" class="modalForPete">
-        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
+      <div v-if="showModal && showModalPete()" v-on:click="showModal = !showModal" class="modalForPete">
+        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_"
+             class="modal fade show" aria-modal="true" style="display: block;">
           <div class="modal-dialog">
             <span tabindex="0"></span>
             <div tabindex="-1" class="modal-content">
               <div class="modal-body">
                 <div class="d-block text-center">
-                  <h2>Test</h2>
-
+                  <b-tooltip class="modalTooltip" show
+                             boundary-padding="25px"
+                             placement="topleft"
+                             positioning="left"
+                             target="tooltip-button-2">Nevzdávaj sa!!</b-tooltip>
+                  <b-img class="modalCharacter"
+                         id="tooltip-button-2"
+                         v-b-tooltip.focus.left
+                         :style="charaCorrectStyle"
+                         src="https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d"></b-img>
                 </div>
               </div><!----></div><span tabindex="0"></span>
           </div>
@@ -51,7 +60,8 @@
 
     <transition name="fade">
       <div v-if="showModal && showModalRespo()"  class="modalForRespo">
-        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
+        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_"
+             class="modal fade show" aria-modal="true" style="display: block;">
           <div class="modal-dialog">
             <span tabindex="0"></span>
             <div tabindex="-1" class="modal-content">
@@ -76,6 +86,11 @@ export default {
   data() {
     return {
       imageBg: require('../../../../img/quiz-background.png'),
+      imageBgfgg: require('../../../../img/quiz/respo-chara-correct.png'),
+
+      //Character Respo Correct
+      charaImageCorrect: "https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d",
+      charaCorrectStyle: "margin-left: 56%; margin-top: 16%; transform: rotate(-45deg)",
 
       //Quiz
       questions: [],
@@ -159,7 +174,7 @@ export default {
       var currentDate = new Date()
     },
     showModalPete(){
-      if(window.innerWidth < 900 && this.numAnimation === 2){
+      if(window.innerWidth < 900 && this.textGood === this.number ){
         this.showPeteModal = true
         return this.showPeteModal
       } else {
@@ -364,13 +379,19 @@ h1 {
   margin-top: 50%;
 }
 .modalForPete .modal-content {
-  margin-top: 8%;
   height: 100%;
+  border: none;
 }
 .modalForPete .modal-dialog {
   max-width: 96%;
   margin: 0%;
   height: 100%;
+}
+.modalCharacter {
+  width: 68%;
+}
+.modalForPete .arrow {
+  left: 160px !important;
 }
 @media only screen and (max-width: 900px){
   .character-area {

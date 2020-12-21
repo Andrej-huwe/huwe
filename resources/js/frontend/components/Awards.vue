@@ -162,7 +162,7 @@ export default  {
       statusFiveNew: false,
       statusSixNew: false,
       //Score of user
-      score: 200,
+      score: 320,
     }
   },
   computed: {

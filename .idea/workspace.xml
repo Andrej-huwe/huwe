@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Awards.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Awards.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
     </list>
@@ -285,7 +284,9 @@
       <workItem from="1607616245885" duration="1457000" />
       <workItem from="1607678570390" duration="2842000" />
       <workItem from="1607780319324" duration="7071000" />
-      <workItem from="1607843768764" duration="3926000" />
+      <workItem from="1607843768764" duration="4572000" />
+      <workItem from="1607928662453" duration="894000" />
+      <workItem from="1608526802608" duration="4664000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
