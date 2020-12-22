@@ -41,16 +41,22 @@
             <div tabindex="-1" class="modal-content">
               <div class="modal-body">
                 <div class="d-block text-center">
-                  <b-tooltip class="modalTooltip" show
-                             boundary-padding="25px"
-                             placement="topleft"
-                             positioning="left"
-                             target="tooltip-button-2">Nevzdávaj sa!!</b-tooltip>
-                  <b-img class="modalCharacter"
-                         id="tooltip-button-2"
-                         v-b-tooltip.focus.left
-                         :style="charaCorrectStyle"
-                         src="https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d"></b-img>
+                  <b-row align-v="stretch">
+                    <b-col>
+                      <h2 class="modalForPeteText">Tvoje scóre doposiaľ je: <br>{{numCorrect}}/10</h2>
+                    </b-col>
+                    <b-col>
+                      <b-tooltip class="modalTooltip" show
+                                 placement="bottomleft"
+                                 boundary-padding="20"
+                                 target="tooltip-button-2">Nevzdávaj sa!!</b-tooltip>
+                      <b-img class="modalCharacter"
+                             id="tooltip-button-2"
+                             v-b-tooltip.focus.left
+                             :style="charaCorrectStyle"
+                             src="https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d"></b-img>
+                    </b-col>
+                  </b-row>
                 </div>
               </div><!----></div><span tabindex="0"></span>
           </div>
@@ -90,7 +96,7 @@ export default {
 
       //Character Respo Correct
       charaImageCorrect: "https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d",
-      charaCorrectStyle: "margin-left: 56%; margin-top: 16%; transform: rotate(-45deg)",
+      charaCorrectStyle: "margin-top: 20%",
 
       //Quiz
       questions: [],
@@ -173,8 +179,17 @@ export default {
     date_function() {
       var currentDate = new Date()
     },
+    //nefunguje textGood
     showModalPete(){
-      if(window.innerWidth < 900 && this.textGood === this.number ){
+      this.textWrong = this.numAnimation
+      if(window.innerWidth < 900 && this.textWrong ===2){
+        this.showPeteModal = true
+        return this.showPeteModal
+      } else {
+        this.showPeteModal = false
+        return this.showPeteModal
+      }
+      if(window.innerWidth < 900 && this.textGood === this.number){
         this.showPeteModal = true
         return this.showPeteModal
       } else {
@@ -388,7 +403,10 @@ h1 {
   height: 100%;
 }
 .modalCharacter {
-  width: 68%;
+  width: 136%;
+}
+.modalForPeteText {
+  margin-top: 38%;
 }
 .modalForPete .arrow {
   left: 160px !important;
