@@ -285,7 +285,8 @@
       <workItem from="1607843768764" duration="4572000" />
       <workItem from="1607928662453" duration="894000" />
       <workItem from="1608526802608" duration="4953000" />
-      <workItem from="1608629467783" duration="2611000" />
+      <workItem from="1608629467783" duration="2849000" />
+      <workItem from="1608884890851" duration="6985000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
@@ -356,6 +357,10 @@
     </state>
     <state x="0" y="25" width="1280" height="803" key="dock-window-1/0.25.1440.803@0.25.1440.803" timestamp="1606900356286" />
     <state x="1440" y="0" width="1280" height="1024" key="dock-window-1/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1607273142554" />
+    <state width="600" height="428" key="javadoc.popup" timestamp="1608894537792">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="600" height="428" key="javadoc.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1608894537792" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1607166727825">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

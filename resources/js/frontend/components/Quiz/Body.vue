@@ -33,7 +33,8 @@
     </b-col>
 
     <transition name="fade">
-      <div v-if="showModal && showModalPete()" v-on:click="showModal = !showModal" class="modalForPete">
+      <div v-if="PeteModalCorrectDefault && showModalPeteCorrect()"
+           v-on:click="PeteModalCorrectDefault = !PeteModalCorrectDefault" class="modalForPete">
         <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_"
              class="modal fade show" aria-modal="true" style="display: block;">
           <div class="modal-dialog">
@@ -43,17 +44,53 @@
                 <div class="d-block text-center">
                   <b-row align-v="stretch">
                     <b-col>
+                      <h1>Si v Correct</h1>
                       <h2 class="modalForPeteText">Tvoje scóre doposiaľ je: <br>{{numCorrect}}/10</h2>
                     </b-col>
                     <b-col>
                       <b-tooltip class="modalTooltip" show
                                  placement="bottomleft"
                                  boundary-padding="20"
-                                 target="tooltip-button-2">Nevzdávaj sa!!</b-tooltip>
+                                 target="tooltip-button-1">Nevzdávaj sa!!</b-tooltip>
+                      <b-img class="modalCharacter"
+                             id="tooltip-button-1"
+                             v-b-tooltip.focus.left
+                             :style="charaCorrectStyle"
+                             src="https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d"></b-img>
+                    </b-col>
+                  </b-row>
+                </div>
+              </div><!----></div><span tabindex="0"></span>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <transition name="fade">
+      <div v-if="PeteModalInCorrectDefault && showModalPeteInCorrect()"
+           v-on:click="" class="modalForPete">
+        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_"
+             class="modal fade show" aria-modal="true" style="display: block;">
+          <div class="modal-dialog">
+            <span tabindex="0"></span>
+            <div tabindex="-1" class="modal-content">
+              <div class="modal-body">
+                <div class="d-block text-center">
+                  <b-row align-v="stretch">
+                    <b-col>
+                      <h1>Si v inCorrect</h1>
+                      <h2 class="modalForPeteText">Tvoje scóre doposiaľ je: <br>{{numCorrect}}/10</h2>
+                    </b-col>
+                    <b-col>
+                      <!-- Vyriešiť min. resposivitu -->
+                      <div class="motivationText">
+                        <h5>Nevzdávaj sa</h5>
+                      </div>
                       <b-img class="modalCharacter"
                              id="tooltip-button-2"
                              v-b-tooltip.focus.left
                              :style="charaCorrectStyle"
+                             aria-describedby="__bv_tooltip_19__ __bv_tooltip_16__"
                              src="https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d"></b-img>
                     </b-col>
                   </b-row>
@@ -74,9 +111,8 @@
               <div class="modal-body">
                 <div class="d-block text-center">
                   <h2>Je potrebné si telefón otočiť na šírku</h2>
-
                 </div>
-              </div><!----></div><span tabindex="0"></span>
+              </div></div><span tabindex="0"></span>
           </div>
         </div>
         <div class="modal-backdrop"></div>
@@ -133,8 +169,12 @@ export default {
       showRespoModal: false,
       checkRespoData: false,
 
-      //Modal Pete
-      showPeteModal: false,
+      //Modal Pete Correct
+      showPeteModalCorrect: false,
+      PeteModalCorrectDefault: true,
+      //Modal Pete inCorrect
+      showPeteModalInCorrect: false,
+      PeteModalInCorrectDefault: true,
 
 
       number: null,
@@ -179,26 +219,23 @@ export default {
     date_function() {
       var currentDate = new Date()
     },
-    //nefunguje textGood
-    showModalPete(){
-      this.textWrong = this.numAnimation
-      if(window.innerWidth < 900 && this.textWrong ===2){
-        this.showPeteModal = true
-        return this.showPeteModal
+    showModalPeteCorrect(){
+      if(this.textGood === 1 && window.innerWidth < 900){
+        this.showPeteModalCorrect = true
+        return this.showPeteModalCorrect
       } else {
-        this.showPeteModal = false
-        return this.showPeteModal
-      }
-      if(window.innerWidth < 900 && this.textGood === this.number){
-        this.showPeteModal = true
-        return this.showPeteModal
-      } else {
-        this.showPeteModal = false
-        return this.showPeteModal
+        this.showPeteModalCorrect = false
+        return this.showPeteModalCorrect
       }
     },
-    checkPete(){
-
+    showModalPeteInCorrect(){
+      if(this.numAnimation === 1 && window.innerWidth < 900){
+        this.showPeteModalInCorrect = true
+        return this.showPeteModalInCorrect
+      } else {
+        this.showPeteModalInCorrect = false
+        return this.showPeteModalInCorrect
+      }
     },
     changeRespo(){
       setInterval(() => this.checkRespo(), 1000)
@@ -248,13 +285,11 @@ export default {
         this.animation = afterAnimation
         this.numAnimation = 0
         this.checkAnimation = false
-        console.log('in angry: ' + this.checkAnimation)
       }, this.angryAnimationDelay)
     },
     waitAnimation(currentAnimation, afterAnimation){
       setTimeout(() => {
         this.animation = currentAnimation
-        console.log('v sad animation, ak sa zavolá: ' + this.animation)
       }, this.waitAnimationDelay)
 
       setTimeout(() => {
@@ -265,7 +300,6 @@ export default {
         } else {
           this.checkAnimation = false
         }
-        console.log('in sad: ' + this.checkAnimation)
       }, this.sadAnimationDelay)
     },
     timeCheck(){
@@ -282,21 +316,19 @@ export default {
       this.animationPressed = true
       this.checkAnimation = true
       this.time = false
-      console.log('in next: ' + this.checkAnimation)
     },
     increment(isCorrect) {
       if (isCorrect) {
         this.numCorrect++
         this.numAnimation--
         this.textGood++
-        console.log('správny text: ' + this.textGood)
       }
       this.numTotal++
       this.numAnimation++
       this.animationPressed = false
     },
   },
-  mounted() {
+  mounted(){
     fetch('https://opentdb.com/api.php?amount=10&category=27&type=multiple', {
       method: 'get'
     })
@@ -308,7 +340,7 @@ export default {
         })
     this.date_function()
     this.randomNumber()
-  },
+  }
 
 }
 </script>
@@ -410,6 +442,47 @@ h1 {
 }
 .modalForPete .arrow {
   left: 160px !important;
+}
+.motivationText {
+  width: 100px;
+  height: 50px;
+  background-color: green;
+  position: relative;
+}
+
+.motivationText {
+  margin-top: 40%;
+  width: 49%;
+  position: absolute;
+  background: #ffffff;
+  border: 3px solid #622161;
+  border-radius: 11px;
+}
+.motivationText h5 {
+  padding: 10px;
+}
+.motivationText:after, .motivationText:before {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.motivationText:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-left-color: #ffffff;
+  border-width: 11px;
+  margin-top: -11px;
+}
+.motivationText:before {
+  border-color: rgba(98, 33, 97, 0);
+  border-left-color: #622161;
+  border-width: 15px;
+  margin-top: -15px;
 }
 @media only screen and (max-width: 900px){
   .character-area {
