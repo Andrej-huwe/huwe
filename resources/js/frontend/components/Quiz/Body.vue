@@ -44,14 +44,12 @@
                 <div class="d-block text-center">
                   <b-row align-v="stretch">
                     <b-col>
-                      <h1>Si v Correct</h1>
                       <h2 class="modalForPeteText">Tvoje scóre doposiaľ je: <br>{{numCorrect}}/10</h2>
                     </b-col>
                     <b-col>
-                      <b-tooltip class="modalTooltip" show
-                                 placement="bottomleft"
-                                 boundary-padding="20"
-                                 target="tooltip-button-1">Nevzdávaj sa!!</b-tooltip>
+                      <div class="motivationText">
+                        <h5>{{textCorrect}}</h5>
+                      </div>
                       <b-img class="modalCharacter"
                              id="tooltip-button-1"
                              v-b-tooltip.focus.left
@@ -68,7 +66,7 @@
 
     <transition name="fade">
       <div v-if="PeteModalInCorrectDefault && showModalPeteInCorrect()"
-           v-on:click="" class="modalForPete">
+           v-on:click="PeteModalInCorrectDefault = !PeteModalInCorrectDefault" class="modalForPete">
         <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_"
              class="modal fade show" aria-modal="true" style="display: block;">
           <div class="modal-dialog">
@@ -78,20 +76,18 @@
                 <div class="d-block text-center">
                   <b-row align-v="stretch">
                     <b-col>
-                      <h1>Si v inCorrect</h1>
                       <h2 class="modalForPeteText">Tvoje scóre doposiaľ je: <br>{{numCorrect}}/10</h2>
                     </b-col>
                     <b-col>
-                      <!-- Vyriešiť min. resposivitu -->
                       <div class="motivationText">
-                        <h5>Nevzdávaj sa</h5>
+                        <h5>{{textMotivation}}</h5>
                       </div>
                       <b-img class="modalCharacter"
                              id="tooltip-button-2"
                              v-b-tooltip.focus.left
                              :style="charaCorrectStyle"
                              aria-describedby="__bv_tooltip_19__ __bv_tooltip_16__"
-                             src="https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d"></b-img>
+                             src="https://huwe.test/images/respo-chara-inCorrect.png?6fdd62a151826df5d93d55e95bbee9f3"></b-img>
                     </b-col>
                   </b-row>
                 </div>
@@ -129,6 +125,7 @@ export default {
     return {
       imageBg: require('../../../../img/quiz-background.png'),
       imageBgfgg: require('../../../../img/quiz/respo-chara-correct.png'),
+      imageBgfggss: require('../../../../img/quiz/respo-chara-inCorrect.png'),
 
       //Character Respo Correct
       charaImageCorrect: "https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d",
@@ -157,18 +154,29 @@ export default {
       checkAnimation: true,
       time: false,
 
-      //Text
-      textCorrect: 'Výborne!!!',
-      textInCorrect: 'Ajajajaj...',
-      textMotivation: 'Makaj viacej!',
+      //Text v Lg
       textWrong: null,
       textGood: null,
-
+      //Text v Sm
+      textNumber: null,
+      textInCorrect: null,
+      textInCorrectOne: 'ÁÁÁÁÁÁÁÁÁÁ!!!',
+      textInCorrectTwo: 'Ajajajaj...',
+      textInCorrectThree: 'Bla Bla Bla Bla!!!',
+      textCorrect:null,
+      textCorrectOne: 'Ide ti to skvele!',
+      textCorrectTwo: 'To už vieš toľko slovíčok?!',
+      textCorrectThree: 'Well done!!',
+      textMotivation: null,
+      textMotivationOne: 'Makaj viacej!',
+      textMotivationTwo: 'Nevzdávaj sa',
+      textMotivationThree: 'Nevadí, pokračuj ďalej',
+      //NumAnimation v Sm
+      smNumAnimation: null,
       //Modal Respo
       showModal: true,
       showRespoModal: false,
       checkRespoData: false,
-
       //Modal Pete Correct
       showPeteModalCorrect: false,
       PeteModalCorrectDefault: true,
@@ -207,6 +215,7 @@ export default {
     changeText() {
       this.textWrong = this.numAnimation
       if(this.textWrong === 2) {
+        this.smChangeText()
         return this.textInCorrect
       } else if (this.textGood === this.number) {
         return this.textCorrect
@@ -220,7 +229,7 @@ export default {
       var currentDate = new Date()
     },
     showModalPeteCorrect(){
-      if(this.textGood === 1 && window.innerWidth < 900){
+      if(this.textGood === this.number && window.innerWidth < 900){
         this.showPeteModalCorrect = true
         return this.showPeteModalCorrect
       } else {
@@ -229,12 +238,32 @@ export default {
       }
     },
     showModalPeteInCorrect(){
-      if(this.numAnimation === 1 && window.innerWidth < 900){
+      if(this.smNumAnimation === 2 && window.innerWidth < 900){
         this.showPeteModalInCorrect = true
         return this.showPeteModalInCorrect
-      } else {
+      }else if(this.smNumAnimation === 3 && window.innerWidth < 900){
+        this.smNumAnimation = 0
+        return this.smNumAnimation
+      } else  {
         this.showPeteModalInCorrect = false
         return this.showPeteModalInCorrect
+      }
+    },
+    smChangeText(){
+      this.textNumber = Math.floor(Math.random() * 3) + 1;
+      console.log("TextNumber: " + this.textNumber)
+      if(this.textNumber === 1) {
+        this.textInCorrect = this.textInCorrectOne
+        this.textCorrect = this.textCorrectOne
+        this.textMotivation = this.textMotivationOne
+      } else if (this.textNumber === 2) {
+        this.textInCorrect = this.textInCorrectTwo
+        this.textCorrect = this.textCorrectTwo
+        this.textMotivation = this.textMotivationTwo
+      } else if(this.textNumber === 3) {
+        this.textInCorrect = this.textInCorrectThree
+        this.textCorrect = this.textCorrectThree
+        this.textMotivation = this.textMotivationThree
       }
     },
     changeRespo(){
@@ -259,8 +288,7 @@ export default {
     },
     randomNumber() {
       this.number = Math.floor(Math.random() * 9) + 1;
-      console.log('číslo prvé: ' + this.number)
-
+      console.log('číslo textu Correct: ' + this.number)
     },
     onOpen() {
       this.textWrong = this.numAnimation
@@ -325,6 +353,7 @@ export default {
       }
       this.numTotal++
       this.numAnimation++
+      this.smNumAnimation++
       this.animationPressed = false
     },
   },
@@ -340,6 +369,7 @@ export default {
         })
     this.date_function()
     this.randomNumber()
+    this.smChangeText()
   }
 
 }
@@ -455,14 +485,14 @@ h1 {
   width: 49%;
   position: absolute;
   background: #ffffff;
-  border: 3px solid #622161;
-  border-radius: 11px;
 }
 .motivationText h5 {
   padding: 10px;
+  border: 3px solid #622161;
+  border-radius: 11px;
 }
 .motivationText:after, .motivationText:before {
-  left: 100%;
+  left: 98.5%;
   top: 50%;
   border: solid transparent;
   content: "";

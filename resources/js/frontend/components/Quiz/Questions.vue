@@ -30,7 +30,7 @@
 
         <transition name="bounce" mode="out-in">
           <div class="final-part" v-if="showElements">
-            <h1 class="finish-text" v-if="upNumber">Výborne, testt ukočený!</h1>
+            <h1 class="finish-text" v-if="upNumber">Výborne, test ukočený!</h1>
             <h1 class="finish-text" v-if="downNumber">Ešte na sebe musíš veľa pracovať, <br> test ukočený!</h1>
             <h3 class="text-center">Správne: {{ numCorrect  }}/ {{ numTotal }} </h3>
             <b-button class="finish" href="/home">Pokračovať</b-button>
@@ -76,7 +76,6 @@ export default {
     },
     sizeOfQuestion(){
       if(this.checkRespoData === false) {
-        console.log("question test")
         return this.questionSize
       }
     }
