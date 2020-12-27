@@ -4,7 +4,7 @@
             <i class="fas fa-code"></i> Example Vue Component
         </div>
         <div class="card-body">
-           Funguje git? verzia 2
+           Funguje git? verzia 3
         </div>
     </div>
 </template>
