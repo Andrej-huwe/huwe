@@ -118,13 +118,24 @@ export default  {
       completedStepsOne: 0,
       completedStepsTwo: 0,
       completedStepsThree: 0,
-      //Level Data
+      //Čierno Biely Level
       levelThreeFull: false,
       levelTwoFull: false,
+      scoreLevel: 11,
     }
   },
   methods: {
     openNextLevel() {
+      if(this.scoreLevel >= 0 && this.scoreLevel < 10){
+        this.levelTwoFull = true
+        this.levelThreeFull = true
+      } else if (this.scoreLevel >= 10 && this.scoreLevel < 20){
+        this.completedStepsOne = 10
+        this.nextLevelTwo = true
+        this.levelTwoFull = false
+        this.levelThreeFull = true
+      }
+      /*
       if(this.completedStepsOne >= this.correctWordsLevelOne){
         this.nextLevelTwo = true
         this.levelTwoFull = false
@@ -141,6 +152,7 @@ export default  {
         this.nextLevelThree = false
         this.levelThreeFull = true
       }
+      */
     }
   },
   components: {
