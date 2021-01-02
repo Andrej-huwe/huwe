@@ -2,7 +2,8 @@
 import '../bootstrap';
 import '../plugins';
 import Vue from 'vue';
-
+import Form from '../Form'
+window.Form = Form
 
 import BootstrapVue from "bootstrap-vue"
 
