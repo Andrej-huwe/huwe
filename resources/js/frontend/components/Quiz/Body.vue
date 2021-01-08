@@ -184,7 +184,6 @@ export default {
       showPeteModalInCorrect: false,
       PeteModalInCorrectDefault: true,
 
-
       number: null,
       date: new Date()
     }

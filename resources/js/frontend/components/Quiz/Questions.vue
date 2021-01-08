@@ -20,24 +20,24 @@
           {{answer}}
         </b-list-group-item>
       </b-list-group>
-      <div class="quiz-button">
-        <b-button
-            class="next"
-            @click="next(),  showHideElements(), onClose()"
-            :disabled="answered === false"
-            v-if="hideElements"
-            href="">Pokračovať</b-button>
-
-        <transition name="bounce" mode="out-in">
-          <div class="final-part" v-if="showElements">
-            <h1 class="finish-text" v-if="upNumber">Výborne, test ukočený!</h1>
-            <h1 class="finish-text" v-if="downNumber">Ešte na sebe musíš veľa pracovať, <br> test ukočený!</h1>
-            <h3 class="text-center">Správne: {{ numCorrect  }}/ {{ numTotal }} </h3>
-            <b-button class="finish" href="/home">Pokračovať</b-button>
-          </div>
-        </transition>
-      </div>
-
+      <form @submit.prevent="saveData" action="/home">
+        <div class="quiz-button">
+          <b-button
+              class="next"
+              @click="next(),  showHideElements(), onClose()"
+              :disabled="answered === false"
+              v-if="hideElements"
+              href="">Pokračovať</b-button>
+          <transition name="bounce" mode="out-in">
+            <div class="final-part" v-if="showElements">
+              <h1 class="finish-text" v-if="upNumber">Výborne, test ukočený!</h1>
+              <h1 class="finish-text" v-if="downNumber">Ešte na sebe musíš veľa pracovať, <br> test ukočený!</h1>
+              <h3 class="text-center">Správne: {{ numCorrect  }}/ {{ numTotal }} </h3>
+              <button type="submit" class="finish">Pokračovať</button>
+            </div>
+          </transition>
+        </div>
+      </form>
     </b-jumbotron>
   </div>
 </template>
@@ -54,7 +54,19 @@ export default {
       upNumber: false,
       downNumber: false,
       hideElements: true,
-      questionSize: "font-size: 1.5rem;"
+      numberTest: 100,
+      questionSize: "font-size: 1.5rem;",
+      form: new Form({
+        score: "",
+        actualScore: 249,
+      }),
+
+      awardOne: false,
+      awardTwo: false,
+      awardThree: false,
+      awardFour: false,
+      awardFive: false,
+      awardSix: false
     }
   },
   props: {
@@ -90,7 +102,104 @@ export default {
       }
     }
   },
+  mounted() {
+
+  },
   methods: {
+    saveData(){
+      this.updateAwards()
+      //Vloženie "props" do "form"
+      this.form.score = this.numCorrect
+      let data = new FormData()
+      //Zapísanie do databázy score + ocenenia
+      data.append('score', 9999999999)
+      data.append('actualScore', this.form.actualScore)
+      if(this.awardOne == true){
+        data.append('awardOne', 1)
+      }
+      if(this.awardTwo == true){
+        data.append('awardTwo', 1)
+      }
+      if(this.awardThree == true){
+        data.append('awardThree', 1)
+      }
+      if(this.awardFour == true){
+        data.append('awardFour', 1)
+      }
+      if(this.awardFive == true){
+        data.append('awardFive', 1)
+      }
+      if(this.awardSix == true){
+        data.append('awardSix', 1)
+      }
+      axios.post('/api/quiz', data)
+    },
+    updateAwards(){
+      //Prepísanie pri získaní nové ocenenia
+
+      if(this.form.actualScore === 50){
+        this.awardOne = !this.awardOne //awardOne = true
+
+        if(this.form.actualScore === 100){
+          this.awardOne = !this.awardOne //awardOne = false
+          this.awardTwo = !this.awardTwo //awardTwo = true
+
+          if(this.form.actualScore = 150){
+            this.awardOne = !this.awardOne //awardOne = false
+            this.awardTwo = !this.awardTwo //awardTwo = false
+            this.awardThree = !this.awardThree //awardThree = true
+
+            if(this.form.actualScore = 200){
+              this.awardOne = !this.awardOne
+              this.awardTwo = !this.awardTwo
+              this.awardThree = !this.awardThree
+              this.awardFour = !this.awardFour
+
+              if(this.form.actualScore = 250){
+                this.awardOne = !this.awardOne
+                this.awardTwo = !this.awardTwo
+                this.awardThree = !this.awardThree
+                this.awardFour = !this.awardFour
+                this.awardFive = !this.awardFive
+
+                if(this.form.actualScore = 300){
+                  this.awardOne = !this.awardOne
+                  this.awardTwo = !this.awardTwo
+                  this.awardThree = !this.awardThree
+                  this.awardFour = !this.awardFour
+                  this.awardFive = !this.awardFive
+                  this.awardFSix = !this.awardSix
+                }
+              }
+            }
+          }
+        }
+      }
+
+      /*
+      if(this.form.actualScore === 50){
+        this.awardOne = !this.awardOne
+        console.log("awardOne = 50")
+      }
+      if(this.form.actualScore = 100){
+        this.awardTwo = !this.awardTwo
+        console.log("awardTwo = 100")
+      }
+      if(this.form.actualScore >= 150){
+        this.awardThree = !this.awardThree
+      }
+      if(this.form.actualScore >= 200){
+        this.awardFour = !this.awardFour
+      }
+      if(this.form.actualScore >= 250){
+        this.awardFive = !this.awardFive
+      }
+      if(this.form.actualScore >= 300){
+        this.awardSix = !this.awardSix
+      }
+    */
+
+    },
     selectAnswer(index) {
       this.selectedIndex = index
     },
@@ -98,6 +207,7 @@ export default {
       let isCorrect = false
       if(this.selectedIndex === this.correctIndex) {
         isCorrect = true
+        this.form.actualScore++
       }
       this.answered = true
       this.increment(isCorrect)
@@ -121,8 +231,7 @@ export default {
       return answerClass
     },
     showHideElements(){
-
-      if(this.index === 9) {
+      if(this.index === 1) { //originíl '9'
         this.showElements = true
         this.hideElements = false
         if(this.numCorrect >= 5) {
@@ -219,6 +328,7 @@ export default {
   background-color: #622161;
   font-family: 'Poppins', sans-serif;
   margin-top: 8%;
+  color: white;
 }
 .btn-success {
   border-color: white;

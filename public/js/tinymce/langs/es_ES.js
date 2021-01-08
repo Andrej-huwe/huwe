@@ -281,7 +281,7 @@ tinymce.addI18n('es_ES',{
 "Failed to initialize plugin: {0}": "Fallo al iniciar el complemento: {0}",
 "example": "ejemplo",
 "Search": "Buscar",
-"All": "Todo",
+"All": "Question",
 "Currency": "Divisa",
 "Text": "Texto",
 "Quotations": "Comillas",

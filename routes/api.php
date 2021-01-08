@@ -49,4 +49,4 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1', 'as' => 'v1.'], functio
         Route::apiResource('blogs', 'BlogsController');
     });
 });
-Route::resource('todo', 'TodoController');
+Route::resource('quiz', 'QuestionController', );

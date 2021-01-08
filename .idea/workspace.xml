@@ -20,18 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_200951_create_questions_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/QuizController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TodoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TodoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_30_200951_create_todos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_200951_create_todos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TodoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Todo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Question.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_30_200951_create_todos_table.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vendor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/ExampleComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/ExampleComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/tinymce/langs/es_ES.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/tinymce/langs/es_ES.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,18 +242,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/database/migrations" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/database/migrations" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Frontend/User" />
       <recent name="$PROJECT_DIR$/resources/js/frontend/components" />
       <recent name="$PROJECT_DIR$/resources/views/frontend/user" />
-      <recent name="$PROJECT_DIR$/resources/views/frontend/layouts" />
     </key>
   </component>
   <component name="RunManager">
@@ -304,7 +302,10 @@
       <workItem from="1609405647818" duration="3209000" />
       <workItem from="1609419403257" duration="4251000" />
       <workItem from="1609423854056" duration="252000" />
-      <workItem from="1609952542073" duration="4111000" />
+      <workItem from="1609952542073" duration="5813000" />
+      <workItem from="1610019705396" duration="4625000" />
+      <workItem from="1610115751842" duration="15000" />
+      <workItem from="1610115971645" duration="5330000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
@@ -357,6 +358,11 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="467" y="256" key="#com.intellij.fileTypes.FileTypeChooser/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1606675696801" />
+    <state x="465" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610116250900">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="465" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610116250900" />
+    <state x="465" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1440.25.1280.999/0.0.1440.900@0.0.1440.900" timestamp="1610024226935" />
     <state x="458" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609358756945">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -374,18 +380,23 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="201" key="Vcs.Push.Dialog.v2/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1606891354351" />
-    <state x="1440" y="0" width="1280" height="1024" key="dock-window-1" timestamp="1607273142554">
-      <screen x="1440" y="0" width="1280" height="1024" />
+    <state x="526" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610023296227">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="526" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610023296227" />
+    <state x="1440" y="25" width="1280" height="909" key="dock-window-1" timestamp="1609958132712">
+      <screen x="1440" y="25" width="1280" height="999" />
     </state>
     <state x="0" y="25" width="1280" height="803" key="dock-window-1/0.25.1440.803@0.25.1440.803" timestamp="1606900356286" />
-    <state x="1440" y="0" width="1280" height="1024" key="dock-window-1/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1607273142554" />
+    <state x="1440" y="0" width="1280" height="909" key="dock-window-1/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1609957774375" />
+    <state x="1440" y="25" width="1280" height="909" key="dock-window-1/1440.25.1280.999/0.25.1440.803@0.25.1440.803" timestamp="1609958132712" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1608894537792">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="600" height="428" key="javadoc.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1608894537792" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1609953657370">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1610120508374">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1609953657370" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610120508374" />
   </component>
 </project>
