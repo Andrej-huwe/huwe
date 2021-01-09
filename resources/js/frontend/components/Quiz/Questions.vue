@@ -20,7 +20,7 @@
           {{answer}}
         </b-list-group-item>
       </b-list-group>
-      <form @submit.prevent="saveData" action="/home">
+      <form @submit="saveData" action="/home">
         <div class="quiz-button">
           <b-button
               class="next"
@@ -58,8 +58,10 @@ export default {
       questionSize: "font-size: 1.5rem;",
       form: new Form({
         score: "",
-        actualScore: 249,
+        actualScore: 245,
       }),
+
+      actualScore: 245,
 
       awardOne: false,
       awardTwo: false,
@@ -107,12 +109,13 @@ export default {
   },
   methods: {
     saveData(){
-      this.updateAwards()
       //Vloženie "props" do "form"
       this.form.score = this.numCorrect
+      // Je potrebné prepsíať "actualScore", pretože inakšie nefunguje funckia na ukladanie "awards". Zle tam funguje "if" v "upateAwards()"
+      this.form.actualScore = this.actualScore
       let data = new FormData()
       //Zapísanie do databázy score + ocenenia
-      data.append('score', 9999999999)
+      data.append('score', this.form.score)
       data.append('actualScore', this.form.actualScore)
       if(this.awardOne == true){
         data.append('awardOne', 1)
@@ -136,14 +139,41 @@ export default {
     },
     updateAwards(){
       //Prepísanie pri získaní nové ocenenia
-
-      if(this.form.actualScore === 50){
+      console.log("funguje updateAwards?")
+      if(this.actualScore === 50 ){
+        this.awardOne = !this.awardOne//awardOne = true
+        return this.awardOne
+        console.log("funguje 50?")
+      } else if(this.actualScore === 100 ){
+        this.awardTwo = !this.awardTwo
+        return this.awardTwo
+      } else if(this.actualScore === 150 ){
+        this.awardThree = !this.awardThree
+        return this.awardThree
+      } else if(this.actualScore === 200 ){
+        this.awardFour = !this.awardFour
+        return this.awardFour
+      } else if(this.actualScore === 250 ){
+        this.awardFive = !this.awardFive
+        return this.awardFive
+      } else if(this.actualScore === 300 ){
+        this.awardSix = !this.awardSix
+        return this.awardSix
+      }
+        /*
+        if(this.form.actualScore === 50) {
         this.awardOne = !this.awardOne //awardOne = true
-
-        if(this.form.actualScore === 100){
-          this.awardOne = !this.awardOne //awardOne = false
-          this.awardTwo = !this.awardTwo //awardTwo = true
-
+      }
+      if(this.form.actualScore === 100) {
+        this.awardOne = !this.awardOne //awardOne = false
+        this.awardTwo = !this.awardTwo //awardTwo = true
+      }
+      if(this.form.actualScore === 150) {
+        this.awardOne = !this.awardOne //awardOne = false
+        this.awardTwo = !this.awardTwo //awardTwo = false
+        this.awardThree = !this.awardThree //awardThree = true
+        console.log("funguje 150?")
+      }
           if(this.form.actualScore = 150){
             this.awardOne = !this.awardOne //awardOne = false
             this.awardTwo = !this.awardTwo //awardTwo = false
@@ -173,31 +203,9 @@ export default {
               }
             }
           }
-        }
-      }
+          */
 
-      /*
-      if(this.form.actualScore === 50){
-        this.awardOne = !this.awardOne
-        console.log("awardOne = 50")
-      }
-      if(this.form.actualScore = 100){
-        this.awardTwo = !this.awardTwo
-        console.log("awardTwo = 100")
-      }
-      if(this.form.actualScore >= 150){
-        this.awardThree = !this.awardThree
-      }
-      if(this.form.actualScore >= 200){
-        this.awardFour = !this.awardFour
-      }
-      if(this.form.actualScore >= 250){
-        this.awardFive = !this.awardFive
-      }
-      if(this.form.actualScore >= 300){
-        this.awardSix = !this.awardSix
-      }
-    */
+
 
     },
     selectAnswer(index) {
@@ -207,7 +215,8 @@ export default {
       let isCorrect = false
       if(this.selectedIndex === this.correctIndex) {
         isCorrect = true
-        this.form.actualScore++
+        this.actualScore++
+        this.updateAwards()
       }
       this.answered = true
       this.increment(isCorrect)
@@ -231,7 +240,7 @@ export default {
       return answerClass
     },
     showHideElements(){
-      if(this.index === 1) { //originíl '9'
+      if(this.index === 9) { //originíl '9'
         this.showElements = true
         this.hideElements = false
         if(this.numCorrect >= 5) {

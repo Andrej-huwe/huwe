@@ -1,6 +1,9 @@
 <template>
   <div class="text-center b-container">
-    <h1>Ocenenie</h1>
+    <div v-for="todo in todos" :key="todo.id[31]">
+      <h1>{{todo.score}}</h1>
+    </div>
+    <h1>Ocenenieee</h1>
     <b-row class="awards">
       <b-col class="awardsSingle"
              :style="awardNewOneMethodOut"
@@ -103,12 +106,7 @@
 export default  {
   data() {
     return {
-      imageOne: require('../../../img/awards/award_0.png'),
-      imagea: require('../../../img/awards/award_1.png'),
-      imageOse: require('../../../img/awards/award_2.png'),
-      imageOve: require('../../../img/awards/award_3.png'),
-      imageOee: require('../../../img/awards/award_4.png'),
-      imageOte: require('../../../img/awards/award_5.png'),
+      todos: '',
 
       //Awards Data
       awardOneNew: false,
@@ -255,7 +253,18 @@ export default  {
       }
     },
   },
+  mounted(){
+    this.getTodos()
+  },
   methods: {
+    getTodos(){
+      axios.get('/api/quiz').then((res) =>{
+        this.todos = res.data
+      }).catch((error) =>{
+        console.log(error)
+      })
+    },
+
     testTime(){
       this.test = this.modalAwardNewIn
       // modal dokončiť TimeOut
@@ -351,8 +360,8 @@ export default  {
       if(this.score >= this.scoreLevelSix){
         this.awardSixFull = true
       }
-    },
-  }
+    }
+  },
 }
 </script>
 <style scoped>

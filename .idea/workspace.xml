@@ -20,7 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
-      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_07_200951_create_questions_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Awards.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Awards.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/ExampleComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/ExampleComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,6 +302,7 @@
       <workItem from="1610019705396" duration="4625000" />
       <workItem from="1610115751842" duration="15000" />
       <workItem from="1610115971645" duration="5734000" />
+      <workItem from="1610198804726" duration="4865000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
@@ -375,19 +381,19 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="526" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610023296227" />
-    <state x="1440" y="25" width="1280" height="909" key="dock-window-1" timestamp="1609958132712">
-      <screen x="1440" y="25" width="1280" height="999" />
+    <state x="1440" y="25" width="1280" height="909" key="dock-window-1" timestamp="1610203663370">
+      <screen x="1440" y="0" width="1280" height="1024" />
     </state>
     <state x="0" y="25" width="1280" height="803" key="dock-window-1/0.25.1440.803@0.25.1440.803" timestamp="1606900356286" />
-    <state x="1440" y="0" width="1280" height="909" key="dock-window-1/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1609957774375" />
+    <state x="1440" y="25" width="1280" height="909" key="dock-window-1/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610203663370" />
     <state x="1440" y="25" width="1280" height="909" key="dock-window-1/1440.25.1280.999/0.25.1440.803@0.25.1440.803" timestamp="1609958132712" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1608894537792">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="600" height="428" key="javadoc.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1608894537792" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1610122014229">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1610203570595">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610122014229" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610203570595" />
   </component>
 </project>

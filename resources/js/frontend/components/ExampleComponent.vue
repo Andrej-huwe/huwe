@@ -63,7 +63,7 @@
           axios.post('/api/todo/' + e.id, data)
         },
         getTodos(){
-          axios.get('/api/todo').then((res) =>{
+          axios.get('/api/questions').then((res) =>{
             this.todos = res.data
           }).catch((error) =>{
             console.log(error)

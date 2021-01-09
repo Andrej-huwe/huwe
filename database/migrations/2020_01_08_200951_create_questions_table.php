@@ -15,14 +15,14 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->increments('score')->default(0);
-            $table->increments('actualScore');
-            $table->increments('awardOne')->default(0);
-            $table->increments('awardTwo')->default(0);
-            $table->increments('awardThree')->default(0);
-            $table->increments('awardFour')->default(0);
-            $table->increments('awardFive')->default(0);
-            $table->increments('awardSix')->default(0);
+            $table->float('score')->default(0);
+            $table->float('actualScore');
+            $table->boolean('awardOne')->default(0);
+            $table->boolean('awardTwo')->default(0);
+            $table->boolean('awardThree')->default(0);
+            $table->boolean('awardFour')->default(0);
+            $table->boolean('awardFive')->default(0);
+            $table->boolean('awardSix')->default(0);
             $table->timestamps();
         });
     }
