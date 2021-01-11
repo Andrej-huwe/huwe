@@ -1,9 +1,6 @@
 <template>
   <div class="text-center b-container">
-    <div v-for="todo in todos" :key="todo.id[31]">
-      <h1>{{todo.score}}</h1>
-    </div>
-    <h1>Ocenenieee</h1>
+    <h1>Ocenenie</h1>
     <b-row class="awards">
       <b-col class="awardsSingle"
              :style="awardNewOneMethodOut"
@@ -106,7 +103,7 @@
 export default  {
   data() {
     return {
-      todos: '',
+      awardsData: '',
 
       //Awards Data
       awardOneNew: false,
@@ -153,14 +150,14 @@ export default  {
       showAwardModal: false,
       modalAwardNewIn: "transition: 3s;",
       //Award Actual
-      statusOneNew: false,
-      statusTwoNew: false,
-      statusThreeNew: false,
-      statusFourNew: false,
-      statusFiveNew: false,
-      statusSixNew: false,
+      statusOneNew: '',
+      statusTwoNew: '',
+      statusThreeNew: '',
+      statusFourNew: '',
+      statusFiveNew: '',
+      statusSixNew: '',
       //Score of user
-      score: 190,
+      score: '',
     }
   },
   computed: {
@@ -169,84 +166,84 @@ export default  {
       return this.test
     },
     awardNewOneMethodOut(){
-      if(this.statusOneNew === true){
+      if(this.statusOneNew === 1){
         return this.awardNewOut
       }else {
         return this.awardOldOut;
       }
     },
     awardNewTwoMethodOut(){
-      if(this.statusTwoNew === true){
+      if(this.statusTwoNew === 1){
         return this.awardNewOut
       }else {
         return this.awardOldOut;
       }
     },
     awardNewThreeMethodOut(){
-      if(this.statusThreeNew === true){
+      if(this.statusThreeNew === 1){
         return this.awardNewOut
       }else {
         return this.awardOldOut;
       }
     },
     awardNewFourMethodOut(){
-      if(this.statusFourNew === true){
+      if(this.statusFourNew === 1){
         return this.awardNewOut
       }else {
         return this.awardOldOut;
       }
     },
     awardNewFiveMethodOut(){
-      if(this.statusFiveNew === true){
+      if(this.statusFiveNew === 1){
         return this.awardNewOut
       }else {
         return this.awardOldOut;
       }
     },
     awardNewSixMethodOut(){
-      if(this.statusSixNew === true){
+      if(this.statusSixNew === 1){
         return this.awardNewOut
       }else {
         return this.awardOldOut;
       }
     },
     awardNewOneMethodIn(){
-      if(this.statusOneNew === true){
+      if(this.statusOneNew === 1){
         return this.awardNewIn
       }else {
         return this.awardOldIn;
       }
     },
     awardNewTwoMethodIn(){
-      if(this.statusTwoNew === true){
+      if(this.statusTwoNew === 1){
         return this.awardNewIn
       } else {
         return this.awardOldIn
       }
     },
     awardNewThreeMethodIn(){
-      if(this.statusThreeNew === true){
+      if(this.statusThreeNew === 1){
         return this.awardNewIn
       } else {
         return this.awardOldIn
       }
     },
     awardNewFourMethodIn(){
-      if(this.statusFourNew === true){
+      if(this.statusFourNew === 1){
         return this.awardNewIn
       } else {
         return this.awardOldIn
       }
     },
     awardNewFiveMethodIn(){
-      if(this.statusFiveNew === true){
+      if(this.statusFiveNew === 1){
         return this.awardNewIn
       } else {
         return this.awardOldIn
       }
     },
     awardNewSixMethodIn(){
-      if(this.statusSixNew === true){
+      if(this.statusSixNew === 1){
         return this.awardNewIn
       } else {
         return this.awardOldIn
@@ -259,7 +256,14 @@ export default  {
   methods: {
     getTodos(){
       axios.get('/api/quiz').then((res) =>{
-        this.todos = res.data
+        this.score = res.data[0].actualScore
+        this.statusOneNew = res.data[0].awardOne
+        this.statusTwoNew = res.data[0].awardTwo
+        this.statusThreeNew = res.data[0].awardThree
+        this.statusFourNew = res.data[0].awardFour
+        this.statusFiveNew = res.data[0].awardFive
+        this.statusSixNew = res.data[0].awardSix
+        console.log(this.score + ' ' + this.statusOneNew)
       }).catch((error) =>{
         console.log(error)
       })
@@ -270,68 +274,68 @@ export default  {
       // modal dokončiť TimeOut
     },
     modalAwardName(){
-      if(this.statusOneNew === true){
+      if(this.statusOneNew === 1){
         return this.awardOneName
-      }else if(this.statusTwoNew === true){
+      }else if(this.statusTwoNew === 1){
         return this.awardTwoName
-      }else if(this.statusThreeNew === true){
+      }else if(this.statusThreeNew === 1){
         return this.awardThreeName
-      }else if(this.statusFourNew === true){
+      }else if(this.statusFourNew === 1){
         return this.awardFourName
-      }else if(this.statusFiveNew === true){
+      }else if(this.statusFiveNew === 1){
         return this.awardFiveName
-      }else if(this.statusSixNew === true){
+      }else if(this.statusSixNew === 1){
         return this.awardSixName
       }
 
     },
     modalAwardImg(){
-      if(this.statusOneNew === true){
+      if(this.statusOneNew === 1){
         return this.awardOneImg
-      }else if(this.statusTwoNew === true){
+      }else if(this.statusTwoNew === 1){
         return this.awardTwoImg
-      }else if(this.statusThreeNew === true){
+      }else if(this.statusThreeNew === 1){
         return this.awardThreeImg
-      }else if(this.statusFourNew === true){
+      }else if(this.statusFourNew === 1){
         return this.awardFourImg
-      }else if(this.statusFiveNew === true){
+      }else if(this.statusFiveNew === 1){
         return this.awardFiveImg
-      }else if(this.statusSixNew === true){
+      }else if(this.statusSixNew === 1){
         return this.awardSixImg
       }
     },
     modalAwardImgClass(){
-      if(this.statusOneNew === true){
+      if(this.statusOneNew === 1){
         return this.awardOneFull
-      }else if(this.statusTwoNew === true){
+      }else if(this.statusTwoNew === 1){
         return this.awardTwoFull
-      }else if(this.statusThreeNew === true){
+      }else if(this.statusThreeNew === 1){
         return this.awardThreeFull
-      }else if(this.statusFourNew === true){
+      }else if(this.statusFourNew === 1){
         return this.awardFourFull
-      }else if(this.statusFiveNew === true){
+      }else if(this.statusFiveNew === 1){
         return this.awardFiveFull
-      }else if(this.statusSixNew === true){
+      }else if(this.statusSixNew === 1){
         return this.awardSixFull
       }
     },
     showAwardModalMethod(){
-      if(this.statusOneNew === true){
+      if(this.statusOneNew === 1){
         this.showAwardModal = true
         return this.showAwardModal
-      }else if(this.statusTwoNew === true){
+      }else if(this.statusTwoNew === 1){
         this.showAwardModal = true
         return this.showAwardModal
-      } else if(this.statusThreeNew === true){
+      } else if(this.statusThreeNew === 1){
         this.showAwardModal = true
         return this.showAwardModal
-      } else if(this.statusFourNew === true){
+      } else if(this.statusFourNew === 1){
         this.showAwardModal = true
         return this.showAwardModal
-      } else if(this.statusFiveNew === true){
+      } else if(this.statusFiveNew === 1){
         this.showAwardModal = true
         return this.showAwardModal
-      } else if(this.statusSixNew === true){
+      } else if(this.statusSixNew === 1){
         this.showAwardModal = true
         return this.showAwardModal
       }

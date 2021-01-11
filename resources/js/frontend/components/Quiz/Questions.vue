@@ -58,10 +58,10 @@ export default {
       questionSize: "font-size: 1.5rem;",
       form: new Form({
         score: "",
-        actualScore: 245,
+        actualScore: "",
       }),
 
-      actualScore: 245,
+      actualScore: 99,
 
       awardOne: false,
       awardTwo: false,

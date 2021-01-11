@@ -50,3 +50,5 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1', 'as' => 'v1.'], functio
     });
 });
 Route::resource('quiz', 'QuestionController', );
+Route::resource('award', 'AwardController', );
+
