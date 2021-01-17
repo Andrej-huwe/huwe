@@ -2,7 +2,7 @@
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand mt-1 ml-5" href="#">
+    <a class="navbar-brand mt-1" style="margin-left: 30px" href="#">
         <h4>HUWE - admin panel</h4>
     </a>
 
