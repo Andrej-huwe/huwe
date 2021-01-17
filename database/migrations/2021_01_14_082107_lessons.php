@@ -13,7 +13,15 @@ class Lessons extends Migration
      */
     public function up()
     {
-        //
+            Schema::create('lessons', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable();
+            $table->string('desc')->nullable();
+            $table->string('difficulty')->nullable();
+            $table->string('type')->nullable();
+            $table->boolean('unlock_at')->default(0);
+            $table->timestamps();
+        });
     }
 
     /**

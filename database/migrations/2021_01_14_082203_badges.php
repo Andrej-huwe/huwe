@@ -13,7 +13,14 @@ class Badges extends Migration
      */
     public function up()
     {
-        //
+            Schema::create('badges', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable();
+            $table->string('desc')->nullable();
+            $table->boolean('unlock_at')->default(0);
+            $table->boolean('show_at')->default(0);
+            $table->boolean('img')->default(0);
+            $table->timestamps();
     }
 
     /**

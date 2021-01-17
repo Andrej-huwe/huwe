@@ -13,7 +13,16 @@ class Sensences extends Migration
      */
     public function up()
     {
-        //
+            Schema::create('sentences', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->boolean('parent_lesson')->default(0);
+            $table->string('question')->nullable();
+            $table->string('answer_one')->nullable();
+            $table->string('answer_two')->nullable();
+            $table->string('answer_four')->nullable();
+            $table->string('answer_corrent')->nullable();
+            $table->string('type')->nullable();
+            $table->timestamps();
     }
 
     /**
