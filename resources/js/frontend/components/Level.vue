@@ -1,5 +1,9 @@
 <template>
     <div class="text-center">
+      <h1>{{this.testId}}</h1>
+      <div v-for="data in testData" :key="data.id">
+        <h2>{{data.id}}</h2>
+      </div>
       <h1>Quiz</h1>
       <b-list-group class="list-group-one-item" :class="openNextLevel()">
         <b-list-group-item class="d-flex align-items-center">
@@ -91,6 +95,10 @@ import RadialProgressBar from 'vue-radial-progress'
 export default  {
   data() {
     return {
+      testId: window.location.href.split('/').pop(),
+      testNumber: null,
+      testData: '',
+
       //Correct Words
       correctWordsLevelOne: 10,
       correctWordsLevelTwo: 10,
@@ -124,7 +132,19 @@ export default  {
       scoreLevel: 11,
     }
   },
+  mounted(){
+    this.getTodos()
+  },
   methods: {
+
+    getTodos(){
+      axios.get('/api/quiz').then((res) =>{
+        this.testData = res.data
+        console.log(this.testData)
+      }).catch((error) =>{
+        console.log(error)
+      })
+    },
     openNextLevel() {
       if(this.scoreLevel >= 0 && this.scoreLevel < 10){
         this.levelTwoFull = true

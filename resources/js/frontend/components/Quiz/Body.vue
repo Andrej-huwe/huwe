@@ -123,6 +123,7 @@
 export default {
   data() {
     return {
+
       imageBg: require('../../../../img/quiz-background.png'),
       imageBgfgg: require('../../../../img/quiz/respo-chara-correct.png'),
       imageBgfggss: require('../../../../img/quiz/respo-chara-inCorrect.png'),

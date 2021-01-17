@@ -69,6 +69,9 @@
         <h4>{{this.awardSixName}}</h4>
       </b-col>
     </b-row>
+    <div v-for="awardData in awardsData" :key="awardData.id">
+      <a :href="'/level/' + awardData.id">{{awardData.id}}</a>
+    </div>
       <transition name="fade">
         <div v-if="showModal && showAwardModalMethod()" >
           <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
@@ -256,6 +259,7 @@ export default  {
   methods: {
     getTodos(){
       axios.get('/api/quiz').then((res) =>{
+        this.awardsData = res.data
         this.score = res.data[0].actualScore
         this.statusOneNew = res.data[0].awardOne
         this.statusTwoNew = res.data[0].awardTwo

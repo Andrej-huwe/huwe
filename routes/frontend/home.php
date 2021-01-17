@@ -27,10 +27,10 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::get('home', [DashboardController::class, 'index'])->name('dashboard');
 
         //User Level Specific
-        Route::get('level', [LevelController::class, 'index'])->name('level');
+        Route::get('level/{id}', [LevelController::class, 'index'])->name('level');
 
         //User Quiz Specific
-        Route::get('quiz', [QuizController::class, 'index'])->name('quiz');
+        Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz');
 
         // User Account Specific
         Route::get('account', [AccountController::class, 'index'])->name('account');
