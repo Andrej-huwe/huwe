@@ -19,6 +19,7 @@ Vue.component('awards', require('./components/Awards.vue').default);
 Vue.component('quiz-header', require('./components/Quiz/Header.vue').default);
 
 
+
 const app = new Vue({
     el: '#app',
 });

@@ -2,7 +2,7 @@
     <div class="text-center">
       <h1>{{this.testId}}</h1>
       <div v-for="data in testData" :key="data.id">
-        <h2>{{data.id}}</h2>
+        <h2>{{data.id | test(testId)}}</h2>
       </div>
       <h1>Quiz</h1>
       <b-list-group class="list-group-one-item" :class="openNextLevel()">
@@ -96,8 +96,10 @@ export default  {
   data() {
     return {
       testId: window.location.href.split('/').pop(),
+      testStringId: 1,
+      testHide: false,
       testNumber: null,
-      testData: '',
+      testData: [],
 
       //Correct Words
       correctWordsLevelOne: 10,
@@ -133,18 +135,44 @@ export default  {
     }
   },
   mounted(){
-    this.getTodos()
+    this.getData()
   },
-  methods: {
+  filters: {
+    test(value, id ){
+      if(value == id){
+        return value
+      }else {
+        value = null
+        return value
+      }
+      return value
+    },
+  },
 
-    getTodos(){
+  methods: {
+    testHideFunction(){
+      if(this.testData === this.testId){
+        this.testHide = true
+      } else {
+        this.testHide = false
+      }
+    },
+    testDataId(){
+      return this.testData.filter(function (data) {  return data.id = 8})
+    },
+    getTestID(){
+      this.testStringId = this.testId.toString()
+    },
+    getData(){
       axios.get('/api/quiz').then((res) =>{
         this.testData = res.data
-        console.log(this.testData)
       }).catch((error) =>{
         console.log(error)
       })
     },
+
+
+
     openNextLevel() {
       if(this.scoreLevel >= 0 && this.scoreLevel < 10){
         this.levelTwoFull = true
@@ -155,24 +183,6 @@ export default  {
         this.levelTwoFull = false
         this.levelThreeFull = true
       }
-      /*
-      if(this.completedStepsOne >= this.correctWordsLevelOne){
-        this.nextLevelTwo = true
-        this.levelTwoFull = false
-      } else {
-        this.completedStepsTwo = 0
-        this.nextLevelTwo = false
-        this.levelTwoFull = true
-      }
-      if(this.completedStepsTwo >= this.correctWordsLevelTwo ){
-        this.nextLevelThree = true
-        this.levelThreeFull = false
-      } else {
-        this.completedStepsThree = 0
-        this.nextLevelThree = false
-        this.levelThreeFull = true
-      }
-      */
     }
   },
   components: {
