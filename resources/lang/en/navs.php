@@ -13,8 +13,8 @@ return [
     */
 
     'general' => [
-        'home' => 'Home',
-        'logout' => 'Logout',
+        'home' => 'Domov',
+        'logout' => 'Odhlásenie',
     ],
 
     'frontend' => [

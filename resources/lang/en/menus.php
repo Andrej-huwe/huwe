@@ -14,7 +14,7 @@ return [
 
     'backend' => [
         'access' => [
-            'title' => 'Access',
+            'title' => 'Správa používateľov',
 
             'roles' => [
                 'all' => 'All Roles',
@@ -124,11 +124,11 @@ return [
             'dashboard' => 'Dashboard',
             'general' => 'General',
             'history' => 'History',
-            'system' => 'System',
-            'blogs' => 'Blog Management',
-            'pages' => 'Pages Management',
-            'faqs' => 'Faq Management',
-            'email-templates' => 'Email Templates',
+            'system' => 'Lekcie',
+            'blogs' => 'Správa lekcií',
+            'pages' => 'Správa slovíčok',
+            'faqs' => 'Správa viet',
+            'email-templates' => 'Správa score',
         ],
     ],
 
