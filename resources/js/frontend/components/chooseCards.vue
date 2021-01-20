@@ -12,7 +12,7 @@
               style="max-width: 30rem;"
               class="mb-3"
           >
-            <b-button class="next-page" href="/level" variant="primary">Slovička</b-button>
+            <b-button class="next-page" href="/words" variant="primary">Slovička</b-button>
           </b-card>
           <b-card
               img-src= https://huwe.test/images/quiz_correct.jpg?f2381b0037263ece8eff761b8027da68
@@ -22,7 +22,7 @@
               style="max-width: 30rem;"
               class="mb-3"
           >
-            <b-button class="next-page" href="/level" variant="primary">Vety</b-button>
+            <b-button class="next-page" href="/sentences" variant="primary">Vety</b-button>
           </b-card>
 
           <b-card

@@ -70,7 +70,7 @@
       </b-col>
     </b-row>
     <div v-for="awardData in awardsData" :key="awardData.id">
-      <a :href="'/level/' + awardData.id">{{awardData.id}}</a>
+      <a :href="'/words/' + awardData.id">{{awardData.id}}</a>
     </div>
       <transition name="fade">
         <div v-if="showModal && showAwardModalMethod()" >

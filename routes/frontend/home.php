@@ -4,9 +4,12 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\User\AccountController;
 use App\Http\Controllers\Frontend\User\DashboardController;
-use App\Http\Controllers\Frontend\User\LevelController;
+use App\Http\Controllers\Frontend\User\WordsController;
 use App\Http\Controllers\Frontend\User\ProfileController;
 use App\Http\Controllers\Frontend\User\QuizController;
+use App\Http\Controllers\Frontend\User\LevelController;
+use App\Http\Controllers\Frontend\User\SentencesController;
+use App\Http\Controllers\Frontend\User\LessonController;
 
 /*
  * Frontend Controllers
@@ -26,11 +29,17 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         // User Dashboard Specific
         Route::get('home', [DashboardController::class, 'index'])->name('dashboard');
 
-        //User Level Specific
+        //User Words
+        Route::get('words', [WordsController::class, 'index'])->name('words');
+        //User Level
         Route::get('level/{id}', [LevelController::class, 'index'])->name('level');
+        //User Sentences
+        Route::get('sentences', [SentencesController::class, 'index'])->name('sentences');
+
+        Route::get('test', [TestController::class, 'index'])->name('test');
 
         //User Quiz Specific
-        Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz');
+        Route::get('quiz', [QuizController::class, 'index'])->name('quiz');
 
         // User Account Specific
         Route::get('account', [AccountController::class, 'index'])->name('account');
