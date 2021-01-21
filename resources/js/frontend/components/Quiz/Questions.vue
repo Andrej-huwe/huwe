@@ -20,7 +20,7 @@
           {{answer}}
         </b-list-group-item>
       </b-list-group>
-      <form @submit="saveData" action="/home">
+      <form @submit=" updateData()" action="/home">
         <div class="quiz-button">
           <b-button
               class="next"
@@ -59,6 +59,7 @@ export default {
       form: new Form({
         score: "",
         actualScore: "",
+        completedSteps: "",
       }),
 
       actualScore: 99,
@@ -68,7 +69,10 @@ export default {
       awardThree: false,
       awardFour: false,
       awardFive: false,
-      awardSix: false
+      awardSix: false,
+
+      idOfSite: window.location.href.split('/').pop(),
+      nextIdOfSite: null,
     }
   },
   props: {
@@ -84,7 +88,7 @@ export default {
   },
   computed: {
     answers() {
-      let answers = [...this.currentQuestion.incorrect_answers]
+      let answers = [...this.currentQuestion.incorrect_answers] // "..." vytvárame kópiu array namiesto odkazovania
       answers.push(this.currentQuestion.correct_answer)
       return answers
     },
@@ -96,7 +100,7 @@ export default {
   },
   watch: {
     currentQuestion: {
-      immediate: true,
+      immediate: true, // "immediate" a "handler" nám spustia funkciu "shuffle" hneď po načitání stránky, inakšie by to bolo až po tom ako sa zmení index
       handler() {
         this.selectedIndex = null
         this.answered = false
@@ -105,13 +109,18 @@ export default {
     }
   },
   mounted() {
-
+    this.changeIdOfSite()
   },
   methods: {
+    updateData(){
+      this.updateDataSteps()
+      this.updateDataDisable()
+      this.saveData()
+    },
     saveData(){
       //Vloženie "props" do "form"
       this.form.score = this.numCorrect
-      // Je potrebné prepsíať "actualScore", pretože inakšie nefunguje funckia na ukladanie "awards". Zle tam funguje "if" v "upateAwards()"
+      // Je potrebné prepsíať "actualScore", pretože inakšie nefunguje funckia na ukladanie "awards". Zle tam funguje "if" v "updateAwards()"
       this.form.actualScore = this.actualScore
       let data = new FormData()
       //Zapísanie do databázy score + ocenenia
@@ -137,13 +146,43 @@ export default {
       }
       axios.post('/api/quiz', data)
     },
-    updateAwards(){
+    updateDataSteps(){
+      this.form.completedSteps = this.numCorrect
+      let id = this.idOfSite
+      let dataSteps = new FormData();
+
+      dataSteps.append('_method', 'PATCH')
+      dataSteps.append('completed_steps', this.form.completedSteps)
+      axios.post('/api/lesson/'+ id, dataSteps)
+          .catch((error) => {
+            this.form.errors.record(error.response.data.errors)
+          })
+    },
+    changeIdOfSite(){
+      //prepísanie "id" stránky = id + 1
+      let id = this.idOfSite
+      id++
+      this.nextIdOfSite = id
+    },
+    updateDataDisable(){
+      let id = this.nextIdOfSite
+      let dataTotal = new FormData();
+      dataTotal.append('_method', 'PATCH')
+      if(this.numCorrect == 10){
+        dataTotal.append('disable', 1)
+      }
+      console.log("id: " + id)
+      axios.post('/api/lesson/'+ id, dataTotal)
+          .catch((error) => {
+            this.form.errors.record(error.response.data.errors)
+          })
+    },
+    updateAwardsData(){
       //Prepísanie pri získaní nové ocenenia
       console.log("funguje updateAwards?")
       if(this.actualScore === 50 ){
         this.awardOne = !this.awardOne//awardOne = true
         return this.awardOne
-        console.log("funguje 50?")
       } else if(this.actualScore === 100 ){
         this.awardTwo = !this.awardTwo
         return this.awardTwo
@@ -160,53 +199,6 @@ export default {
         this.awardSix = !this.awardSix
         return this.awardSix
       }
-        /*
-        if(this.form.actualScore === 50) {
-        this.awardOne = !this.awardOne //awardOne = true
-      }
-      if(this.form.actualScore === 100) {
-        this.awardOne = !this.awardOne //awardOne = false
-        this.awardTwo = !this.awardTwo //awardTwo = true
-      }
-      if(this.form.actualScore === 150) {
-        this.awardOne = !this.awardOne //awardOne = false
-        this.awardTwo = !this.awardTwo //awardTwo = false
-        this.awardThree = !this.awardThree //awardThree = true
-        console.log("funguje 150?")
-      }
-          if(this.form.actualScore = 150){
-            this.awardOne = !this.awardOne //awardOne = false
-            this.awardTwo = !this.awardTwo //awardTwo = false
-            this.awardThree = !this.awardThree //awardThree = true
-
-            if(this.form.actualScore = 200){
-              this.awardOne = !this.awardOne
-              this.awardTwo = !this.awardTwo
-              this.awardThree = !this.awardThree
-              this.awardFour = !this.awardFour
-
-              if(this.form.actualScore = 250){
-                this.awardOne = !this.awardOne
-                this.awardTwo = !this.awardTwo
-                this.awardThree = !this.awardThree
-                this.awardFour = !this.awardFour
-                this.awardFive = !this.awardFive
-
-                if(this.form.actualScore = 300){
-                  this.awardOne = !this.awardOne
-                  this.awardTwo = !this.awardTwo
-                  this.awardThree = !this.awardThree
-                  this.awardFour = !this.awardFour
-                  this.awardFive = !this.awardFive
-                  this.awardFSix = !this.awardSix
-                }
-              }
-            }
-          }
-          */
-
-
-
     },
     selectAnswer(index) {
       this.selectedIndex = index
@@ -216,7 +208,7 @@ export default {
       if(this.selectedIndex === this.correctIndex) {
         isCorrect = true
         this.actualScore++
-        this.updateAwards()
+        this.updateAwardsData()
       }
       this.answered = true
       this.increment(isCorrect)
@@ -224,19 +216,17 @@ export default {
     },
     shuffleAnswers() {
       let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
-      this.shuffledAnswers = _.shuffle(answers)
-      this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
+      this.shuffledAnswers = _.shuffle(answers) // pracujeme s algoritmom z Lodash
+      this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)  // "indexOf" nájde index správnej odpovede
       console.log('correctIndex: ' + this.correctIndex)
     },
     answerClass(index) {
       let answerClass = ''
-
       if (this.answered && this.correctIndex === index) {
         answerClass = 'correct-list'
       } else if (this.answered && this.selectedIndex === index && this.correctIndex !== index) {
         answerClass = 'incorrect-list'
       }
-
       return answerClass
     },
     showHideElements(){

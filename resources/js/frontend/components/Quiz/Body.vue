@@ -25,8 +25,8 @@
               :idle="idle"
               :onClose="onClose"
               :onOpen="onOpen"
-              :checkRespoData="checkRespoData"
-          ></quiz-questions>
+              :checkRespoData="checkRespoData">
+          </quiz-questions>
         </b-col>
         </b-row>
       </b-container>
@@ -345,7 +345,7 @@ export default {
       this.checkAnimation = true
       this.time = false
     },
-    increment(isCorrect) {
+    increment(isCorrect) { //funkcia na zachytávanie dát pri odpovedi na otázku
       if (isCorrect) {
         this.numCorrect++
         this.numAnimation--

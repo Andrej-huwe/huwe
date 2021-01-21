@@ -69,7 +69,9 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $question = Question::findOrFail($id);
+        $question->update($request->all());
+        $question->save();
     }
 
     /**

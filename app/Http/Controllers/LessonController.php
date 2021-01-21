@@ -68,9 +68,11 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lesson $lesson)
+    public function update(Request $request, $id)
     {
-        //
+        $lesson = Lesson::findOrFail($id);
+        $lesson->update($request->all());
+        $lesson->save();
     }
 
     /**

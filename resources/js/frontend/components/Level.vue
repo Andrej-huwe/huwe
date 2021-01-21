@@ -19,7 +19,7 @@
                   :stopColor="stopColor">
                 <div class="avatar-item">
                   <a :disabled="!level.disable"
-                     href="/quiz"
+                     :href="'/quiz/' + level.id"
                      target="_self"
                      class="b-avatar avatar badge-secondary rounded-circle"
                      style="width: 6rem; height: 6rem;">
