@@ -1,8 +1,8 @@
 <template>
     <div class="text-center">
-      <h1>{{this.testId}}</h1>
+      <h1>{{this.typeOfSite}}</h1>
       <div v-for="data in testData" :key="data.id">
-        <h2 style="color: red">{{data.id + data.actualScore | testFilter(data.id, data.actualScore, testId)}}</h2>
+        <h2 style="color: red">{{data.id + data.actualScore | testFilter(data.id, data.actualScore, typeOfSite)}}</h2>
       </div>
       <h1>Quiz</h1>
 
@@ -19,7 +19,7 @@
                   :stopColor="stopColor">
                 <div class="avatar-item">
                   <a :disabled="!level.disable"
-                     :href="'/quiz/' + level.id"
+                     :href="typeOfSite + '/quiz/' + level.id"
                      target="_self"
                      class="b-avatar avatar badge-secondary rounded-circle"
                      style="width: 6rem; height: 6rem;">
@@ -42,7 +42,7 @@ import RadialProgressBar from 'vue-radial-progress'
 export default  {
   data() {
     return {
-      testId: window.location.href.split('/').pop(),
+      typeOfSite: window.location.href.split('/').pop(),
       testData: [],
 
       //Data Test na Level
@@ -67,7 +67,6 @@ export default  {
   mounted(){
     this.getData()
     this.getLevels()
-    this.getScore()
   },
   filters: {
     testFilter(value, id, score, siteId){
@@ -90,11 +89,21 @@ export default  {
       })
     },
     getLevels(){
-      axios.get('/api/lesson').then((res) => {
-        this.levelData = res.data
-      }).catch((error) => {
-        console.log(error)
-      })
+      if(this.typeOfSite == "words"){
+        axios.get('/api/words').then((res) => {
+          this.levelData = res.data
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+      if(this.typeOfSite == "sentences"){
+        axios.get('/api/sentences').then((res) => {
+          this.levelData = res.data
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+
     },
   },
   components: {

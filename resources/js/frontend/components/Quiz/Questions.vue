@@ -56,23 +56,31 @@ export default {
       hideElements: true,
       numberTest: 100,
       questionSize: "font-size: 1.5rem;",
+      //"form" na vkladanie do DB
       form: new Form({
         score: "",
         actualScore: "",
         completedSteps: "",
       }),
 
-      actualScore: 99,
-
+      //Awards Data, odosielanie do DB
       awardOne: false,
       awardTwo: false,
       awardThree: false,
       awardFour: false,
       awardFive: false,
       awardSix: false,
-
+      //Id stránky
       idOfSite: window.location.href.split('/').pop(),
+      typeOfSite: window.location.href.split('/'),
       nextIdOfSite: null,
+      //Get data
+      completedSteps: [],
+      score: [],
+      words_score: [],
+      sentences_score: [],
+      idOfScore: [],
+      idOfUser: this.$userId,
     }
   },
   props: {
@@ -109,23 +117,24 @@ export default {
     }
   },
   mounted() {
+    this.getDataSteps()
     this.changeIdOfSite()
+    this.getDataScore()
+    console.log("snetences: " + this.score)
   },
   methods: {
     updateData(){
       this.updateDataSteps()
       this.updateDataDisable()
       this.saveData()
+      this.updateDataScore()
     },
     saveData(){
       //Vloženie "props" do "form"
       this.form.score = this.numCorrect
-      // Je potrebné prepsíať "actualScore", pretože inakšie nefunguje funckia na ukladanie "awards". Zle tam funguje "if" v "updateAwards()"
-      this.form.actualScore = this.actualScore
+      // Je potrebné prepsíať "actualScore", pretože inakšie nefunguje funckia na ukladanie "awards". Zle tam funguje "if" v "updateAwards()
       let data = new FormData()
       //Zapísanie do databázy score + ocenenia
-      data.append('score', this.form.score)
-      data.append('actualScore', this.form.actualScore)
       if(this.awardOne == true){
         data.append('awardOne', 1)
       }
@@ -146,17 +155,97 @@ export default {
       }
       axios.post('/api/quiz', data)
     },
+    getDataScore(){
+      let index = this.idOfUser
+      index--
+      //kontrola, či "completed_steps" = 10, ak áno, odošle 10 do tabuľky automaticky
+      axios.get('/api/score').then((res) =>{
+        this.score = res.data[index].total_score
+        this.words_score = res.data[index].words_score
+        this.sentences_score = res.data[index].sentences_score
+        this.idOfScore = res.data[index].id
+      }).catch((error) =>{
+        console.log(error)
+      })
+    },
+    updateDataScore(){
+      // dáta ukladáme podľa "id" uživateľa
+      let id = this.idOfUser
+      this.form.score = this.numCorrect
+      let newScore = this.form.score + this.score
+      let dataScore = new FormData();
+      let wordsScore = this.numCorrect + this.words_score
+      let sentencesScore = this.numCorrect + this.sentences_score
+
+
+      dataScore.append('_method', 'PATCH')
+      dataScore.append('total_score', newScore)
+      if(this.typeOfSite == "words"){
+        dataScore.append('words_score', wordsScore)
+      }
+      if(this.typeOfSite == "sentences"){
+        dataScore.append('sentences_score', sentencesScore)
+      }
+      axios.post('/api/score/'+ id, dataScore)
+          .catch((error) => {
+            this.form.errors.record(error.response.data.errors)
+          })
+    },
+    getDataSteps(){
+      let index = this.idOfSite
+      index--
+      this.typeOfSite = this.typeOfSite[3]
+      if(this.typeOfSite == "words"){
+        //kontrola, či "completed_steps" = 10, ak áno, odošle 10 do tabuľky automaticky
+        axios.get('/api/words').then((res) =>{
+          this.completedSteps = res.data[index].completed_steps
+        }).catch((error) =>{
+          console.log(error)
+        })
+      }
+      if(this.typeOfSite == "sentences"){
+        //kontrola, či "completed_steps" = 10, ak áno, odošle 10 do tabuľky automaticky
+        axios.get('/api/sentences').then((res) =>{
+          this.completedSteps = res.data[index].completed_steps
+        }).catch((error) =>{
+          console.log(error)
+        })
+      }
+    },
     updateDataSteps(){
       this.form.completedSteps = this.numCorrect
       let id = this.idOfSite
       let dataSteps = new FormData();
 
-      dataSteps.append('_method', 'PATCH')
-      dataSteps.append('completed_steps', this.form.completedSteps)
-      axios.post('/api/lesson/'+ id, dataSteps)
-          .catch((error) => {
-            this.form.errors.record(error.response.data.errors)
-          })
+
+      if(this.typeOfSite == "words"){
+        dataSteps.append('_method', 'PATCH')
+        if(this.completedSteps < 10){
+          dataSteps.append('completed_steps', this.form.completedSteps)
+        } else {
+          dataSteps.append('completed_steps', 10)
+        }
+      console.log("completed steps")
+        axios.post('/api/words/'+ id, dataSteps)
+            .catch((error) => {
+              this.form.errors.record(error.response.data.errors)
+            })
+      }
+
+      if(this.typeOfSite == "sentences"){
+        dataSteps.append('_method', 'PATCH')
+        if(this.completedSteps < 10){
+          dataSteps.append('completed_steps', this.form.completedSteps)
+        } else {
+          dataSteps.append('completed_steps', 10)
+        }
+        axios.post('/api/sentences/'+ id, dataSteps)
+            .catch((error) => {
+              this.form.errors.record(error.response.data.errors)
+            })
+      }
+
+
     },
     changeIdOfSite(){
       //prepísanie "id" stránky = id + 1
@@ -167,19 +256,30 @@ export default {
     updateDataDisable(){
       let id = this.nextIdOfSite
       let dataTotal = new FormData();
-      dataTotal.append('_method', 'PATCH')
-      if(this.numCorrect == 10){
-        dataTotal.append('disable', 1)
+
+      if(this.typeOfSite == "words"){
+        dataTotal.append('_method', 'PATCH')
+        if(this.numCorrect == 10){
+          dataTotal.append('disable', 1)
+        }
+        axios.post('/api/words/'+ id, dataTotal)
+            .catch((error) => {
+              this.form.errors.record(error.response.data.errors)
+            })
       }
-      console.log("id: " + id)
-      axios.post('/api/lesson/'+ id, dataTotal)
-          .catch((error) => {
-            this.form.errors.record(error.response.data.errors)
-          })
+      if(this.typeOfSite == "sentences"){
+        dataTotal.append('_method', 'PATCH')
+        if(this.numCorrect == 10){
+          dataTotal.append('disable', 1)
+        }
+        axios.post('/api/sentences/'+ id, dataTotal)
+            .catch((error) => {
+              this.form.errors.record(error.response.data.errors)
+            })
+      }
     },
     updateAwardsData(){
       //Prepísanie pri získaní nové ocenenia
-      console.log("funguje updateAwards?")
       if(this.actualScore === 50 ){
         this.awardOne = !this.awardOne//awardOne = true
         return this.awardOne

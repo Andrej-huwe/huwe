@@ -123,8 +123,7 @@
 export default {
   data() {
     return {
-
-      imageBg: require('../../../../img/quiz-background.png'),
+      imageBg: "https://huwe.test/images/quiz-background.png?4c8accaf28fac92cf21bc4fa2ca0de57",
       imageBgfgg: require('../../../../img/quiz/respo-chara-correct.png'),
       imageBgfggss: require('../../../../img/quiz/respo-chara-inCorrect.png'),
 

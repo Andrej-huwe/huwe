@@ -18,7 +18,7 @@ class CreateScoresTable extends Migration
             $table->boolean('user_id')->default(0);
             $table->boolean('total_score')->default(0);
             $table->boolean('words_score')->default(0);
-            $table->boolean('sencences_score')->default(0);
+            $table->boolean('sentences_score')->default(0);
             $table->boolean('nouns_score')->default(0);
             $table->boolean('verbs_score')->default(0);
             $table->boolean('adjectives_score')->default(0);

@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::get('test', [TestController::class, 'index'])->name('test');
 
         //User Quiz Specific
-        Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz');
+        Route::get('{type}/quiz/{id}', [QuizController::class, 'index'])->name('quiz');
 
         // User Account Specific
         Route::get('account', [AccountController::class, 'index'])->name('account');

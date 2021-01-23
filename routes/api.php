@@ -53,3 +53,5 @@ Route::resource('quiz', 'QuestionController', );
 Route::resource('award', 'AwardController', );
 Route::resource('lesson', 'LessonController', );
 Route::resource('score', 'ScoreController');
+Route::resource('words', 'WordController');
+Route::resource('sentences', 'SentenceController');

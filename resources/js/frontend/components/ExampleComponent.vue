@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>stuska</h1>
+    <h1>{{user_id}}</h1>
     <form @submit.prevent="saveData">
       <div class="input-group">
         <h1 >{{this.form.title}}</h1>
@@ -27,7 +28,8 @@
           form: new Form({
             title: 5,
           }),
-          test: 1
+          test: 1,
+          user_id: this.$userId,
         }
       },
       methods: {

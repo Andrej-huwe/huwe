@@ -160,7 +160,9 @@ export default  {
       statusFiveNew: '',
       statusSixNew: '',
       //Score of user
-      score: '',
+      score: null,
+      scoreData: [],
+      idOfUser: this.$userId,
     }
   },
   computed: {
@@ -254,10 +256,11 @@ export default  {
     },
   },
   mounted(){
-    this.getTodos()
+    this.getAwards()
   },
   methods: {
-    getTodos(){
+    getAwards(){
+      /*
       axios.get('/api/quiz').then((res) =>{
         this.awardsData = res.data
         this.score = res.data[0].actualScore
@@ -271,6 +274,19 @@ export default  {
       }).catch((error) =>{
         console.log(error)
       })
+
+      */
+
+
+      let index = this.idOfUser
+      index--
+      axios.get('/api/score').then((res) =>{
+        this.score = res.data[index].total_score
+        console.log("totalScore: " +this.score)
+      }).catch((error) =>{
+        console.log(error)
+      })
+
     },
 
     testTime(){

@@ -18,6 +18,7 @@ Vue.component('quiz-questions', require('./components/Quiz/Questions.vue').defau
 Vue.component('awards', require('./components/Awards.vue').default);
 Vue.component('quiz-header', require('./components/Quiz/Header.vue').default);
 
+Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content');
 
 
 const app = new Vue({

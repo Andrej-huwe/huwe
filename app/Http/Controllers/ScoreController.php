@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Award;
+use App\Question;
 use App\Score;
 use Illuminate\Http\Request;
 
@@ -68,9 +69,11 @@ class ScoreController extends Controller
      * @param  \App\Score  $score
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Score $score)
+    public function update(Request $request, $id)
     {
-        //
+        $score = Score::findOrFail($id);
+        $score->update($request->all());
+        $score->save();
     }
 
     /**

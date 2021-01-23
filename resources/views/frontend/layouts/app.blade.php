@@ -37,6 +37,10 @@
             </div><!-- container -->
         </div><!-- #app -->
 
+        <!-- Kontrola user ID -->
+        @if (Auth::check())
+            <meta name="user_id" content="{{ Auth::user()->id }}" />
+        @endif
         <!-- Scripts -->
         @stack('before-scripts')
         {!! script(mix('js/manifest.js')) !!}
