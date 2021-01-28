@@ -7,6 +7,6 @@
 
     <choose-cards></choose-cards>
 
-    <awards></awards>
+    <awards-new></awards-new>
 
 @endsection

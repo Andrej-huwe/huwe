@@ -23,23 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
+      <change afterPath="$PROJECT_DIR$/resources/js/frontend/components/AwardsNew.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScoreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScoreController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Score.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Score.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_19_121621_create_scores_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_19_121621_create_scores_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Awards.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Awards.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/ExampleComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/ExampleComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Level.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Level.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/appQuiz.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/appQuiz.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/user/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/user/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/frontend/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/frontend/home.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,7 +337,14 @@
       <workItem from="1611221294341" duration="281000" />
       <workItem from="1611234838509" duration="7148000" />
       <workItem from="1611293673916" duration="5587000" />
-      <workItem from="1611389565206" duration="7662000" />
+      <workItem from="1611389565206" duration="7766000" />
+      <workItem from="1611489682690" duration="29000" />
+      <workItem from="1611489983701" duration="2848000" />
+      <workItem from="1611517932409" duration="3696000" />
+      <workItem from="1611682278803" duration="9846000" />
+      <workItem from="1611758569120" duration="4113000" />
+      <workItem from="1611815291022" duration="3397000" />
+      <workItem from="1611839250642" duration="7856000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
@@ -404,10 +406,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1609358756945" />
-    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611394143078">
+    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611684985380">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1611394143078" />
+    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1611684985380" />
     <state x="590" y="351" key="Github.ShareDialog" timestamp="1606677893369">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -425,36 +427,19 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="526" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610023296227" />
-    <state x="160" y="25" width="1280" height="803" key="dock-window-1" timestamp="1610209537869">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state x="1440" y="0" width="1280" height="1024" key="dock-window-1" timestamp="1611557209195">
+      <screen x="1440" y="25" width="1280" height="999" />
     </state>
     <state x="160" y="25" width="1280" height="803" key="dock-window-1/0.25.1440.803@0.25.1440.803" timestamp="1610209537869" />
-    <state x="1440" y="25" width="1280" height="909" key="dock-window-1/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1610203663370" />
-    <state x="1440" y="25" width="1280" height="909" key="dock-window-1/1440.25.1280.999/0.25.1440.803@0.25.1440.803" timestamp="1609958132712" />
+    <state x="1440" y="0" width="1280" height="1024" key="dock-window-1/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1611518483100" />
+    <state x="1440" y="0" width="1280" height="1024" key="dock-window-1/1440.25.1280.999/0.25.1440.803@0.25.1440.803" timestamp="1611557209195" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1608894537792">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="600" height="428" key="javadoc.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1608894537792" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1611396854480">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1611843552810">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1611396854480" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/resources/js/frontend/components/Awards.vue</url>
-          <line>74</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/resources/js/frontend/components/Awards.vue</url>
-          <line>167</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1611843552810" />
   </component>
 </project>

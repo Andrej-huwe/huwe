@@ -38,6 +38,8 @@
         </div><!-- #app -->
 
         <!-- Kontrola user ID -->
+
+
         @if (Auth::check())
             <meta name="user_id" content="{{ Auth::user()->id }}" />
         @endif

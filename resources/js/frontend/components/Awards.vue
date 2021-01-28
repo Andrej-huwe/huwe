@@ -1,6 +1,7 @@
 <template>
   <div class="text-center b-container">
     <h1>Ocenenie</h1>
+    <!--
     <b-row class="awards">
       <b-col class="awardsSingle"
              :style="awardNewOneMethodOut"
@@ -69,9 +70,70 @@
         <h4>{{this.awardSixName}}</h4>
       </b-col>
     </b-row>
-    <div v-for="awardData in awardsData" :key="awardData.id">
-      <a :href="'/words/' + awardData.id">{{awardData.id}}</a>
-    </div>
+
+-->
+    <b-row class="awards">
+      <b-col class="awardsSingle">
+        <b-img thumbnail fluid
+               :src="this.awardTwo"></b-img>
+        <h4>test</h4>
+      </b-col>
+
+      <b-col class="awardsSingle"
+
+             :class="awardTwoFull ? this.statusOutside : ''">
+        <b-img thumbnail fluid
+
+               :class="awardTwoFull ? this.statusInside : ''"
+               loading="lazy"
+               :src=this.awardTwoImg></b-img>
+        <h4>{{this.awardTwoName}}</h4>
+      </b-col>
+
+      <b-col class="awardsSingle"
+
+             :class="awardThreeFull ? this.statusOutside : ''">
+        <b-img thumbnail fluid
+
+               :class="awardThreeFull ? this.statusInside : ''"
+               loading="lazy"
+               :src=this.awardThreeImg></b-img>
+        <h4>{{this.awardThreeName}}</h4>
+      </b-col>
+
+      <b-col class="awardsSingle"
+
+             :class="awardFourFull ? this.statusOutside : ''">
+        <b-img thumbnail fluid
+
+               :class="awardFourFull ? this.statusInside : ''"
+               loading="lazy"
+               :src=this.awardFourImg></b-img>
+        <h4>{{this.awardFourName}}</h4>
+      </b-col>
+
+      <b-col class="awardsSingle"
+
+             :class="awardFiveFull ? this.statusOutside : ''">
+        <b-img thumbnail fluid
+
+               :class="awardFiveFull ? this.statusInside  : ''"
+               loading="lazy"
+               :src=this.awardFiveImg ></b-img>
+        <h4>{{this.awardFiveName}}</h4>
+      </b-col>
+
+      <b-col class="awardsSingle"
+
+             :class="awardSixFull ? this.statusOutside : ''">
+        <b-img thumbnail fluid
+
+               :class="awardSixFull ? this.statusInside  : '' "
+               loading="lazy"
+               :src=this.awardSixImg></b-img>
+        <h4>{{this.awardSixName}}</h4>
+      </b-col>
+    </b-row>
       <transition name="fade">
         <div v-if="showModal && showAwardModalMethod()" >
           <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
@@ -94,7 +156,7 @@
                     </b-col>
                     <h1>Gratulujeme!</h1>
                   </div>
-                </div><!----></div><span tabindex="0"></span>
+                </div></div><span tabindex="0"></span>
             </div>
           </div>
           <div class="modal-backdrop"></div>
@@ -111,12 +173,12 @@ export default  {
       //Awards Data
       awardOneNew: false,
       awardTwoNew: false,
-      awardOneFull: false,
-      awardTwoFull: false,
-      awardThreeFull: false,
-      awardFourFull: false,
-      awardFiveFull: false,
-      awardSixFull: false,
+      awardOneFull: true,
+      awardTwoFull: true,
+      awardThreeFull: true,
+      awardFourFull: true,
+      awardFiveFull: true,
+      awardSixFull: true,
       //Awards Image
       awardOneImg:"https://huwe.test/images/award_0.png?581d15dd551124da1b8d05b888c181c0",
       awardTwoImg:"https://huwe.test/images/award_1.png?37df38faf333d98395b2a43bd569887f",
@@ -160,12 +222,13 @@ export default  {
       statusFiveNew: '',
       statusSixNew: '',
       //Score of user
-      score: null,
+      score: 60,
       scoreData: [],
       idOfUser: this.$userId,
     }
   },
   computed: {
+    /*
     modalAwardNewInMethod(){
       this.testTime()
       return this.test
@@ -254,6 +317,8 @@ export default  {
         return this.awardOldIn
       }
     },
+
+     */
   },
   mounted(){
     this.getAwards()
@@ -293,6 +358,7 @@ export default  {
       this.test = this.modalAwardNewIn
       // modal dokončiť TimeOut
     },
+    /*
     modalAwardName(){
       if(this.statusOneNew === 1){
         return this.awardOneName
@@ -361,30 +427,44 @@ export default  {
       }
 
     },
-    awardChangeStatusInside(){
-      this.statusInside = this.statusOld
-    },
-    awardsMethod(){
+
+     */
+    // Ukázanie ocenení
+     awardsMethod(){
+      let awardOne = this.awardOneFull
+      let awardTwo = this.awardTwoFull
+      let awardThree= this.awardThreeFull
+      let awardFour = this.awardFourFull
+      let awardFive = this.awardFiveFull
+      let awrardSix = this.awardSixFull
+
       if(this.score >= this.scoreLevelOne){
-        this.awardOneFull = true
-        this.awardChangeStatusInside()
+        awardOne = !awardOne
+        this.statusInside = this.statusOld
       }
       if(this.score >= this.scoreLevelTwo){
         this.awardTwoFull = true
+        this.statusInside = this.statusOld
       }
       if(this.score >= this.scoreLevelThree){
         this.awardThreeFull = true
+        this.statusInside = this.statusOld
       }
       if(this.score >= this.scoreLevelFour){
         this.awardFourFull = true
+        this.statusInside = this.statusOld
       }
       if(this.score >= this.scoreLevelFive){
         this.awardFiveFull = true
+        this.statusInside = this.statusOld
       }
       if(this.score >= this.scoreLevelSix){
         this.awardSixFull = true
+        this.statusInside = this.statusOld
       }
     }
+
+
   },
 }
 </script>

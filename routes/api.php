@@ -55,3 +55,5 @@ Route::resource('lesson', 'LessonController', );
 Route::resource('score', 'ScoreController');
 Route::resource('words', 'WordController');
 Route::resource('sentences', 'SentenceController');
+Route::resource('badges', 'BadgeController');
+

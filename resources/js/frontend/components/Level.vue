@@ -1,6 +1,5 @@
 <template>
     <div class="text-center">
-      <h1>{{this.typeOfSite}}</h1>
       <div v-for="data in testData" :key="data.id">
         <h2 style="color: red">{{data.id + data.actualScore | testFilter(data.id, data.actualScore, typeOfSite)}}</h2>
       </div>
@@ -65,7 +64,6 @@ export default  {
     }
   },
   mounted(){
-    this.getData()
     this.getLevels()
   },
   filters: {
@@ -80,14 +78,6 @@ export default  {
     },
   },
   methods: {
-    // Testovancie Get
-    getData(){
-      axios.get('/api/quiz').then((res) =>{
-        this.testData = res.data
-      }).catch((error) =>{
-        console.log(error)
-      })
-    },
     getLevels(){
       if(this.typeOfSite == "words"){
         axios.get('/api/words').then((res) => {

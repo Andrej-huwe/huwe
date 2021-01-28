@@ -20,7 +20,7 @@
           {{answer}}
         </b-list-group-item>
       </b-list-group>
-      <form @submit=" updateData()" action="/home">
+      <form @submit.prevent=" updateData()" action="/home">
         <div class="quiz-button">
           <b-button
               class="next"
@@ -81,6 +81,14 @@ export default {
       sentences_score: [],
       idOfScore: [],
       idOfUser: this.$userId,
+      badges: {
+        length: [],
+        data: [],
+        userId: [],
+        status: [],
+        unlock_at: {},
+        id: [],
+      },
     }
   },
   props: {
@@ -120,7 +128,6 @@ export default {
     this.getDataSteps()
     this.changeIdOfSite()
     this.getDataScore()
-    console.log("snetences: " + this.score)
   },
   methods: {
     updateData(){
@@ -128,6 +135,7 @@ export default {
       this.updateDataDisable()
       this.saveData()
       this.updateDataScore()
+      this.updateBadges()
     },
     saveData(){
       //Vloženie "props" do "form"
@@ -191,6 +199,61 @@ export default {
             this.form.errors.record(error.response.data.errors)
           })
     },
+    //Načítať údaje si môžme až po skončení quizu, nepotrebujem v priebehu quizu s nimi pracovať
+    updateBadges(){
+      let index = 0
+      axios.get('/api/badges').then((res) => {
+        this.badges.length = res.data.length
+        //Vďaka "for" mi načíta všetky údaje, nie iba posledný
+        for(index = 0; index <= this.badges.length; index++){
+          this.badges.status = res.data[index].status
+          this.badges.unlock_at = res.data[index].unlock_at
+          this.badges.userId =res.data[index].userId
+          this.badges.id = res.data[index].id
+          //Zavoláme si funkciu, aby sme pracovali s "for". Inakšie by nám odoslalo iba jeden údaj, takto nám odošle všetky
+          this.setBadges(this.badges.userId, this.badges.id, this.badges.unlock_at)
+          this.setBadgesNew(this.badges.userId, this.badges.id, this.badges.unlock_at)
+        }
+      }).catch((error) =>{
+        console.log(error)
+      })
+    },
+    setBadges(userIdDB, id, unlock){
+      let newScore = this.form.score + this.score
+      let userId = this.idOfUser
+      let dataBadges = new FormData()
+      //Ak uživateľské ID sa musí rovnať s "userId" v "badges"
+      if(userIdDB == userId){
+        dataBadges.append('_method', 'PATCH')
+        //Ak scóre je väčšie ako "unlock_at"
+        if(newScore >= unlock){
+          dataBadges.append('status', 1)
+        } else {
+          dataBadges.append('status', 0)
+        }
+        dataBadges.append('new_award', 0)
+        axios.post('/api/badges/'+ id, dataBadges)
+            .catch((error) => {
+              this.form.errors.record(error.response.data.errors)
+            })
+      }
+    },
+    setBadgesNew(userIdDB, id, unlock){
+      let score = this.score
+      let count
+      let newScore = this.form.score + this.score
+      let dataBadges = new FormData()
+      dataBadges.append('_method', 'PATCH')
+      //skontroluje mi čísla od starého po nové skóre, ak jedno z tých čísel sa rovná "unlock" zapíše mi do "new_award" = 1
+      for(count = score ; count <= newScore; count++ ) {
+        if(count == unlock) {
+          console.log("data: " + count + unlock + id)
+          console.log("score = unlock")
+          dataBadges.append('new_award', 1)
+          axios.post('/api/badges/' + id, dataBadges)
+        }
+      }
+    },
     getDataSteps(){
       let index = this.idOfSite
       index--
@@ -217,13 +280,14 @@ export default {
       let id = this.idOfSite
       let dataSteps = new FormData();
 
-
       if(this.typeOfSite == "words"){
         dataSteps.append('_method', 'PATCH')
-        if(this.completedSteps < 10){
+        // Ak správne odpovede ako 10 (číže už som urobil na plný počet daný level)
+        // a ak moje aktuálne kroky sú menšie ako moje predošlé, uloží mi moje správne odpovede
+        if(this.form.completedSteps > this.completedSteps){
           dataSteps.append('completed_steps', this.form.completedSteps)
         } else {
-          dataSteps.append('completed_steps', 10)
+          dataSteps.append('completed_steps', this.completedSteps)
         }
       console.log("completed steps")
         axios.post('/api/words/'+ id, dataSteps)
@@ -330,7 +394,7 @@ export default {
       return answerClass
     },
     showHideElements(){
-      if(this.index === 9) { //originíl '9'
+      if(this.index == 1) { //originíl '9'
         this.showElements = true
         this.hideElements = false
         if(this.numCorrect >= 5) {
