@@ -10,6 +10,11 @@ import BootstrapVue from "bootstrap-vue"
 Vue.use(BootstrapVue)
 window.Vue = Vue;
 
+Vue.config.productionTip = false
+export const bus = new Vue();
+
+
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('choose-cards', require('./components/chooseCards.vue').default);
 Vue.component('level-vue', require('./components/Level.vue').default);
@@ -19,9 +24,10 @@ Vue.component('awards', require('./components/Awards.vue').default);
 Vue.component('awards-new', require('./components/AwardsNew.vue').default);
 Vue.component('quiz-header', require('./components/Quiz/Header.vue').default);
 
-Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content');
+Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'); // Získanie "id" uživateľa
 
 
 const app = new Vue({
     el: '#app',
 });
+

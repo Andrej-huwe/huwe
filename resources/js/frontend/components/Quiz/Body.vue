@@ -25,6 +25,7 @@
               :idle="idle"
               :onClose="onClose"
               :onOpen="onOpen"
+              :typeQuestion="typeQuestion"
               :checkRespoData="checkRespoData">
           </quiz-questions>
         </b-col>
@@ -119,7 +120,7 @@
 </template>
 
 <script>
-
+import { bus } from '../../app'
 export default {
   data() {
     return {
@@ -183,6 +184,8 @@ export default {
       //Modal Pete inCorrect
       showPeteModalInCorrect: false,
       PeteModalInCorrectDefault: true,
+      //Zmena zo Speech-to-text na obyčajný quiz
+      typeQuestion: true, //"true" = quiz, "false" = speech
 
       number: null,
       date: new Date()
@@ -250,7 +253,6 @@ export default {
     },
     smChangeText(){
       this.textNumber = Math.floor(Math.random() * 3) + 1;
-      console.log("TextNumber: " + this.textNumber)
       if(this.textNumber === 1) {
         this.textInCorrect = this.textInCorrectOne
         this.textCorrect = this.textCorrectOne
@@ -287,7 +289,6 @@ export default {
     },
     randomNumber() {
       this.number = Math.floor(Math.random() * 9) + 1;
-      console.log('číslo textu Correct: ' + this.number)
     },
     onOpen() {
       this.textWrong = this.numAnimation
@@ -343,6 +344,13 @@ export default {
       this.animationPressed = true
       this.checkAnimation = true
       this.time = false
+
+      if(this.numTotal === this.number){
+        this.typeQuestion = false
+
+      } else {
+        this.typeQuestion = true
+      }
     },
     increment(isCorrect) { //funkcia na zachytávanie dát pri odpovedi na otázku
       if (isCorrect) {

@@ -10,7 +10,23 @@
       <b-list-group
           horizontal="md"
           v-if="hideElements">
+          <b-button id="btnGiveCommand"
+                    class="btnSpeech"
+                    v-if="!typeQuestion"
+                    @click="submitSpeech(),  doLoading()"
+                    v-bind:style="btnAnswerSpeech"
+                    :disabled="answered === true">
+            {{btnAnswerText}}
+            <loading :active.sync="isLoading"
+                     :can-cancel="true"
+                     :color="color"
+                     :loader="loader"
+                     :background-color="backgroundColor"
+                     :is-full-page="fullPage"></loading>
+          </b-button>
+
         <b-list-group-item
+            v-if="typeQuestion"
             v-for="(answer, index) in answers"
             :key="answer"
             @click="selectAnswer(index), submitAnswer(), onOpen()"
@@ -20,7 +36,7 @@
           {{answer}}
         </b-list-group-item>
       </b-list-group>
-      <form @submit.prevent=" updateData()" action="/home">
+      <form @submit=" updateData()" action="/home">
         <div class="quiz-button">
           <b-button
               class="next"
@@ -44,9 +60,19 @@
 
 <script>
 import _ from 'lodash'
+import { bus } from '../../app'
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
   data() {
     return {
+      color: '#622161',
+      backgroundColor: 'none',
+      loader: 'bars',
+      isLoading: false,
+      fullPage: false,
+
       shuffledAnswers: [],
       correctIndex: null,
       answered: false,
@@ -89,7 +115,13 @@ export default {
         unlock_at: {},
         id: [],
       },
+      //Speech to text
+      btnAnswerSpeech: '',
+      btnAnswerText: 'Tap to speak'
     }
+  },
+  components: {
+    Loading
   },
   props: {
     currentQuestion: Object,
@@ -100,7 +132,9 @@ export default {
     numTotal: Number,
     onClose: Function,
     onOpen: Function,
-    checkRespoData: Boolean
+    checkRespoData: Boolean,
+    randomNumber: Number,
+    typeQuestion: Boolean
   },
   computed: {
     answers() {
@@ -133,35 +167,8 @@ export default {
     updateData(){
       this.updateDataSteps()
       this.updateDataDisable()
-      this.saveData()
       this.updateDataScore()
       this.updateBadges()
-    },
-    saveData(){
-      //Vloženie "props" do "form"
-      this.form.score = this.numCorrect
-      // Je potrebné prepsíať "actualScore", pretože inakšie nefunguje funckia na ukladanie "awards". Zle tam funguje "if" v "updateAwards()
-      let data = new FormData()
-      //Zapísanie do databázy score + ocenenia
-      if(this.awardOne == true){
-        data.append('awardOne', 1)
-      }
-      if(this.awardTwo == true){
-        data.append('awardTwo', 1)
-      }
-      if(this.awardThree == true){
-        data.append('awardThree', 1)
-      }
-      if(this.awardFour == true){
-        data.append('awardFour', 1)
-      }
-      if(this.awardFive == true){
-        data.append('awardFive', 1)
-      }
-      if(this.awardSix == true){
-        data.append('awardSix', 1)
-      }
-      axios.post('/api/quiz', data)
     },
     getDataScore(){
       let index = this.idOfUser
@@ -247,8 +254,6 @@ export default {
       //skontroluje mi čísla od starého po nové skóre, ak jedno z tých čísel sa rovná "unlock" zapíše mi do "new_award" = 1
       for(count = score ; count <= newScore; count++ ) {
         if(count == unlock) {
-          console.log("data: " + count + unlock + id)
-          console.log("score = unlock")
           dataBadges.append('new_award', 1)
           axios.post('/api/badges/' + id, dataBadges)
         }
@@ -289,7 +294,6 @@ export default {
         } else {
           dataSteps.append('completed_steps', this.completedSteps)
         }
-      console.log("completed steps")
         axios.post('/api/words/'+ id, dataSteps)
             .catch((error) => {
               this.form.errors.record(error.response.data.errors)
@@ -342,37 +346,52 @@ export default {
             })
       }
     },
-    updateAwardsData(){
-      //Prepísanie pri získaní nové ocenenia
-      if(this.actualScore === 50 ){
-        this.awardOne = !this.awardOne//awardOne = true
-        return this.awardOne
-      } else if(this.actualScore === 100 ){
-        this.awardTwo = !this.awardTwo
-        return this.awardTwo
-      } else if(this.actualScore === 150 ){
-        this.awardThree = !this.awardThree
-        return this.awardThree
-      } else if(this.actualScore === 200 ){
-        this.awardFour = !this.awardFour
-        return this.awardFour
-      } else if(this.actualScore === 250 ){
-        this.awardFive = !this.awardFive
-        return this.awardFive
-      } else if(this.actualScore === 300 ){
-        this.awardSix = !this.awardSix
-        return this.awardSix
-      }
-    },
     selectAnswer(index) {
       this.selectedIndex = index
+    },
+    submitSpeech() {
+      let answer = this.currentQuestion.correct_answer
+
+      let SpeechRecognition = SpeechRecognition || webkitSpeechRecognition; // SpeechRecognition pre FireFox, webkitSpeechRecognition pre Chrome
+      let SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+
+      let grammar = '#JSGF V1.0;' // Typ Gramatiky, ktorú používame
+
+      let recognition = new SpeechRecognition();
+      let speechRecognitionList = new SpeechGrammarList();
+      speechRecognitionList.addFromString(grammar, 1); //Definovanie gramatiky
+      recognition.grammars = speechRecognitionList; // Vloženie gramatiky do rozpoznania
+      recognition.lang = 'en-US';
+      recognition.interimResults = false; // S kódom pracuje, až keď dohovoríme
+
+      recognition.onresult = function(event) {
+        let last = event.results.length - 1;
+        let command = event.results[last][0].transcript;
+
+        console.log(command)
+        if(command.toLowerCase() === 'best'){ // answer.toLowerCase()
+          console.log("command == answer")
+          bus.$emit('answered', 1);
+        } else {
+          console.log("command =/ best")
+          bus.$emit('answered', 0);
+        }
+      };
+      recognition.onspeechend = function() {
+        recognition.stop();
+        bus.$emit('stopLoading', 1)
+      };
+
+      recognition.onerror = function(event) {
+        console.log('Error occurred in recognition: ' + event.error)
+      }
+      recognition.start();
+
     },
     submitAnswer() {
       let isCorrect = false
       if(this.selectedIndex === this.correctIndex) {
         isCorrect = true
-        this.actualScore++
-        this.updateAwardsData()
       }
       this.answered = true
       this.increment(isCorrect)
@@ -382,7 +401,19 @@ export default {
       let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
       this.shuffledAnswers = _.shuffle(answers) // pracujeme s algoritmom z Lodash
       this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)  // "indexOf" nájde index správnej odpovede
-      console.log('correctIndex: ' + this.correctIndex)
+      console.log('correctIndex: ' + this.correctIndex + ' ' + this.currentQuestion.correct_answer)
+    },
+    answerClassSpeech(data){
+      if(data == 1){
+        this.btnAnswerSpeech = 'background-color: #38c172; color: white;'
+      } else if(data == 0){
+        this.btnAnswerSpeech = 'background-color: #bd3231; color: white;'
+      }
+      return this.btnAnswerSpeech
+    },
+    doLoading() {
+      this.btnAnswerText = null
+      this.isLoading = true;
     },
     answerClass(index) {
       let answerClass = ''
@@ -394,7 +425,7 @@ export default {
       return answerClass
     },
     showHideElements(){
-      if(this.index == 1) { //originíl '9'
+      if(this.index == 9) { //originíl '9'
         this.showElements = true
         this.hideElements = false
         if(this.numCorrect >= 5) {
@@ -403,8 +434,17 @@ export default {
           this.downNumber = true
         }
       }
-    }
-  }
+    },
+  },
+  created() {
+    bus.$on('answered', (data) => {
+      this.increment(data)
+      this.answered = true
+      this.isLoading = false
+      this.btnAnswerText = 'Tap to speak'
+      this.answerClassSpeech(data)
+    })
+  },
 }
 </script>
 
@@ -498,6 +538,21 @@ export default {
 }
 .finish-text {
   margin: 10% 0;
+}
+.btnSpeech {
+  margin: 0 auto;
+  width: 50%;
+  font-size: 1.4rem;
+  border-radius: 12px;
+  border: 3px solid rgba(0,0,0, 0.125);
+  font-weight: 300;
+  background-color: #f7f7f7;
+  color: #212529;
+  font-family: 'Poppins', sans-serif;
+}
+.btnSpeech:hover {
+  border: 3px solid #622161;
+  cursor: pointer;
 }
 @media only screen and (max-width: 900px){
   .list-group-item {

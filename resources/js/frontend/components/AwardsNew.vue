@@ -66,6 +66,7 @@ export default {
         data: [],
         newAward: [],
         name: [],
+        id: []
       },
       //Styles
       newAward: true,
@@ -100,14 +101,29 @@ export default {
           this.badges.userId =res.data[index].userId
           this.badges.name = res.data[index].name
           this.badges.newAward = res.data[index].new_award
-
+          this.badges.id = res.data[index].id
           this.setAward( this.badges.newAward, this.badges.name)
+          this.updateBadges(this.badges.newAward, this.badges.id)
         }
       }).catch((error) =>{
         console.log(error)
       })
     },
+    updateBadges(newAward, id){
+      let dataBadges = new FormData();
+      dataBadges.append('_method', 'PATCH')
+      if(newAward == 1) {
+        console.log("data: " + newAward + id)
+        dataBadges.append('new_award', 0)
+        axios.post('/api/badges/'+ id, dataBadges)
+            .catch((error) => {
+              this.form.errors.record(error.response.data.errors)
+            })
+      }
+
+    },
     setAward( newAward, name){
+
       if(newAward == 1){
         this.modalAward = !this.modalAward
         this.newAwardName = name

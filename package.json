@@ -72,6 +72,7 @@
         "jstree": "^3.3.10",
         "select2": "^4.0.13",
         "tinymce": "^5.4.0",
+        "vue-loading-overlay": "^3.4.2",
         "vue-mq": "^1.0.1",
         "vue-radial-progress": "^0.3.2"
     }

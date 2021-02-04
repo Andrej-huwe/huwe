@@ -17,13 +17,61 @@
         {{todo.id}}
       </div>
     </div>
+
+  <div class="speech">
+    <button id='btnGiveCommand'>Give Command!</button>
+    <br><br>
+    <span id='message'></span>
+    <br><br>
+
+    <input id='chkSteve' type="checkbox"> Hello
+    <br>
+    <input id='chkTony' type="checkbox"> How are you?
+    <br>
+    <input id='chkBruce' type="checkbox">  Bla bla bla
+    <br>
+    <input id='chkNick' type="checkbox"> What's up
   </div>
+    <div id="app2">
+      <Test v-bind:header="header"/>
+      <Test2 v-bind:header="header"/>
+    </div>
+
+    <div class="vld-parent">
+      <loading :active.sync="isLoading"
+               :can-cancel="true"
+               :on-cancel="onCancel"
+               :color="color"
+               :loader="loader"
+               :background-color="backgroundColor"
+               :is-full-page="fullPage"></loading>
+
+      <label><input type="checkbox" v-model="fullPage">Full page?</label>
+      <button @click.prevent="doAjax">fetch Data</button>
+    </div>
+
+  </div>
+
+
 </template>
 
 <script>
+
+import Test from './Test.vue';
+import Test2 from './Test2.vue'
+// Import component
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
     export default {
       data() {
         return {
+          color: '#622161',
+          backgroundColor: 'none',
+          loader: 'bars',
+          isLoading: false,
+          fullPage: false,
+          header: 'initial header',
           todos: '',
           form: new Form({
             title: 5,
@@ -32,7 +80,20 @@
           user_id: this.$userId,
         }
       },
+      components: {
+        Loading
+      },
       methods: {
+        doAjax() {
+          this.isLoading = true;
+          // simulate AJAX
+          setTimeout(() => {
+            this.isLoading = false
+          },2000)
+        },
+        onCancel() {
+          console.log('User cancelled the loader.')
+        },
         addToTest(){
           this.form.title++
         },
@@ -62,10 +123,66 @@
             this.form.reset()
             this.getTodos()
           })
-        }
+        },
+        speech(){
+          var message = document.querySelector('#message');
+
+          var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition; // SpeechRecognition pre FireFox, webkitSpeechRecognition pre Chrome
+          var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+
+          var grammar = '#JSGF V1.0;' // Typ Gramatiky, ktorú používame
+
+          var recognition = new SpeechRecognition();
+          var speechRecognitionList = new SpeechGrammarList();
+          speechRecognitionList.addFromString(grammar, 1); //Definovanie gramatiky
+          recognition.grammars = speechRecognitionList; // Vloženie gramatiky do rozpoznania
+          recognition.lang = 'en-US';
+          recognition.interimResults = false; // S kódom pracuje, až keď dohovoríme
+
+          recognition.onresult = function(event) {
+            var last = event.results.length - 1;
+            var command = event.results[last][0].transcript;
+            message.textContent = 'Voice Input: ' + command + '.';
+
+            if(command.toLowerCase() === 'hello'){
+              document.querySelector('#chkSteve').checked = true;
+            }
+            else if (command.toLowerCase() === 'how are you'){
+              document.querySelector('#chkTony').checked = true;
+            }
+            else if (command.toLowerCase() === 'select bruce'){
+              document.querySelector('#chkBruce').checked = true;
+            }
+            else if (command.toLowerCase() === 'select nick'){
+              document.querySelector('#chkNick').checked = true;
+            }
+          };
+
+          recognition.onspeechend = function() {
+            recognition.stop();
+          };
+
+          recognition.onerror = function(event) {
+            message.textContent = 'Error occurred in recognition: ' + event.error;
+          }
+
+          document.querySelector('#btnGiveCommand').addEventListener('click', function(){
+            recognition.start();
+
+          });
+        },
       },
       mounted(){
         this.getTodos()
+        this.speech()
       }
     }
 </script>
+<style>
+.vld-parent {
+  width: 50%;
+  background-color: black;
+  height: 50%;
+  margin: auto;
+}
+</style>
