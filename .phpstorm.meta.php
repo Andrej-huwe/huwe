@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2021-01-26 18:08:11.
+    * Generated on 2021-02-06 15:09:43.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -51,8 +51,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,
@@ -238,8 +236,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,
@@ -425,8 +421,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,
@@ -612,8 +606,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,
@@ -799,8 +791,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,
@@ -986,8 +976,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,
@@ -1173,8 +1161,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,
@@ -1360,8 +1346,6 @@ namespace PHPSTORM_META {
         'Knuckles\Scribe\Matching\RouteMatcherInterface' => \Knuckles\Scribe\Matching\RouteMatcher::class,
         'Lab404\Impersonate\Services\ImpersonateManager' => \Lab404\Impersonate\Services\ImpersonateManager::class,
         'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
-        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
-        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
         'Psr\Http\Message\ResponseInterface' => \Nyholm\Psr7\Response::class,

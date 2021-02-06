@@ -53,3 +53,4 @@
         @include('includes.partials.ga')
     </body>
 </html>
+@yield('style')

@@ -5,9 +5,7 @@
         <div class="col col-sm-10 align-self-center">
             <div class="card">
                 <div class="card-header">
-                    <strong>
-                        @lang('navs.frontend.user.account')
-                    </strong>
+                    <h2>Môj Profil</h2>
                 </div>
 
                 <div class="card-body">
@@ -48,4 +46,43 @@
             </div><!-- card -->
         </div><!-- col-xs-12 -->
     </div><!-- row -->
+
 @endsection
+
+@section('style')
+    <style>
+        .card {
+            border-radius: 25px;
+        }
+        .card-header {
+            background: none;
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border-bottom: none;
+        }
+        .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+            border-color: #622161 #622161 #fff;
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #622161;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+        }
+        .nav-tabs .nav-link.active {
+            color: black;
+        }
+        .table-bordered th, .table-bordered td {
+            border-top: none ;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: white;
+        }
+        .table-bordered th {
+            color: grey;
+        }
+
+    </style>
+@endsection
+

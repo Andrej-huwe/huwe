@@ -7,8 +7,8 @@
                 {{ html()->label(__('validation.attributes.frontend.avatar'))->for('avatar') }}
 
                 <div>
-                    <input type="radio" name="avatar_type" value="gravatar" {{ $logged_in_user->avatar_type == 'gravatar' ? 'checked' : '' }} /> Gravatar
-                    <input type="radio" name="avatar_type" value="storage" {{ $logged_in_user->avatar_type == 'storage' ? 'checked' : '' }} /> Upload
+                    <input type="radio" name="avatar_type" value="gravatar" {{ $logged_in_user->avatar_type == 'gravatar' ? 'checked' : '' }} /> Originálny obrázok
+                    <input type="radio" name="avatar_type" value="storage" {{ $logged_in_user->avatar_type == 'storage' ? 'checked' : '' }} /> Pridať
 
                     @foreach($logged_in_user->providers as $provider)
                         @if(strlen($provider->avatar))
@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
-                {{ html()->label(__('validation.attributes.frontend.first_name'))->for('first_name') }}
+                Meno
 
                 {{ html()->text('first_name')
                     ->class('form-control')
@@ -42,7 +42,7 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
-                {{ html()->label(__('validation.attributes.frontend.last_name'))->for('last_name') }}
+                Priezvisko
 
                 {{ html()->text('last_name')
                     ->class('form-control')
