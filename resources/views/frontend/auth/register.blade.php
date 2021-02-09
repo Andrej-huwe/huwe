@@ -116,3 +116,34 @@
         @captchaScripts
     @endif
 @endpush
+
+@section('style')
+    <style>
+        .card {
+            border-radius: 25px;
+        }
+        .card-header {
+            background: none;
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border-bottom: none;
+        }
+        .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+            border-color: #622161 #622161 #fff;
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #622161;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+        }
+        .nav-tabs .nav-link.active {
+            color: black;
+        }
+        .btn {
+            width: 15%;
+        }
+
+    </style>
+@endsection

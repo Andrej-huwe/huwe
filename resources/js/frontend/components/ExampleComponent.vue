@@ -1,5 +1,6 @@
 <template>
   <div>
+    test
     <h1>stuska</h1>
     <h1>{{user_id}}</h1>
     <form @submit.prevent="saveData">
@@ -48,6 +49,13 @@
 
       <label><input type="checkbox" v-model="fullPage">Full page?</label>
       <button @click.prevent="doAjax">fetch Data</button>
+    </div>
+
+
+    <div>
+      Select Voice: <select id='voiceList'></select> <br><br>
+      <input id='txtInput' /> <br><br>
+      <button id='btnSpeak'>Speak!</button>
     </div>
 
   </div>
@@ -124,6 +132,31 @@ import 'vue-loading-overlay/dist/vue-loading.css';
             this.getTodos()
           })
         },
+        speechLoud(){
+          var btnSpeak = document.querySelector('#btnSpeak');
+          var synth = window.speechSynthesis;
+          var voices = [];
+
+          PopulateVoices();
+          if(speechSynthesis !== undefined){
+            speechSynthesis.onvoiceschanged = PopulateVoices;
+          }
+
+          btnSpeak.addEventListener('click', ()=> {
+            var toSpeak = new SpeechSynthesisUtterance("My name is Andy, and yours?");
+            var selectedVoiceName =  'Google UK English Female';
+            voices.forEach((voice)=>{
+              if(voice.name === selectedVoiceName){
+                toSpeak.voice = voice;
+              }
+            });
+            synth.speak(toSpeak);
+          });
+
+          function PopulateVoices(){
+            voices = synth.getVoices();
+          }
+        },
         speech(){
           var message = document.querySelector('#message');
 
@@ -175,6 +208,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
       mounted(){
         this.getTodos()
         this.speech()
+        this.speechLoud()
       }
     }
 </script>

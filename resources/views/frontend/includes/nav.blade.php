@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-    <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
+<nav class="navbar navbar-expand-lg navbar-light  mb-4">
+    <a href="{{ route('frontend.index') }}" class="navbar-brand">Huwe</a>
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="@lang('labels.general.toggle_navigation')">
         <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
         <ul class="navbar-nav">
 
             @auth
-                <li class="nav-item"><a href="{{route('frontend.user.dashboard')}}" class="nav-link {{ active_class(Route::is('frontend.user.dashboard')) }}">@lang('navs.frontend.dashboard')</a></li>
+                <li class="nav-item"><a href="{{route('frontend.user.dashboard')}}" class="nav-link {{ active_class(Route::is('frontend.user.dashboard')) }}">Domovská stránka</a></li>
             @endauth
 
             @guest
@@ -28,7 +28,7 @@
                             <a href="{{ route('admin.dashboard') }}" class="dropdown-item">@lang('navs.frontend.user.administration')</a>
                         @endcan
 
-                        <a href="{{ route('frontend.user.account') }}" class="dropdown-item {{ active_class(Route::is('frontend.user.account')) }}">@lang('navs.frontend.user.account')</a>
+                        <a href="{{ route('frontend.user.account') }}" class="dropdown-item {{ active_class(Route::is('frontend.user.account')) }}">Môj účet</a>
                         <a href="{{ route('frontend.auth.logout') }}" class="dropdown-item">@lang('navs.general.logout')</a>
                     </div>
                 </li>
@@ -37,3 +37,10 @@
         </ul>
     </div>
 </nav>
+@section('style')
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+@endsection

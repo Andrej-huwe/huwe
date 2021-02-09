@@ -5,6 +5,7 @@ import Vue from 'vue';
 import Form from '../Form'
 window.Form = Form
 
+
 import BootstrapVue from "bootstrap-vue"
 
 Vue.use(BootstrapVue)
@@ -23,8 +24,8 @@ Vue.component('quiz-questions', require('./components/Quiz/Questions.vue').defau
 Vue.component('awards', require('./components/Awards.vue').default);
 Vue.component('awards-new', require('./components/AwardsNew.vue').default);
 Vue.component('quiz-header', require('./components/Quiz/Header.vue').default);
+let user = Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'); // Získanie "id" uživateľa
 
-Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'); // Získanie "id" uživateľa
 
 
 const app = new Vue({

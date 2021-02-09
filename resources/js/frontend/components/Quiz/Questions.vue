@@ -1,12 +1,17 @@
 <template>
   <div class="question-box-container">
     <b-jumbotron class="text-center">
-      <h1 class="question"
-          :style="sizeOfQuestion"
-          v-if="hideElements">
-        {{ currentQuestion.question }}
-      </h1>
+          <h1 class="question"
+                   :style="sizeOfQuestion"
+                   v-if="hideElements">
+            <b-button @click="speechLoud()" id='btnSpeak'><i class="fas fa-volume-up fa-2x"></i></b-button>
+          Ako povieš: {{ currentQuestion.question }}
+         </h1>
+      <div>
 
+
+
+      </div>
       <b-list-group
           horizontal="md"
           v-if="hideElements">
@@ -349,6 +354,32 @@ export default {
     selectAnswer(index) {
       this.selectedIndex = index
     },
+    speechLoud(){
+      let question = this.currentQuestion.question
+
+      var synth = window.speechSynthesis;
+      var voices = [];
+
+      var toSpeak = new SpeechSynthesisUtterance(question); //question
+      var selectedVoiceName =  'Daniel';
+
+      PopulateVoices();
+      if(speechSynthesis !== undefined){
+        speechSynthesis.onvoiceschanged = PopulateVoices;
+      }
+
+      voices.forEach((voice)=>{
+        if(voice.name === selectedVoiceName){
+          toSpeak.voice = voice;
+        }
+      });
+      synth.speak(toSpeak);
+
+      function PopulateVoices(){
+        voices = synth.getVoices();
+
+      }
+    },
     submitSpeech() {
       let answer = this.currentQuestion.correct_answer
 
@@ -369,7 +400,7 @@ export default {
         let command = event.results[last][0].transcript;
 
         console.log(command)
-        if(command.toLowerCase() === 'best'){ // answer.toLowerCase()
+        if(command.toLowerCase() === answer.toLowerCase()){ // answer.toLowerCase()
           console.log("command == answer")
           bus.$emit('answered', 1);
         } else {
@@ -554,6 +585,11 @@ export default {
   border: 3px solid #622161;
   cursor: pointer;
 }
+#btnSpeak {
+  background: none;
+  border: none;
+  color: #622161;
+}
 @media only screen and (max-width: 900px){
   .list-group-item {
     width: 25%;
@@ -563,6 +599,7 @@ export default {
   }
   .question {
     min-height: 50%;
+    font-size: 1rem !important;
   }
   .list-group {
     min-height: 0;
@@ -573,15 +610,27 @@ export default {
   }
   .next {
     margin-top: 3%;
+    height: 38px;
   }
   .finish-text {
     margin: 5% 0;
+  }
+  .btnSpeech {
+    width: 80%;
+    margin: 2% 10%;
+    padding: 5%;
   }
 }
 @media only screen and (max-width: 675px){
   .list-group-item {
     width: 100%;
     margin: 0;
+    padding: 1%;
+  }
+  .btnSpeech {
+    width: 80%;
+    margin: 0% 10%;
+    padding: 1%;
   }
 }
 </style>
