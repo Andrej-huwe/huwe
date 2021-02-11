@@ -12,6 +12,7 @@
         <meta name="description" content="@yield('meta_description', 'Laravel Starter')">
         <meta name="author" content="@yield('meta_author', 'FasTrax Infotech')">
         @yield('meta')
+        @yield('head-style')
 
         {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
         @stack('before-styles')
@@ -31,10 +32,8 @@
             @include('includes.partials.logged-in-as')
             @include('frontend.includes.nav')
 
-            <div class="container">
                 @include('includes.partials.messages')
                 @yield('content')
-            </div><!-- container -->
         </div><!-- #app -->
 
         <!-- Kontrola user ID -->

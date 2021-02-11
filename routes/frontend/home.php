@@ -10,6 +10,8 @@ use App\Http\Controllers\Frontend\User\QuizController;
 use App\Http\Controllers\Frontend\User\LevelController;
 use App\Http\Controllers\Frontend\User\SentencesController;
 use App\Http\Controllers\Frontend\User\LessonController;
+use App\Http\Controllers\Frontend\User\GrammarSiteController;
+use App\Http\Controllers\Frontend\User\GrammarSingleController;
 
 /*
  * Frontend Controllers
@@ -37,6 +39,10 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::get('sentences', [SentencesController::class, 'index'])->name('sentences');
 
         Route::get('test', [TestController::class, 'index'])->name('test');
+
+        Route::get('grammar', [GrammarSiteController::class, 'index'])->name('grammar');
+
+        Route::get('grammar/{id}', [GrammarSingleController::class, 'index'])->name('grammarSingle');
 
         //User Quiz Specific
         Route::get('{type}/quiz/{id}', [QuizController::class, 'index'])->name('quiz');

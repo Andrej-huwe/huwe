@@ -33,7 +33,7 @@
               style="max-width: 30rem;"
               class="mb-3"
           >
-            <b-button class="next-page" href="/level" variant="primary">Gramatika</b-button>
+            <b-button class="next-page" href="/grammar" variant="primary">Gramatika</b-button>
           </b-card>
         </b-card-group>
       </div>
