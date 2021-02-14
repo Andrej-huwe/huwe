@@ -65,8 +65,6 @@
 
 <script>
 
-import Test from './Test.vue';
-import Test2 from './Test2.vue'
 // Import component
 import Loading from 'vue-loading-overlay';
 // Import stylesheet

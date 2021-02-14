@@ -1,11 +1,14 @@
 <template>
   <div>
-    <div v-for="grammar in grammarData" :key="grammar.id">
-      <b-jumbotron>
-        <h1>{{grammar.name}}</h1>
-        <p>{{grammar.desc | lengthFilter(10, '...')}}</p>
-        <b-button :href="'/grammar/' + grammar.id">Čítať</b-button>
-      </b-jumbotron>
+    <h1 class="text-center name">{{name}}</h1>
+    <div class="container">
+      <div v-for="grammar in grammarData" :key="grammar.id">
+        <b-jumbotron>
+          <h1>{{grammar.name}}</h1>
+          <p>{{grammar.desc | lengthFilter(10, '...')}}</p>
+          <b-button :href="'/grammar/' + grammar.id">Čítať viacej...</b-button>
+        </b-jumbotron>
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +16,8 @@
 export default {
   data() {
     return {
-      grammarData: []
+      grammarData: [],
+      name: "Gramatika",
     }
   },
   mounted() {
@@ -48,5 +52,8 @@ export default {
   }
   .jumbotron {
     border-radius: 25px;
+  }
+  .name {
+     margin-bottom: 3rem;
   }
 </style>

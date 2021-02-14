@@ -1,38 +1,36 @@
 <template>
     <div class="text-center">
-      <div v-for="data in testData" :key="data.id">
-        <h2 style="color: red">{{data.id + data.actualScore | testFilter(data.id, data.actualScore, typeOfSite)}}</h2>
-      </div>
-      <h1>Quiz</h1>
-
-      <div v-for="level in levelData" :key="level.name">
-        <b-list-group class="list-group-one-item"> <!--Ak bude tréba dať 2 bunky  do jedného radu = "list-group-two-item" = donastavovať -->
-          <b-list-group-item class="d-flex align-items-center">
-            <div class="levelAvatar">
-              <radial-progress-bar
-                  :diameter="diameter"
-                  :completed-steps="level.completed_steps"
-                  :total-steps="totalSteps"
-                  :innerStrokeColor="innerStrokeColor"
-                  :startColor="startColor"
-                  :stopColor="stopColor">
-                <div class="avatar-item">
-                  <a :disabled="!level.disable"
-                     :href="typeOfSite + '/quiz/' + level.id"
-                     target="_self"
-                     class="b-avatar avatar badge-secondary rounded-circle"
-                     style="width: 6rem; height: 6rem;">
+      <h1>{{name}}</h1>
+      <div v-for="level in levelData" :key="level.id">
+        <div v-if="level.userId == idOfUser">
+          <div class="container">
+            <div class="row justify-content-md-center">
+              <div class="col">
+                <radial-progress-bar
+                    :diameter="diameter"
+                    :completed-steps="level.completed_steps"
+                    :total-steps="totalSteps"
+                    :innerStrokeColor="innerStrokeColor"
+                    :startColor="startColor"
+                    :stopColor="stopColor">
+                  <div class="avatar-item">
+                    <a :disabled="!level.disable"
+                       :href="typeOfSite + '/quiz/' + level.id"
+                       target="_self"
+                       class="b-avatar avatar badge-secondary rounded-circle"
+                       style="width: 6rem; height: 6rem;">
                   <span class="b-avatar-img">
                     <img src="https://huwe.test/images/apple-1.png?d2d5ddb0a77b7f26fb483b76d21795e5"
                          alt="avatar"
                          :class="!level.disable ? 'blocked' : ''">
                   </span><!----></a>
-                </div>
-              </radial-progress-bar>
-              <h3>{{level.name}}</h3>
+                  </div>
+                </radial-progress-bar>
+                <h3>{{level.name}}</h3>
+              </div>
             </div>
-          </b-list-group-item>
-        </b-list-group>
+          </div>
+        </div>
       </div>
     </div>
 </template>
@@ -42,7 +40,8 @@ export default  {
   data() {
     return {
       typeOfSite: window.location.href.split('/').pop(),
-      testData: [],
+      name: "",
+      idOfUser: this.$userId,
 
       //Data Test na Level
       levelData: [],
@@ -66,22 +65,15 @@ export default  {
   mounted(){
     this.getLevels()
   },
-  filters: {
-    testFilter(value, id, score, siteId){
-      if(id == siteId){
-        return score
-      } else {
-        score = null
-        return score
-      }
-      return score
-    },
-  },
   methods: {
+    name(type){
+
+    },
     getLevels(){
       if(this.typeOfSite == "words"){
         axios.get('/api/words').then((res) => {
           this.levelData = res.data
+          this.name = "Slovíčka"
         }).catch((error) => {
           console.log(error)
         })
@@ -89,6 +81,7 @@ export default  {
       if(this.typeOfSite == "sentences"){
         axios.get('/api/sentences').then((res) => {
           this.levelData = res.data
+          this.name = "Vety"
         }).catch((error) => {
           console.log(error)
         })
@@ -102,6 +95,9 @@ export default  {
 }
 </script>
 <style scoped>
+.col {
+  margin: 0 50%;
+}
 .list-group-one-item {
   max-width: 14%;
   margin: auto;

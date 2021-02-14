@@ -1,12 +1,14 @@
 <template>
-  <div v-if="grammarData.length">
-    <div v-for="single in grammarData" :key="single.id">
-      <div v-if="single.id == idOfSite">
-        <h1>{{single.name}}</h1>
-        <p>{{single.desc}}</p>
+  <div class="container">
+    <div v-if="grammarData.length">
+      <div v-for="single in grammarData" :key="single.id">
+        <div v-if="single.id == idOfSite">
+          <h1 class="text-center">{{single.name}}</h1>
+          <p>{{single.desc}}</p>
+        </div>
       </div>
+      <b-button href="/grammar">Spať na gramatiku!</b-button>
     </div>
-    <b-button href="/grammar">Spať na gramatiku!</b-button>
   </div>
 </template>
 <script>

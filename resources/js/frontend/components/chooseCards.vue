@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="container text-center">
-    <h1>Čo sa učiť:</h1>
     <div>
       <div>
         <b-card-group deck>

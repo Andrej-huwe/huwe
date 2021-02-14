@@ -26,6 +26,8 @@ Vue.component('awards-new', require('./components/AwardsNew.vue').default);
 Vue.component('quiz-header', require('./components/Quiz/Header.vue').default);
 Vue.component('grammar-vue', require('./components/Grammar.vue').default);
 Vue.component('grammar-single', require('./components/Single.vue').default);
+Vue.component('check-width', require('./components/ChangeWidth.vue').default);
+Vue.component('footer-vue', require('./components/Footer.vue').default);
 let user = Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'); // Získanie "id" uživateľa
 
 

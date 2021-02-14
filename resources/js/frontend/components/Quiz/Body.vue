@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col col class="character-area" :style="inlineStyleArea">
+    <b-col col class="character-area">
       <b-img v-bind:src="imageBg" fluid-grow></b-img>
       <div class="character" :style="inlineStyle"></div>
       <div id="tooltip-button-show-event" class="character-message">.</div>
@@ -25,8 +25,7 @@
               :idle="idle"
               :onClose="onClose"
               :onOpen="onOpen"
-              :typeQuestion="typeQuestion"
-              :checkRespoData="checkRespoData">
+              :typeQuestion="typeQuestion">
           </quiz-questions>
         </b-col>
         </b-row>
@@ -98,24 +97,6 @@
       </div>
     </transition>
 
-    <transition name="fade">
-      <div v-if="showModal && showModalRespo()"  class="modalForRespo">
-        <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_"
-             class="modal fade show" aria-modal="true" style="display: block;">
-          <div class="modal-dialog">
-            <span tabindex="0"></span>
-            <div tabindex="-1" class="modal-content">
-              <div class="modal-body">
-                <div class="d-block text-center">
-                  <h2>Je potrebné si telefón otočiť na šírku</h2>
-                </div>
-              </div></div><span tabindex="0"></span>
-          </div>
-        </div>
-        <div class="modal-backdrop"></div>
-      </div>
-    </transition>
-
   </b-row>
 </template>
 
@@ -174,10 +155,7 @@ export default {
       textMotivationThree: 'Nevadí, pokračuj ďalej',
       //NumAnimation v Sm
       smNumAnimation: null,
-      //Modal Respo
-      showModal: true,
-      showRespoModal: false,
-      checkRespoData: false,
+
       //Modal Pete Correct
       showPeteModalCorrect: false,
       PeteModalCorrectDefault: true,
@@ -192,11 +170,6 @@ export default {
     }
   },
   computed: {
-    inlineStyleArea(){
-      if(this.checkRespoData === true){
-
-      }
-    },
     inlineStyle() {
       if (this.numAnimation === 2 && this.checkAnimation === true && this.time === true) {
         this.updateAnimation(this.angry, this.idle)
@@ -265,26 +238,6 @@ export default {
         this.textInCorrect = this.textInCorrectThree
         this.textCorrect = this.textCorrectThree
         this.textMotivation = this.textMotivationThree
-      }
-    },
-    changeRespo(){
-      setInterval(() => this.checkRespo(), 1000)
-    },
-    showModalRespo(){
-      this.changeRespo()
-      if(this.checkRespoData === true){
-        this.showRespoModal = true
-        return this.showRespoModal
-      } else {
-        this.showRespoModal = false
-        return  this.showRespoModal
-      }
-    },
-    checkRespo(){
-      if(window.innerWidth < window.innerHeight){
-        this.checkRespoData = true
-      } else {
-        this.checkRespoData = false
       }
     },
     randomNumber() {

@@ -4,4 +4,6 @@
 
 @section('content')
     <level-vue></level-vue>
+    <check-width></check-width>
+    <footer-vue></footer-vue>
 @endsection

@@ -13,7 +13,7 @@
                     Mauris feugiat erat tellus. behind the word mountains.</p>
                 <div class="btn-toolbar float-right" role="toolbar">
                     <div class="btn-group">
-                        <button class="btn btn-start btn-lg text-white" href="www.google.sk">Začať</button>
+                       <a class="btn btn-start btn-lg text-white" href="{{route('frontend.auth.login')}}" class="nav-link {{ active_class(Route::is('frontend.auth.login')) }}">Začať</a>
                     </div>
                 </div>
             </div>
@@ -64,11 +64,7 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="jumbotron jumbotron-fluid mb-0 text-center">
-            <h1>Footer</h1>
-        </div>
-    </footer>
+    <footer-vue></footer-vue>
 @endsection
 @section('style')
     <style>

@@ -2,7 +2,6 @@
   <div class="question-box-container">
     <b-jumbotron class="text-center">
           <h1 class="question"
-                   :style="sizeOfQuestion"
                    v-if="hideElements">
             <b-button @click="speechLoud()" id='btnSpeak'><i class="fas fa-volume-up fa-2x"></i></b-button>
           Ako povieš: {{ currentQuestion.question }}
@@ -86,7 +85,6 @@ export default {
       downNumber: false,
       hideElements: true,
       numberTest: 100,
-      questionSize: "font-size: 1.5rem;",
       //"form" na vkladanie do DB
       form: new Form({
         score: "",
@@ -137,7 +135,6 @@ export default {
     numTotal: Number,
     onClose: Function,
     onOpen: Function,
-    checkRespoData: Boolean,
     randomNumber: Number,
     typeQuestion: Boolean
   },
@@ -147,11 +144,6 @@ export default {
       answers.push(this.currentQuestion.correct_answer)
       return answers
     },
-    sizeOfQuestion(){
-      if(this.checkRespoData === false) {
-        return this.questionSize
-      }
-    }
   },
   watch: {
     currentQuestion: {
@@ -400,11 +392,9 @@ export default {
         let command = event.results[last][0].transcript;
 
         console.log(command)
-        if(command.toLowerCase() === answer.toLowerCase()){ // answer.toLowerCase()
-          console.log("command == answer")
+        if(command.toLowerCase() === 'best'){ // answer.toLowerCase()
           bus.$emit('answered', 1);
         } else {
-          console.log("command =/ best")
           bus.$emit('answered', 0);
         }
       };

@@ -9,4 +9,8 @@
 
     <awards-new></awards-new>
 
+    <check-width></check-width>
+
+    <footer-vue></footer-vue>
+
 @endsection

@@ -1,8 +1,9 @@
 <template>
   <div class="text-center b-container">
-    <h1>{{this.score}}</h1>
-    <b-row class="awards">
+    <h1>Ocenenia</h1>
+    <b-row class="awards justify-content-md-center">
     <div v-for="award in badges.data" :key="award.id">
+
         <b-col v-if="award.userId == idOfUser"
                :style="award.new_award ? colStyleSpecific : ''"
                class="awardsSingle">
@@ -14,6 +15,27 @@
         </b-col>
       </div>
     </b-row>
+
+    <div class="table-section text-center">
+      <div class="container">
+        <h1>Tvoje úspechy</h1>
+        <table class="table">
+          <thead>
+          <th scope="col">Celkové skóre</th>
+          <th scope="col">Skóre v slovíčkach</th>
+          <th scope="col">Skóre vo vetách</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{score.total_score}}</td>
+            <td>{{score.words_score}}</td>
+            <td>{{score.sentences_score}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <transition name="fade">
       <div v-if="modalAward" >
         <div role="dialog" aria-labelledby="bv-modal-example___BV_modal_title_" aria-describedby="bv-modal-example___BV_modal_body_" class="modal fade show" aria-modal="true" style="display: block;">
@@ -87,7 +109,7 @@ export default {
       let index = this.idOfUser
       index--
       axios.get('/api/score').then((res) =>{
-        this.score = res.data[index].total_score
+        this.score = res.data[index]
       }).catch((error) =>{
         console.log(error)
       })
@@ -179,5 +201,33 @@ img.old {
 }
 .modal-backdrop {
   opacity: 0.6;
+}
+.table-section {
+  margin-top: 5%;
+}
+@media only screen and (max-width: 900px){
+  .modal-content {
+    border-radius: 0;
+  }
+  .modal-dialog {
+    margin: 0;
+    max-width: 100%;
+  }
+  .modal-header {
+    padding: 0;
+  }
+  .modal-body h1 {
+    margin: 0;
+  }
+  .modal-header .close {
+    margin: 0rem 2rem -1rem auto;
+  }
+  .awards {
+    width: 75%;
+    margin: auto;
+  }
+  .table {
+    margin: auto;
+  }
 }
 </style>

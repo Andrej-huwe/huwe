@@ -4,4 +4,5 @@
 
 @section('content')
     <grammar-vue></grammar-vue>
+    <footer-vue></footer-vue>
 @endsection

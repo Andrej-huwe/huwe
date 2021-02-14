@@ -31,11 +31,11 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
+                                    Heslo
 
                                     {{ html()->password('password')
                                         ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
+                                        ->placeholder(__('Heslo'))
                                         ->required() }}
                                 </div><!--form-group-->
                             </div><!--col-->
@@ -45,7 +45,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <div class="checkbox">
-                                        {{ html()->label(html()->checkbox('remember', true, 1) . ' ' . __('labels.frontend.auth.remember_me'))->for('remember') }}
+                                        {{ html()->label(html()->checkbox('remember', true, 1) . ' ' . __('Zapamätať'))->for('remember') }}
                                     </div>
                                 </div><!--form-group-->
                             </div><!--col-->
@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group text-right">
-                                    <a href="{{ route('frontend.auth.password.reset') }}">@lang('labels.frontend.passwords.forgot_password')</a>
+                                    <a href="{{ route('frontend.auth.password.reset') }}">Zabudol si heslo?</a>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
