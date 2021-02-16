@@ -1,11 +1,11 @@
 <template>
   <div class="question-box-container">
     <b-jumbotron class="text-center">
-          <h1 class="question"
-                   v-if="hideElements">
-            <b-button @click="speechLoud()" id='btnSpeak'><i class="fas fa-volume-up fa-2x"></i></b-button>
-          Ako povieš: {{ currentQuestion.question }}
-         </h1>
+      <h1 class="question"
+          v-if="hideElements">
+        <b-button @click="speechLoud()" id='btnSpeak'><i class="fas fa-volume-up fa-2x"></i></b-button>
+        Ako povieš: {{ currentQuestion.question }}
+      </h1>
       <div>
 
 
@@ -14,20 +14,20 @@
       <b-list-group
           horizontal="md"
           v-if="hideElements">
-          <b-button id="btnGiveCommand"
-                    class="btnSpeech"
-                    v-if="!typeQuestion"
-                    @click="submitSpeech(),  doLoading()"
-                    v-bind:style="btnAnswerSpeech"
-                    :disabled="answered === true">
-            {{btnAnswerText}}
-            <loading :active.sync="isLoading"
-                     :can-cancel="true"
-                     :color="color"
-                     :loader="loader"
-                     :background-color="backgroundColor"
-                     :is-full-page="fullPage"></loading>
-          </b-button>
+        <b-button id="btnGiveCommand"
+                  class="btnSpeech"
+                  v-if="!typeQuestion"
+                  @click="submitSpeech(),  doLoading()"
+                  v-bind:style="btnAnswerSpeech"
+                  :disabled="answered === true">
+          {{btnAnswerText}}
+          <loading :active.sync="isLoading"
+                   :can-cancel="true"
+                   :color="color"
+                   :loader="loader"
+                   :background-color="backgroundColor"
+                   :is-full-page="fullPage"></loading>
+        </b-button>
 
         <b-list-group-item
             v-if="typeQuestion"

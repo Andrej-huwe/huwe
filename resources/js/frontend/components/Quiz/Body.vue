@@ -10,11 +10,23 @@
     <b-col col sm="12" lg="7" class="quiz-area">
       <quiz-header
           :numTotal="numTotal"
+          :school="school"
       ></quiz-header>
       <b-container  class="bv-example-row">
         <b-row><b-col>
+          <quiz-school
+              v-if="questions &&  questions.length>1 , school"
+              :currentQuestion="questions[index]"
+              :next="next"
+              :increment="increment"
+              :index="index"
+              :numCorrect="numCorrect"
+              :numTotal="numTotal"
+              :angry="angry"
+              :idle="idle">
+          </quiz-school>
           <quiz-questions
-              v-if="questions.length"
+              v-if="questions &&  questions.length>1, !school"
               :currentQuestion="questions[index]"
               :next="next"
               :increment="increment"
@@ -112,12 +124,16 @@ export default {
       //Character Respo Correct
       charaImageCorrect: "https://huwe.test/images/respo-chara-correct.png?caec35523b37c9b45d7a9f0c0d47744d",
       charaCorrectStyle: "margin-top: 20%",
-
+      //Type of site
+      typeOfSite: window.location.href.split('/').pop(),
       //Quiz
-      questions: [],
+      questions: null,
       index: 0,
       numCorrect: 0,
       numTotal: 0,
+
+      //School
+      school: false,
 
       //Animation
       stopAnimationDelay: 200,
@@ -200,6 +216,16 @@ export default {
     }
   },
   methods: {
+    checkLink(){
+      //Nadstavenie quizu či už pre školy alebo pre normálneho uživateľa
+      let str = this.typeOfSite.toString();
+      let res = str.charAt(0)
+      if(res == "!"){
+        this.school = true
+      } else {
+        this.school = false
+      }
+    },
     date_function() {
       var currentDate = new Date()
     },
@@ -330,6 +356,7 @@ export default {
     this.date_function()
     this.randomNumber()
     this.smChangeText()
+    this.checkLink()
   }
 
 }

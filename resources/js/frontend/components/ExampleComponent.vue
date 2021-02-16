@@ -57,9 +57,8 @@
       <input id='txtInput' /> <br><br>
       <button id='btnSpeak'>Speak!</button>
     </div>
-
+    <h1> {{ timeLeft }} remaining...</h1>
   </div>
-
 
 </template>
 
@@ -72,6 +71,8 @@ import 'vue-loading-overlay/dist/vue-loading.css';
     export default {
       data() {
         return {
+          time: 3, //in seconds
+          timer: null,
           imgOne: require('../../../img/index/information.jpg'),
           imgTwo: require('../../../img/index/our-plan.jpg'),
           imgThree: require('../../../img/index/main-pagepsd.jpg'),
@@ -92,7 +93,30 @@ import 'vue-loading-overlay/dist/vue-loading.css';
       components: {
         Loading
       },
+      computed: {
+        timeLeft () {
+          return `${this.minutes} minutes ${this.seconds} seconds`
+        },
+        minutes () {
+          return String(Math.floor(this.time / 60)).padStart(2, '0')
+        },
+        seconds () {
+          return String(this.time % 60).padStart(2, '0')
+        }
+      },
+      created () {
+        this.timer = setInterval(this.decrementOrAlert, 1000)
+      },
       methods: {
+        decrementOrAlert () {
+          if (this.time > 0) {
+            this.time--
+            return
+          }
+
+          console.log("Times up...")
+          clearInterval(this.timer)
+        },
         doAjax() {
           this.isLoading = true;
           // simulate AJAX

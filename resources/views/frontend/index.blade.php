@@ -3,6 +3,7 @@
 @section('title', app_name() . ' | ' . __('navs.general.home'))
 
 @section('content')
+    <example-component></example-component>
     <!--main page -->
     <div class="section-main">
         <div class="jumbotron jumbotron-fluid text-right vertical-center">

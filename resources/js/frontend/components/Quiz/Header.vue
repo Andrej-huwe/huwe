@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <b-progress :max="max">
+    <h1 v-if="school">Školský test: {{nameOfTest}}</h1>
+    <b-progress v-if="!school" :max="max">
       <b-progress-bar class="progress-bar" :value=" numTotal"></b-progress-bar>
     </b-progress>
 
@@ -10,10 +11,12 @@
 <script>
 export default {
   props: {
-    numTotal: Number
+    numTotal: Number,
+    school: Boolean
   },
   data() {
     return {
+      nameOfTest: 'Teória z informatiky č.7',
       max: 10
     }
   },
