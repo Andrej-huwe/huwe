@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container text-center">
     <h1 v-if="school">Školský test: {{nameOfTest}}</h1>
     <b-progress v-if="!school" :max="max">
       <b-progress-bar class="progress-bar" :value=" numTotal"></b-progress-bar>

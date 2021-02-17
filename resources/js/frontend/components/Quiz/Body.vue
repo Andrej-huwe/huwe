@@ -17,13 +17,16 @@
           <quiz-school
               v-if="questions &&  questions.length>1 , school"
               :currentQuestion="questions[index]"
+              :questions="questions"
               :next="next"
+              :prev="prev"
               :increment="increment"
               :index="index"
+              :questionIndex="index"
               :numCorrect="numCorrect"
               :numTotal="numTotal"
-              :angry="angry"
-              :idle="idle">
+              :userResponses="userResponses"
+              :correctAnswers="correctAnswers">
           </quiz-school>
           <quiz-questions
               v-if="questions &&  questions.length>1, !school"
@@ -113,10 +116,16 @@
 </template>
 
 <script>
+
+
 import { bus } from '../../app'
 export default {
   data() {
     return {
+      //Quiz
+      userResponses: null,
+      correctAnswers: null,
+
       imageBg: "https://huwe.test/images/quiz-background.png?4c8accaf28fac92cf21bc4fa2ca0de57",
       imageBgfgg: require('../../../../img/quiz/respo-chara-correct.png'),
       imageBgfggss: require('../../../../img/quiz/respo-chara-inCorrect.png'),
@@ -331,6 +340,11 @@ export default {
         this.typeQuestion = true
       }
     },
+    prev(){
+      if(this.index > 0){
+        this.index--
+      }
+    },
     increment(isCorrect) { //funkcia na zachytávanie dát pri odpovedi na otázku
       if (isCorrect) {
         this.numCorrect++
@@ -338,6 +352,7 @@ export default {
         this.textGood++
       }
       this.numTotal++
+
       this.numAnimation++
       this.smNumAnimation++
       this.animationPressed = false
@@ -352,6 +367,9 @@ export default {
         })
         .then((jsonData) => {
           this.questions = jsonData.results
+          this.userResponses = Array(jsonData.results.length).fill(null)
+          this.correctAnswers = Array(jsonData.results.length).fill("undefined")
+
         })
     this.date_function()
     this.randomNumber()

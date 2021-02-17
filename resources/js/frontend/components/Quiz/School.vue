@@ -2,25 +2,31 @@
   <div class="question-box-container">
     <b-jumbotron class="text-center">
       <div>
-        <b-form @submit="toQuiz" v-if="showForm">
-          <h2 class="mb-3">Pre pokračovanie ku testu, musíte vyplniť údaje</h2>
-          <b-form-group class="text-left" id="input-group-2" label="Meno:" label-for="input-name">
+        <b-form @submit.prevent="toInformation" v-if="showForm">
+          <h2>Pre začatie testu musíte vyplniť následujúce údaje:</h2>
+          <b-form-group
+              label="Meno:"
+              label-for="input-1">
             <b-form-input
-                id="input-name"
-                v-model="formUser.name"
-                placeholder="Napíš svoje meno"
+                v-model="form.name"
+                placeholder="Vložte meno"
                 required
             ></b-form-input>
           </b-form-group>
-
-          <b-button type="submit" class="finish">Pokračovať na quiz</b-button>
+          <b-button type="submit" class="finish">Pokračovať</b-button>
         </b-form>
+        <div v-if="showInfo">
+          <h1>Dôležité informácie</h1>
+          <h2>Váš čas na vypracovanie: {{timeLeft}} min</h2>
+          <h2>Celkový počet otázok: {{questions.length}}</h2>
+          <b-button @click="toQuiz" class="finish">Pokračovať na quiz</b-button>
+        </div>
       </div>
-      <div v-if="!showForm">
-        <h3> {{ timeLeft }}</h3>
+      <div v-if="!showForm && !showInfo">
+        <h3><b>{{ timeLeft }}</b></h3>
         <h1 class="question"
             v-if="hideElements">
-          Ako povieš: {{ currentQuestion.question }}
+          Otázka č. {{numberQuestion}}: {{ currentQuestion.question }}
         </h1>
         <div>
         </div>
@@ -30,17 +36,36 @@
           <b-list-group-item
               v-for="(answer, index) in answers"
               :key="answer"
-              @click="selectAnswer(index), submitAnswer(), next(), showHideElements()"
+              @click="selectAnswer(index, answer), submitAnswer(), showHideElements()"
+              :class="{'correct-list': userResponses[questionIndex] == index}"
           >
             {{answer}}
           </b-list-group-item>
         </b-list-group>
         <form @submit=" updateData()" action="/home">
-          <div class="quiz-button">
+          <div>
+            <b-row align-h="between" class="button-group" v-if="hideElements">
+              <b-col cols="3">
+                <b-button
+                    class="button"
+                    @click="prev(),  showHideElements(), (shuffleActive = false)"
+                    :disabled="index == 0"
+                    href="">Spať</b-button>
+              </b-col>
+              <b-col cols="3">
+                <b-button
+                    class="button"
+                    :class="(userResponses[questionIndex]==null)?'':'is-active'"
+                    @click="next(),  showHideElements(), (shuffleActive = true)"
+                    :disabled="questionIndex>=questions.length"
+                    href="">{{ (userResponses[questionIndex]==null)? 'Preskočiť': 'Ďalšia' }}</b-button>
+              </b-col>
+            </b-row>
             <transition name="bounce" mode="out-in">
               <div class="final-part" v-if="showElements">
                 <h1 class="finish-text">{{formUser.name}}</h1>
-                <h3 class="text-center">Správne: {{ numCorrect  }}/ {{ numTotal }} </h3>
+                <h1 class="finish-text">Počet správnych odpovedí: {{quizScore}} / {{questions.length}}</h1>
+                <h1>Čas ukončenia: {{endQuizTime}}</h1>
                 <button type="submit" class="finish">Ukončiť</button>
               </div>
             </transition>
@@ -61,20 +86,27 @@ export default {
   data() {
     return {
       //Formulár
+      shuffleActive: true,
       formUser: {
         name: '',
       },
+      endQuizTime: null,
+      startQuizTime: null,
+      numberQuestion: null,
+      quizScore: 0,
       showForm: true,
+      showInfo: false,
       color: '#622161',
       backgroundColor: 'none',
       loader: 'bars',
       isLoading: false,
       fullPage: false,
-
       //Timer
-      time: 5, //v sekudnách
+      time: 10, //v sekudnách
       timer: null,
       timeStart: false,
+
+
 
       shuffledAnswers: [],
       correctIndex: null,
@@ -88,6 +120,7 @@ export default {
         actualScore: "",
         completedSteps: "",
       }),
+      //Quiz
 
       //Awards Data, odosielanie do DB
       awardOne: false,
@@ -124,14 +157,19 @@ export default {
     Loading
   },
   props: {
+    questions: Array,
     currentQuestion: Object,
     next: Function,
+    prev: Function,
     increment: Function,
     index: Number,
+    questionIndex: Number,
     numCorrect: Number,
     numTotal: Number,
     randomNumber: Number,
-    typeQuestion: Boolean
+    typeQuestion: Boolean,
+    userResponses: Array,
+    correctAnswers: Array,
   },
   computed: {
     timeLeft () {
@@ -155,7 +193,9 @@ export default {
       immediate: true, // "immediate" a "handler" nám spustia funkciu "shuffle" hneď po načitání stránky, inakšie by to bolo až po tom ako sa zmení index
       handler() {
         this.selectedIndex = null
+        this.selectedAnswer = null
         this.answered = false
+        this.numberQuestionMethod()
         this.shuffleAnswers()
       }
     }
@@ -169,10 +209,20 @@ export default {
     this.timer = setInterval(this.decrementOrAlert, 1000)
   },
   methods: {
+    numberQuestionMethod(){
+      this.numberQuestion = this.index
+      this.numberQuestion++
+      return this.numberQuestion
+    },
     //Formulár
     toQuiz(){
       this.timeStart = true
+      this.showInfo = false
+      this.startQuizTime = new Date()
+    },
+    toInformation(){
       this.showForm = false
+      this.showInfo = true
     },
     decrementOrAlert () {
       if(this.timeStart == true){
@@ -181,7 +231,7 @@ export default {
           return
         }
         this.endQuiz()
-        console.log("Times up...")
+        this.endQuizTime = new Date()
         clearInterval(this.timer)
       }
 
@@ -369,31 +419,46 @@ export default {
             })
       }
     },
-    selectAnswer(index) {
+    selectAnswer(index, answer) {
       this.selectedIndex = index
+      this.selectedAnswer = answer
     },
 
     submitAnswer() {
-      let isCorrect = false
-      if(this.selectedIndex === this.correctIndex) {
-        isCorrect = true
-      }
-      this.answered = true
-      this.increment(isCorrect)
+      this.increment()
+      Vue.set(this.userResponses, this.questionIndex, this.selectedIndex);
+      console.log("User Responses" + this.userResponses);
 
     },
     shuffleAnswers() {
-      let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
-      this.shuffledAnswers = _.shuffle(answers) // pracujeme s algoritmom z Lodash
-      this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)  // "indexOf" nájde index správnej odpovede
-      console.log('correctIndex: ' + this.correctIndex + ' ' + this.currentQuestion.correct_answer)
+      //Po stlačený "spať" aby sa nesputil "shuffle"
+      if(this.shuffleActive == true){
+        let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
+        this.shuffledAnswers = _.shuffle(answers) // pracujeme s algoritmom z Lodash
+        this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)  // "indexOf" nájde index správnej odpovede
+        Vue.set(this.correctAnswers, this.questionIndex, this.correctIndex);
+        console.log('Correct Answers: ' + this.correctAnswers)
+      }
+
     },
     endQuiz(){
+      //Vyhodnotenie až po dokončení quizu
+      for(let i = 0; i < this.userResponses.length; i++){
+        if(this.correctAnswers[i] === this.userResponses[i]){
+          this.quizScore++
+        }
+        console.log("score: " + this.quizScore)
+      }
       this.showElements = true
       this.hideElements = false
+      return this.quizScore
     },
     showHideElements(){
-      if(this.index == 9) { //originíl '9'
+      let index = this.questionIndex
+      index++
+      if(index == this.questions.length) {
+        clearInterval(this.timer)
+        this.endQuizTime = new Date()
         this.endQuiz()
       }
     },
@@ -476,7 +541,20 @@ export default {
 .incorrect-button {
   background-color: #bd3231;
 }
-.next,
+.button {
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #622161;
+  background: none;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  margin-top: 5%;
+}
+.button.is-active {
+  background: #622161;
+  color: white;
+  border-color: transparent;
+}
 .finish {
   width: 50%;
   height: 50px;
