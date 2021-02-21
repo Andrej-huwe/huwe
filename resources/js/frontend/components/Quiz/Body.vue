@@ -359,18 +359,32 @@ export default {
     },
   },
   mounted(){
-    fetch('https://opentdb.com/api.php?amount=10&category=27&type=multiple', {
-      method: 'get'
-    })
-        .then((response) => {
-          return response.json()
-        })
-        .then((jsonData) => {
-          this.questions = jsonData.results
-          this.userResponses = Array(jsonData.results.length).fill(null)
-          this.correctAnswers = Array(jsonData.results.length).fill("undefined")
+    if(this.typeOfSite.charAt(0) === '!'){
+      fetch('https://huwe-file.mltconsulting.sk/api/quiz/' + this.typeOfSite, {
+        method: 'get'
+      })
+          .then((response) => {
+            return response.json()
+          })
+          .then((jsonData) => {
+            this.questions = jsonData.results
+            this.userResponses = Array(jsonData.results.length).fill(null)
+            this.correctAnswers = Array(jsonData.results.length).fill("undefined")
 
-        })
+          })
+    } else {
+      fetch('https://huwe-file.mltconsulting.sk/api/quiz/' + this.typeOfSite, {
+        method: 'get'
+      })
+          .then((response) => {
+            return response.json()
+          })
+          .then((jsonData) => {
+            this.questions = jsonData.results
+
+          })
+    }
+
     this.date_function()
     this.randomNumber()
     this.smChangeText()

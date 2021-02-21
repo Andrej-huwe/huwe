@@ -23,14 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/schoolQuiz.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/AwardsNew.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/AwardsNew.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Level.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Level.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/School.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/School.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/frontend/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/frontend/home.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -377,7 +372,8 @@
       <workItem from="1613813211232" duration="1224000" />
       <workItem from="1613839247230" duration="552000" />
       <workItem from="1613912818565" duration="2397000" />
-      <workItem from="1613927227484" duration="3623000" />
+      <workItem from="1613927227484" duration="3984000" />
+      <workItem from="1613946718109" duration="627000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>

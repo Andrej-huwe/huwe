@@ -19,7 +19,7 @@ use App\Http\Controllers\Frontend\SchoolQuizController;
  * All route names are prefixed with 'frontend.'.
  */
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('school/{id}',  [SchoolQuizController::class, 'index'])->name('schoolQuiz');
+Route::get('schools/{id}',  [SchoolQuizController::class, 'index'])->name('schoolQuiz');
 Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::post('contact/send', [ContactController::class, 'send'])->name('contact.send');
 
