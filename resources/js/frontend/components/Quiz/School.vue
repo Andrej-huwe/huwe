@@ -78,7 +78,7 @@
                 <h1 class="finish-text">{{formUser.name}}</h1>
                 <h1 class="finish-text">Získali ste: {{quizScore}}%</h1>
                 <h1>Čas ukončenia: {{endQuizTime}}</h1>
-                <button type="submit" class="finish">Ukončiť</button>
+                <button type="submit" href="/"  class="finish">Ukončiť</button>
               </div>
             </transition>
           </div>
@@ -103,7 +103,7 @@ export default {
         name: '',
       },
       canStart: false,
-      beginQuizTime: 69780,
+      beginQuizTime: 72720,
       waitQuizTime: null,
       timerQuiz: null,
       endQuizTime: null,
@@ -201,13 +201,14 @@ export default {
       return String(this.time % 60).padStart(2, '0')
     },
     timeStartQuiz(){
-      return `${this.hoursStart} : ${this.minutesStart} : ${this.secondsStart} `
+      return `${this.hoursStart}:${this.minutesStart}:${this.secondsStart} `
     },
     hoursStart(){
       return String(Math.floor(this.beginQuizTime/3600)).padStart(2, '0')
     },
     minutesStart(){
-      return String(Math.floor(this.beginQuizTime/60)).padStart(2, '0')
+      let letTime = this.beginQuizTime - this.hoursStart*3600
+      return String(Math.floor(letTime/60)).padStart(2, '0')
     },
     secondsStart(){
       return String(this.beginQuizTime % 60).padStart(2, '0')
@@ -240,7 +241,12 @@ export default {
   methods: {
     saveDataSchool(){
       let data = new FormData();
+      let schoolId = this.idOfSite
+      if(schoolId.charAt(0) === '!'){
+        schoolId = schoolId.slice(1)
+      }
       data.append('user_name', this.schoolData.name)
+      data.append('school_id', schoolId)
       data.append('user_surname', this.schoolData.surname)
       data.append('endTime', this.schoolData.endTime)
       data.append('points',   this.schoolData.points)

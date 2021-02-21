@@ -23,16 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
+      <change afterPath="$PROJECT_DIR$/resources/views/frontend/schoolQuiz.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/ChangeWidth.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/ChangeWidth.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Grammar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Grammar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/AwardsNew.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/AwardsNew.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Level.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Level.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/School.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/School.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Single.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Single.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/frontend/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/frontend/home.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,19 +250,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Frontend" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Frontend/User" />
+      <recent name="$PROJECT_DIR$/resources/js/frontend/components" />
+      <recent name="$PROJECT_DIR$/resources/js/frontend/components/Blog" />
+      <recent name="$PROJECT_DIR$/resources/views/frontend/user/Blog" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/js/frontend/components/Account" />
       <recent name="$PROJECT_DIR$/resources/js/frontend/components" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Frontend/User" />
       <recent name="$PROJECT_DIR$/database/migrations" />
       <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/js/frontend/components" />
-      <recent name="$PROJECT_DIR$/resources/js/frontend/components/Blog" />
-      <recent name="$PROJECT_DIR$/resources/views/frontend/user/Blog" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Frontend/User" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Frontend" />
     </key>
   </component>
   <component name="RunManager">
@@ -378,6 +377,7 @@
       <workItem from="1613813211232" duration="1224000" />
       <workItem from="1613839247230" duration="552000" />
       <workItem from="1613912818565" duration="2397000" />
+      <workItem from="1613927227484" duration="3623000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
@@ -430,10 +430,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="467" y="256" key="#com.intellij.fileTypes.FileTypeChooser/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1606675696801" />
-    <state x="465" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1612951117513">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1613936790629">
+      <screen x="0" y="25" width="1440" height="803" />
     </state>
-    <state x="465" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1612951117512" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613936790629" />
     <state x="465" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1440.25.1280.999/0.0.1440.900@0.0.1440.900" timestamp="1610024226935" />
     <state x="458" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612950716304">
       <screen x="0" y="0" width="1440" height="900" />
@@ -473,10 +473,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="600" height="428" key="javadoc.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613550068046" />
-    <state x="1782" y="223" width="670" height="770" key="search.everywhere.popup" timestamp="1613915875393">
-      <screen x="1440" y="0" width="1280" height="1024" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1613937405039">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613757362702" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613937405039" />
     <state x="1782" y="223" width="670" height="770" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@1440.0.1280.1024" timestamp="1613915875393" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.25.1280.999/0.25.1440.803@0.25.1440.803" timestamp="1613424265265" />
   </component>

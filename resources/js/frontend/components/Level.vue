@@ -41,7 +41,7 @@ export default  {
     return {
       typeOfSite: window.location.href.split('/').pop(),
       name: "",
-      idOfUser: this.$userId,
+      idOfUser: Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'),
 
       //Data Test na Level
       levelData: [],

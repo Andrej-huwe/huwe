@@ -12,12 +12,14 @@ use App\Http\Controllers\Frontend\User\SentencesController;
 use App\Http\Controllers\Frontend\User\LessonController;
 use App\Http\Controllers\Frontend\User\GrammarSiteController;
 use App\Http\Controllers\Frontend\User\GrammarSingleController;
+use App\Http\Controllers\Frontend\SchoolQuizController;
 
 /*
  * Frontend Controllers
  * All route names are prefixed with 'frontend.'.
  */
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('school/{id}',  [SchoolQuizController::class, 'index'])->name('schoolQuiz');
 Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::post('contact/send', [ContactController::class, 'send'])->name('contact.send');
 

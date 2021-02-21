@@ -28,7 +28,7 @@ Vue.component('grammar-single', require('./components/Single.vue').default);
 Vue.component('check-width', require('./components/ChangeWidth.vue').default);
 Vue.component('footer-vue', require('./components/Footer.vue').default);
 Vue.component('quiz-school', require('./components/Quiz/School.vue').default);
-let user = Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'); // Získanie "id" uživateľa
+
 
 
 

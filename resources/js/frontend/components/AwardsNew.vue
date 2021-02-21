@@ -81,7 +81,7 @@ export default {
 
       //Data na bezfarebné data
       statusOld: "old",
-      idOfUser: this.$userId,
+      idOfUser: Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'),
       testScore: null,
       score: [],
       badges: {

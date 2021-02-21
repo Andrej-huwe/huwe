@@ -109,7 +109,9 @@ export default {
       words_score: [],
       sentences_score: [],
       idOfScore: [],
-      idOfUser: this.$userId,
+      idOfUser: Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'),
+     // let user = Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'); // Získanie "id" uživateľa
+
       badges: {
         length: [],
         data: [],
