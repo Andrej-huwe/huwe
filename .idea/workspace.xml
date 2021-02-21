@@ -24,11 +24,15 @@
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/ChangeWidth.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/ChangeWidth.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Grammar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Grammar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/School.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/School.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Single.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Single.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -367,7 +371,13 @@
       <workItem from="1613419944672" duration="4021000" />
       <workItem from="1613490749416" duration="6242000" />
       <workItem from="1613511354330" duration="11047000" />
-      <workItem from="1613582382387" duration="10421000" />
+      <workItem from="1613582382387" duration="10577000" />
+      <workItem from="1613659097881" duration="4346000" />
+      <workItem from="1613756421532" duration="4925000" />
+      <workItem from="1613767284008" duration="622000" />
+      <workItem from="1613813211232" duration="1224000" />
+      <workItem from="1613839247230" duration="552000" />
+      <workItem from="1613912818565" duration="2397000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
@@ -429,10 +439,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1612950716304" />
-    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1612972705744">
+    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613673217671">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1612972705744" />
+    <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613673217671" />
     <state x="458" y="209" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1440.25.1280.999/0.0.1440.900@0.0.1440.900" timestamp="1612949820078" />
     <state x="590" y="351" key="Github.ShareDialog" timestamp="1606677893369">
       <screen x="0" y="0" width="1440" height="900" />
@@ -463,10 +473,21 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="600" height="428" key="javadoc.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613550068046" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1613583644376">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="1782" y="223" width="670" height="770" key="search.everywhere.popup" timestamp="1613915875393">
+      <screen x="1440" y="0" width="1280" height="1024" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613583644376" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613757362702" />
+    <state x="1782" y="223" width="670" height="770" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@1440.0.1280.1024" timestamp="1613915875393" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.25.1280.999/0.25.1440.803@0.25.1440.803" timestamp="1613424265265" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/SchoolController.php</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

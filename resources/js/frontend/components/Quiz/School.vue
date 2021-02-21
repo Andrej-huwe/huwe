@@ -6,10 +6,21 @@
           <h2>Pre začatie testu musíte vyplniť následujúce údaje:</h2>
           <b-form-group
               label="Meno:"
-              label-for="input-1">
+              label-for="input-group-name">
             <b-form-input
-                v-model="form.name"
+                id="input-name"
+                v-model="schoolData.name"
                 placeholder="Vložte meno"
+                required
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+              label="Priezvisko:"
+              label-for="input-group-surname">
+            <b-form-input
+                id="input-surname"
+                v-model="schoolData.surname"
+                placeholder="Vložte priezvisko"
                 required
             ></b-form-input>
           </b-form-group>
@@ -17,9 +28,10 @@
         </b-form>
         <div v-if="showInfo">
           <h1>Dôležité informácie</h1>
+          <h2>Čas začatia testu: {{timeStartQuiz}}</h2>
           <h2>Váš čas na vypracovanie: {{timeLeft}} min</h2>
           <h2>Celkový počet otázok: {{questions.length}}</h2>
-          <b-button @click="toQuiz" class="finish">Pokračovať na quiz</b-button>
+          <b-button @click="toQuiz" :disabled="canStart !== true" class="finish">Pokračovať na quiz</b-button>
         </div>
       </div>
       <div v-if="!showForm && !showInfo">
@@ -42,7 +54,7 @@
             {{answer}}
           </b-list-group-item>
         </b-list-group>
-        <form @submit=" updateData()" action="/home">
+        <form @submit.prevent="saveDataSchool()" action="/home">
           <div>
             <b-row align-h="between" class="button-group" v-if="hideElements">
               <b-col cols="3">
@@ -64,7 +76,7 @@
             <transition name="bounce" mode="out-in">
               <div class="final-part" v-if="showElements">
                 <h1 class="finish-text">{{formUser.name}}</h1>
-                <h1 class="finish-text">Počet správnych odpovedí: {{quizScore}} / {{questions.length}}</h1>
+                <h1 class="finish-text">Získali ste: {{quizScore}}%</h1>
                 <h1>Čas ukončenia: {{endQuizTime}}</h1>
                 <button type="submit" class="finish">Ukončiť</button>
               </div>
@@ -90,6 +102,10 @@ export default {
       formUser: {
         name: '',
       },
+      canStart: false,
+      beginQuizTime: 69780,
+      waitQuizTime: null,
+      timerQuiz: null,
       endQuizTime: null,
       startQuizTime: null,
       numberQuestion: null,
@@ -102,7 +118,7 @@ export default {
       isLoading: false,
       fullPage: false,
       //Timer
-      time: 10, //v sekudnách
+      time: 360, //v sekudnách
       timer: null,
       timeStart: false,
 
@@ -115,10 +131,12 @@ export default {
       hideElements: true,
       numberTest: 100,
       //"form" na vkladanie do DB
-      form: new Form({
-        score: "",
-        actualScore: "",
-        completedSteps: "",
+      schoolData: new Form({
+        name: "",
+        surname: "",
+        answers: this.userResponses,
+        points: "",
+        endTime: ""
       }),
       //Quiz
 
@@ -182,6 +200,18 @@ export default {
     seconds () {
       return String(this.time % 60).padStart(2, '0')
     },
+    timeStartQuiz(){
+      return `${this.hoursStart} : ${this.minutesStart} : ${this.secondsStart} `
+    },
+    hoursStart(){
+      return String(Math.floor(this.beginQuizTime/3600)).padStart(2, '0')
+    },
+    minutesStart(){
+      return String(Math.floor(this.beginQuizTime/60)).padStart(2, '0')
+    },
+    secondsStart(){
+      return String(this.beginQuizTime % 60).padStart(2, '0')
+    },
     answers() {
       let answers = [...this.currentQuestion.incorrect_answers] // "..." vytvárame kópiu array namiesto odkazovania
       answers.push(this.currentQuestion.correct_answer)
@@ -201,20 +231,39 @@ export default {
     }
   },
   mounted() {
-    this.getDataSteps()
     this.changeIdOfSite()
-    this.getDataScore()
   },
   created () {
     this.timer = setInterval(this.decrementOrAlert, 1000)
+    this.timerQuiz =  setInterval(this.toQuizTime, 1000)
   },
   methods: {
+    saveDataSchool(){
+      let data = new FormData();
+      data.append('user_name', this.schoolData.name)
+      data.append('user_surname', this.schoolData.surname)
+      data.append('endTime', this.schoolData.endTime)
+      data.append('points',   this.schoolData.points)
+      data.append('answers', this.schoolData.answers)
+      axios.post('/api/school', data)
+    },
     numberQuestionMethod(){
       this.numberQuestion = this.index
       this.numberQuestion++
       return this.numberQuestion
     },
     //Formulár
+    toQuizTime(){
+      let actualTime = new Date()
+      let time = actualTime.getHours()*3600 + actualTime.getMinutes()*60 + actualTime.getSeconds()
+      this.waitQuizTime = this.beginQuizTime - time
+
+      if(this.waitQuizTime > 0){
+        this.waitQuizTime--
+        return
+      }
+      this.canStart = true
+    },
     toQuiz(){
       this.timeStart = true
       this.showInfo = false
@@ -234,157 +283,6 @@ export default {
         this.endQuizTime = new Date()
         clearInterval(this.timer)
       }
-
-    },
-    updateData(){
-      this.updateDataSteps()
-      this.updateDataDisable()
-      this.updateDataScore()
-      this.updateBadges()
-    },
-    getDataScore(){
-      let index = this.idOfUser
-      index--
-      //kontrola, či "completed_steps" = 10, ak áno, odošle 10 do tabuľky automaticky
-      axios.get('/api/score').then((res) =>{
-        this.score = res.data[index].total_score
-        this.words_score = res.data[index].words_score
-        this.sentences_score = res.data[index].sentences_score
-        this.idOfScore = res.data[index].id
-      }).catch((error) =>{
-        console.log(error)
-      })
-    },
-    updateDataScore(){
-      // dáta ukladáme podľa "id" uživateľa
-      let id = this.idOfUser
-      this.form.score = this.numCorrect
-      let newScore = this.form.score + this.score
-      let dataScore = new FormData();
-      let wordsScore = this.numCorrect + this.words_score
-      let sentencesScore = this.numCorrect + this.sentences_score
-
-
-      dataScore.append('_method', 'PATCH')
-      dataScore.append('total_score', newScore)
-      if(this.typeOfSite == "words"){
-        dataScore.append('words_score', wordsScore)
-      }
-      if(this.typeOfSite == "sentences"){
-        dataScore.append('sentences_score', sentencesScore)
-      }
-      axios.post('/api/score/'+ id, dataScore)
-          .catch((error) => {
-            this.form.errors.record(error.response.data.errors)
-          })
-    },
-    //Načítať údaje si môžme až po skončení quizu, nepotrebujem v priebehu quizu s nimi pracovať
-    updateBadges(){
-      let index = 0
-      axios.get('/api/badges').then((res) => {
-        this.badges.length = res.data.length
-        //Vďaka "for" mi načíta všetky údaje, nie iba posledný
-        for(index = 0; index <= this.badges.length; index++){
-          this.badges.status = res.data[index].status
-          this.badges.unlock_at = res.data[index].unlock_at
-          this.badges.userId =res.data[index].userId
-          this.badges.id = res.data[index].id
-          //Zavoláme si funkciu, aby sme pracovali s "for". Inakšie by nám odoslalo iba jeden údaj, takto nám odošle všetky
-          this.setBadges(this.badges.userId, this.badges.id, this.badges.unlock_at)
-          this.setBadgesNew(this.badges.userId, this.badges.id, this.badges.unlock_at)
-        }
-      }).catch((error) =>{
-        console.log(error)
-      })
-    },
-    setBadges(userIdDB, id, unlock){
-      let newScore = this.form.score + this.score
-      let userId = this.idOfUser
-      let dataBadges = new FormData()
-      //Ak uživateľské ID sa musí rovnať s "userId" v "badges"
-      if(userIdDB == userId){
-        dataBadges.append('_method', 'PATCH')
-        //Ak scóre je väčšie ako "unlock_at"
-        if(newScore >= unlock){
-          dataBadges.append('status', 1)
-        } else {
-          dataBadges.append('status', 0)
-        }
-        dataBadges.append('new_award', 0)
-        axios.post('/api/badges/'+ id, dataBadges)
-            .catch((error) => {
-              this.form.errors.record(error.response.data.errors)
-            })
-      }
-    },
-    setBadgesNew(userIdDB, id, unlock){
-      let score = this.score
-      let count
-      let newScore = this.form.score + this.score
-      let dataBadges = new FormData()
-      dataBadges.append('_method', 'PATCH')
-      //skontroluje mi čísla od starého po nové skóre, ak jedno z tých čísel sa rovná "unlock" zapíše mi do "new_award" = 1
-      for(count = score ; count <= newScore; count++ ) {
-        if(count == unlock) {
-          dataBadges.append('new_award', 1)
-          axios.post('/api/badges/' + id, dataBadges)
-        }
-      }
-    },
-    getDataSteps(){
-      let index = this.idOfSite
-      index--
-      this.typeOfSite = this.typeOfSite[3]
-      if(this.typeOfSite == "words"){
-        //kontrola, či "completed_steps" = 10, ak áno, odošle 10 do tabuľky automaticky
-        axios.get('/api/words').then((res) =>{
-          this.completedSteps = res.data[index].completed_steps
-        }).catch((error) =>{
-          console.log(error)
-        })
-      }
-      if(this.typeOfSite == "sentences"){
-        //kontrola, či "completed_steps" = 10, ak áno, odošle 10 do tabuľky automaticky
-        axios.get('/api/sentences').then((res) =>{
-          this.completedSteps = res.data[index].completed_steps
-        }).catch((error) =>{
-          console.log(error)
-        })
-      }
-    },
-    updateDataSteps(){
-      this.form.completedSteps = this.numCorrect
-      let id = this.idOfSite
-      let dataSteps = new FormData();
-
-      if(this.typeOfSite == "words"){
-        dataSteps.append('_method', 'PATCH')
-        // Ak správne odpovede ako 10 (číže už som urobil na plný počet daný level)
-        // a ak moje aktuálne kroky sú menšie ako moje predošlé, uloží mi moje správne odpovede
-        if(this.form.completedSteps > this.completedSteps){
-          dataSteps.append('completed_steps', this.form.completedSteps)
-        } else {
-          dataSteps.append('completed_steps', this.completedSteps)
-        }
-        axios.post('/api/words/'+ id, dataSteps)
-            .catch((error) => {
-              this.form.errors.record(error.response.data.errors)
-            })
-      }
-
-      if(this.typeOfSite == "sentences"){
-        dataSteps.append('_method', 'PATCH')
-        if(this.completedSteps < 10){
-          dataSteps.append('completed_steps', this.form.completedSteps)
-        } else {
-          dataSteps.append('completed_steps', 10)
-        }
-        axios.post('/api/sentences/'+ id, dataSteps)
-            .catch((error) => {
-              this.form.errors.record(error.response.data.errors)
-            })
-      }
-
 
     },
     changeIdOfSite(){
@@ -447,8 +345,9 @@ export default {
         if(this.correctAnswers[i] === this.userResponses[i]){
           this.quizScore++
         }
-        console.log("score: " + this.quizScore)
       }
+      this.quizScore = (this.quizScore / this.questions.length) * 100
+      this.schoolData.points = this.quizScore
       this.showElements = true
       this.hideElements = false
       return this.quizScore
@@ -458,7 +357,8 @@ export default {
       index++
       if(index == this.questions.length) {
         clearInterval(this.timer)
-        this.endQuizTime = new Date()
+        this.endQuizTime = new Date().toLocaleTimeString()
+        this.schoolData.endTime = this.endQuizTime
         this.endQuiz()
       }
     },

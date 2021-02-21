@@ -10,7 +10,7 @@
               <div class="vertical-center">
                 <div class="text-center">
                   <h2>Huwe</h2>
-                  <h1>Je potrebné si telefón otočiť na šírku :)</h1>
+                  <h1>Je potrebné si otočiť telefón vodorovne :)</h1>
               </div></div><span tabindex="0"></span>
           </div>
         </div>

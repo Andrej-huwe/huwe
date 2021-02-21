@@ -57,4 +57,5 @@ Route::resource('words', 'WordController');
 Route::resource('sentences', 'SentenceController');
 Route::resource('badges', 'BadgeController');
 Route::resource('grammar', 'GrammarController');
+Route::resource('school', 'SchoolController');
 

@@ -446,7 +446,7 @@ export default {
       return answerClass
     },
     showHideElements(){
-      if(this.index == 9) { //originíl '9'
+      if(this.index == this.questions.length) { //originíl '9'
         this.showElements = true
         this.hideElements = false
         if(this.numCorrect >= 5) {

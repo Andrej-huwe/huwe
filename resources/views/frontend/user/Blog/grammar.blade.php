@@ -5,4 +5,5 @@
 @section('content')
     <grammar-vue></grammar-vue>
     <footer-vue></footer-vue>
+    <check-width></check-width>
 @endsection
