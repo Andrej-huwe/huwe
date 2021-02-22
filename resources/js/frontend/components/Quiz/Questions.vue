@@ -394,7 +394,7 @@ export default {
         let command = event.results[last][0].transcript;
 
         console.log(command)
-        if(command.toLowerCase() === 'best'){ // answer.toLowerCase()
+        if(command.toLowerCase() === answer.toLowerCase()){ // answer.toLowerCase()
           bus.$emit('answered', 1);
         } else {
           bus.$emit('answered', 0);

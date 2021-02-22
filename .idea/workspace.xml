@@ -24,9 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="887a07d0-e4a6-4a9b-9fb6-aec836093e4e" name="Default Changelist" comment="20:14 29.11.2020&#10;Zmena: Andy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/frontend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Body.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/frontend/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/frontend/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/frontend/components/Quiz/Questions.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -373,7 +371,8 @@
       <workItem from="1613839247230" duration="552000" />
       <workItem from="1613912818565" duration="2397000" />
       <workItem from="1613927227484" duration="3984000" />
-      <workItem from="1613946718109" duration="627000" />
+      <workItem from="1613946718109" duration="894000" />
+      <workItem from="1613978072599" duration="69000" />
     </task>
     <task id="LOCAL-00001" summary="test1">
       <created>1606675619454</created>
@@ -469,10 +468,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="600" height="428" key="javadoc.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613550068046" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1613937405039">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1613947166650">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613937405039" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@0.0.1440.900" timestamp="1613947166650" />
     <state x="1782" y="223" width="670" height="770" key="search.everywhere.popup/1440.0.1280.1024/0.0.1440.900@1440.0.1280.1024" timestamp="1613915875393" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/1440.25.1280.999/0.25.1440.803@0.25.1440.803" timestamp="1613424265265" />
   </component>
